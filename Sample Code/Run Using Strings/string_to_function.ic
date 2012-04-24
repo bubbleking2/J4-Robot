@@ -1,0 +1,19 @@
+#use "course_initializer.ic"
+#use "gps_module_modified.ic"
+
+int course;
+
+void string_to_function(char string[])
+{
+    if(string[0] == "Initialize"[0])
+      {
+        if(string[11] == "Course"[0])
+          {
+            course = course_initialize_knob();
+        }
+        else if(string[11] == "GPS"[0])
+          {
+            gps_initialize(course);
+        }
+    }
+}

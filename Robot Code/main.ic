@@ -1,0 +1,28 @@
+#use "CourseInitializeKnob.ic"
+#use "GPSModule.ic"
+
+int course;
+
+void main()
+{
+    course = CourseInitializeKnob();
+    GPSInitialize(course);
+    GPSEnable();
+    
+    while(!stop_button())
+      {
+        while(!GPSGetData());
+        if(gps_x >= 100)
+          {
+            printf("\nX:%d Y:%d", gps_x, gps_y);
+        }
+        else if(gps_x >= 10)
+          {
+            printf("\n%X:d  Y:%d", gps_x, gps_y);
+        }
+        else
+        {
+            printf("\nX:%d   Y:%d", gps_x, gps_y);
+        }
+    }
+}

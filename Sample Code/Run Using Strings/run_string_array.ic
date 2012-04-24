@@ -1,0 +1,11 @@
+#use "string_to_function.ic"
+
+void run_string_array(int numberOfInstructions, char instructions[][])
+{
+    int i = 0;
+    while(i < numberOfInstructions)
+      {
+        string_to_function(instructions[i]);
+        i++;
+    }
+}

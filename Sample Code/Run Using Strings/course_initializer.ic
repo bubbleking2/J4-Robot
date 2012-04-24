@@ -1,0 +1,12 @@
+int course_initialize_knob()
+{
+    printf("\nSelect region with knob and press start\n");
+    
+    while(!start_button())
+      {
+        printf("Region: %c\n", knob()/32+65);
+        msleep(200L);
+    } 
+    
+    return knob()/32+65;
+}

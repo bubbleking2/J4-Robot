@@ -1,0 +1,13 @@
+#use "run_string_array.ic"
+
+#define NUMBER_OF_INSTRUCTIONS 2
+
+void main()
+{
+    char instructions[NUMBER_OF_INSTRUCTIONS][] = {
+          "Initialize Course",
+          "Initialize GPS"
+    };
+    
+    run_string_array(NUMBER_OF_INSTRUCTIONS, instructions);
+}

@@ -1,0 +1,17 @@
+#use "CourseInitializeKnob.ic"
+#use "GPSModule.ic"
+
+int course;
+
+void main()
+{
+    course = CourseInitializeKnob();
+    GPSInitialize(course);
+    GPSEnable();
+    
+    while(!stop_button())
+      {
+        while(!GPSGetData());
+        printf("\n%d%  d", gps_x, gps_y);
+    }
+}
