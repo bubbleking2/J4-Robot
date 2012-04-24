@@ -1,16 +1,36 @@
-#use "gps_module.icb"
-
-//Updated by Tyler Wolf Leonhardt
+//Ryan Hartlage, Pat Wensing 2008-2010
+// Last updated: 4/9/12 by JAG
 int _gps_data[5];
 int gps_x, gps_y, gps_heading, gps_stoplight, gps_generator;
+int _gps_continuous_pid = -1;
 
 /*-------------------------------------------------------------------------------------------------*/
 
-void GPSInitialize(int region)
+void gps_initialize_knob()
 {
-    region = (int)region;
-    //printf("\nGPS - UNPLUG & Press Start\n");
-    //start_press();
+    printf("\nGPS - UNPLUG & Press Start\n");
+    start_press();
+    
+    printf("\nSelect region with knob and press start\n");
+    
+    while(!start_button())
+      {
+        printf("Region: %c\n", knob()/32+65);
+        msleep(200L);
+    } 
+    
+    gps_initialize(knob()/32+65);
+    
+    while(start_button());
+}
+
+/*-------------------------------------------------------------------------------------------------*/
+
+void gps_initialize(int regionc)
+{
+    int region = (int)regionc;
+    printf("\nGPS - UNPLUG & Press Start\n");
+    start_press();
     
     //Select region based on character ranges
     if((region >= 97) && (region <= 104)) // 'a'-'h'
@@ -35,7 +55,7 @@ void GPSInitialize(int region)
 
 /*-------------------------------------------------------------------------------------------------*/
 
-void GPSDisable()
+void gps_disable()
 {
     // Physically disable the RF receiver
     clear_digital_out(0);
@@ -45,7 +65,7 @@ void GPSDisable()
 
 /*-------------------------------------------------------------------------------------------------*/
 
-int GPSEnable()
+int gps_enable()
 {
     // Enables software reception of GPS packets
     gps_enable_asm(0);
@@ -53,7 +73,7 @@ int GPSEnable()
 
 /*-------------------------------------------------------------------------------------------------*/
 
-int GPSGetData()
+int gps_get_data()
 {
     int gps_data_size;
     int counter = 0;
@@ -93,6 +113,34 @@ int GPSGetData()
     else
       {
         return 0;
+    }
+}
+
+/*-------------------------------------------------------------------------------------------------*/
+
+void gps_continuous_enable()
+{
+    if(_gps_continuous_pid == -1)
+      {
+        _gps_continuous_pid = start_process(_gps_continuous());
+    }
+}
+
+/*-------------------------------------------------------------------------------------------------*/
+
+void gps_continuous_disable()
+{
+    _gps_continuous_pid = -1;
+}
+
+/*-------------------------------------------------------------------------------------------------*/
+
+void _gps_continuous()
+{
+    while(_gps_continuous_pid != -1)
+      {
+        gps_get_data();
+        defer();
     }
 }
 

@@ -1,4 +1,4 @@
-#use "gps_module.icb"
+#use GPSModule.icb
 
 //Updated by Tyler Wolf Leonhardt
 int _gps_data[5];
@@ -6,7 +6,7 @@ int gps_x, gps_y, gps_heading, gps_stoplight, gps_generator;
 
 /*-------------------------------------------------------------------------------------------------*/
 
-void gps_initialize(int region)
+void GPSInitialize(int region)
 {
     region = (int)region;
     //printf("\nGPS - UNPLUG & Press Start\n");
@@ -35,7 +35,7 @@ void gps_initialize(int region)
 
 /*-------------------------------------------------------------------------------------------------*/
 
-void gps_disable()
+void GPSDisable()
 {
     // Physically disable the RF receiver
     clear_digital_out(0);
@@ -45,7 +45,7 @@ void gps_disable()
 
 /*-------------------------------------------------------------------------------------------------*/
 
-int gps_enable()
+int GPSEnable()
 {
     // Enables software reception of GPS packets
     gps_enable_asm(0);
@@ -53,7 +53,7 @@ int gps_enable()
 
 /*-------------------------------------------------------------------------------------------------*/
 
-int gps_get_data()
+int GPSGetData()
 {
     int gps_data_size;
     int counter = 0;

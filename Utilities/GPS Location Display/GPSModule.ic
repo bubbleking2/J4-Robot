@@ -1,4 +1,4 @@
-#use "gps_module.icb"
+#use GPSModule.icb
 
 //Updated by Tyler Wolf Leonhardt
 int _gps_data[5];

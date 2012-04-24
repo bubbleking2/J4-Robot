@@ -1,0 +1,14 @@
+#use RunStringArray.ic
+
+#define NUMBER_OF_INSTRUCTIONS 3
+
+void main()
+{
+    char instructions[NUMBER_OF_INSTRUCTIONS][] = {
+        "Initialize Course",
+          "Initialize GPS",
+          "Go Downtown"
+    };
+    
+    RunStringArray(NUMBER_OF_INSTRUCTIONS, instructions);
+}
