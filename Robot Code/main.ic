@@ -1,5 +1,31 @@
-#use StringToFunction.ic
+//Main
+
+#use TestLog\TestLog.ic
+#use CourseInitializeKnob.ic
+#use GPS\GPSModule.ic
 
 void main()
 {
+    //Declare course
+    int course;
+    int courseType;
+    
+    //Declare whether this course is being logged
+    #ifdef usingTestLog
+      {
+        DumpTestLog();
+        ResetTestLog();
+    }
+    #endif
+    
+    
+    course = CourseInitializeKnob();
+    
+    courseType = CourseTypeInitialize(course);
+    
+    GPSInitialize(course);
+    
+    GPSEnable();
+    
+    GPSDisable();
 }

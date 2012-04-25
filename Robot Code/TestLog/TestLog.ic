@@ -1,0 +1,45 @@
+#define usingTestLog 1
+#define TEST_LOG_LENGTH 256
+
+persistent int testLog[TEST_LOG_LENGTH];
+persistent int logIndex;
+
+void DumpTestLog(){
+    printf("\nPress Start to begin");
+    start_press();
+}
+
+void ResetTestLog()
+{
+    int index = 0;
+    printf("\nResetting Test  Log");
+    while(index < TEST_LOG_LENGTH)
+      {
+        testLog[index] = 0;
+        index++;
+    }
+    logIndex = 0;
+}
+
+void LogEvent(int eventNumber)
+{
+    testLog[logIndex] = eventNumber;
+    logIndex++;
+}
+
+// /------------------------------------------\
+// | Event Numbers                            |
+// +------------------------------------------+
+// | 111 | Begin | CourseInitializeKnob       |
+// | 110 | End   | CourseInitializeKnob       |
+// | 121 | Begin | CourseCourseTypeInitialize |
+// | 120 | End   | CourseCourseTypeInitialize |
+// | 211 | Begin | GPSInitialize              |
+// | 210 | End   | GPSInitialize              |
+// | 221 | Begin | GPSDisable                 |
+// | 220 | End   | GPSDisable                 |
+// | 231 | Begin | GPSEnable                  |
+// | 230 | End   | GPSEnable                  |
+// | 241 | Begin | GPSGetData                 |
+// | 240 | End   | GPSGetData                 |
+// \------------------------------------------/

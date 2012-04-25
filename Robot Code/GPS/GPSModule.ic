@@ -1,16 +1,21 @@
+//File #2
+
 #use GPSModule.icb
 
-//Updated by Tyler Wolf Leonhardt
 int _gps_data[5];
 int gps_x, gps_y, gps_heading, gps_stoplight, gps_generator;
 
 /*-------------------------------------------------------------------------------------------------*/
 
-void GPSInitialize(int region)
+void GPSInitialize(int region) //Function #1
 {
     region = (int)region;
-    //printf("\nGPS - UNPLUG & Press Start\n");
-    //start_press();
+    
+    #ifdef usingTestLog
+      {
+        LogEvent(211);
+    }
+    #endif
     
     //Select region based on character ranges
     if((region >= 97) && (region <= 104)) // 'a'-'h'
@@ -31,32 +36,68 @@ void GPSInitialize(int region)
     gps_initialize_asm(region);
     // Physically enable RF receiver
     set_digital_out(0);
+    
+    #ifdef usingTestLog
+      {
+        LogEvent(210);
+    }
+    #endif
 }
 
 /*-------------------------------------------------------------------------------------------------*/
 
-void GPSDisable()
+void GPSDisable() //Function #2
 {
+    #ifdef usingTestLog
+      {
+        LogEvent(221);
+    }
+    #endif
+    
     // Physically disable the RF receiver
     clear_digital_out(0);
     // Prepare the HandyBoard for serial communication and disables reception of GPS packets
     gps_disable_asm(0);
+    
+    #ifdef usingTestLog
+      {
+        LogEvent(220);
+    }
+    #endif
 }
 
 /*-------------------------------------------------------------------------------------------------*/
 
-int GPSEnable()
+int GPSEnable() //Function #3
 {
+    #ifdef usingTestLog
+      {
+        LogEvent(231);
+    }
+    #endif
+    
     // Enables software reception of GPS packets
     gps_enable_asm(0);
+    
+    #ifdef usingTestLog
+      {
+        LogEvent(230);
+    }
+    #endif
 }
 
 /*-------------------------------------------------------------------------------------------------*/
 
-int GPSGetData()
+int GPSGetData() //Function #4
 {
     int gps_data_size;
     int counter = 0;
+    
+    #ifdef usingTestLog
+      {
+        LogEvent(241);
+    }
+    #endif
     
     // Print message if stop signal has been received
     if(gps_stopped(0)>0)
@@ -84,6 +125,12 @@ int GPSGetData()
         gps_heading = (_gps_data[3]&0x0F)*16 + (_gps_data[4]&0x3C)/4;
         gps_stoplight = _gps_data[4]&0x1;
         gps_generator = ( _gps_data[4]&0x2 ) / 2;
+        
+    #ifdef usingTestLog
+      {
+        LogEvent(240);
+    }
+    #endif
         
         // Clear ready flag (so that gps_ready(0) will return 0 until the next packet comes in)
         gps_clear(0);
