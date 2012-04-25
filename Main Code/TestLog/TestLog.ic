@@ -23,8 +23,19 @@ void ResetTestLog()
 
 void LogEvent(int eventNumber)
 {
-    testLog[logIndex] = eventNumber;
-    logIndex++;
+    if(logIndex >= 2)
+      {
+        if(testLog[logIndex - 1] != eventNumber && testLog[logIndex - 2] != eventNumber)
+          {
+            testLog[logIndex] = eventNumber;
+            logIndex++;
+        }
+    }
+    else
+      {
+        testLog[logIndex] = eventNumber;
+        logIndex++;
+    }
 }
 
 // /------------------------------------------\

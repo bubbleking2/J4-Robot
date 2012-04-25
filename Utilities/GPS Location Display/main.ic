@@ -1,4 +1,4 @@
-//GPSLocationDisplay
+//GPS Location Display
 
 #use CourseInitializeKnob.ic
 #use GPSModule.ic

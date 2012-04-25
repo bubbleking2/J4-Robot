@@ -25,9 +25,9 @@ int CourseInitializeKnob() //Function #1
     return knob()/32+65;
 }
 
-int CourseTypeInitialize(int course) //Function #2
+int CourseDirectionInitialize(int course) //Function #2
 {
-     #ifdef usingTestLog
+    #ifdef usingTestLog
       {
         LogEvent(121);
     }
@@ -42,7 +42,7 @@ int CourseTypeInitialize(int course) //Function #2
         course = 1;
     }
     
-     #ifdef usingTestLog
+    #ifdef usingTestLog
       {
         LogEvent(120);
     }

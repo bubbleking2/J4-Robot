@@ -1,0 +1,43 @@
+//Main
+
+#use TestLog\TestLog.ic
+#use Course\CourseInitialize.ic
+#use GPS\GPSModule.ic
+#use DriveFunctions\FromTo.ic
+#use TaskFunctions\PushButton.ic
+#use TaskFunctions\WaitForGo.ic
+
+void main()
+{
+    //Declare course
+    int course;
+    int courseDirection;
+    
+    //Declare whether this course is being logged
+    #ifdef usingTestLog
+      {
+        DumpTestLog();
+        ResetTestLog();
+    }
+    #endif
+    
+    
+    course = CourseInitializeKnob();
+    
+    courseDirection = CourseDirectionInitialize(course);
+    
+    GPSInitialize(course);
+    
+    GPSEnable();
+    
+    WaitForGo();
+    
+    FromStartToTraffic(courseDirection);
+    
+    FromTrafficToButton(courseDirection);
+    
+    PushButton(courseDirection);
+    
+    FromButtonToCrank(courseDirection);
+    
+}

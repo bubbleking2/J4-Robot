@@ -1,0 +1,4 @@
+void WaitForGo()
+{
+    //while(cds Cell Reading == x);
+}

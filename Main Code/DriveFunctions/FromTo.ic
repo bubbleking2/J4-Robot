@@ -1,0 +1,16 @@
+void FromStartToTraffic(int courseDirection)
+{
+    //DriveStraight(int distance);
+}
+    
+void FromTrafficToButton(int courseDirection)
+{
+    //TurnToAngle(int heading);
+    //DriveStraight(int distance);
+}
+
+void FromButtonToCrank(int courseDirection)
+{
+    //TurnToAngle(int heading);
+    //DriveStraight(int distance);
+}

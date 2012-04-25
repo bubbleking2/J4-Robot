@@ -95,7 +95,7 @@ int GPSGetData() //Function #4
     
     #ifdef usingTestLog
       {
-        LogEvent(241);
+            LogEvent(241);
     }
     #endif
     
@@ -126,11 +126,11 @@ int GPSGetData() //Function #4
         gps_stoplight = _gps_data[4]&0x1;
         gps_generator = ( _gps_data[4]&0x2 ) / 2;
         
-    #ifdef usingTestLog
-      {
-        LogEvent(240);
-    }
-    #endif
+        #ifdef usingTestLog
+          {
+              LogEvent(240);
+        }
+        #endif
         
         // Clear ready flag (so that gps_ready(0) will return 0 until the next packet comes in)
         gps_clear(0);
