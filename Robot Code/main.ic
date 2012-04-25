@@ -1,41 +1,5 @@
-//#use sencdr2.icb
-//#use sencdr3.icb
-#use fencdr2.icb
-#use fencdr3.icb
-
-#define leftEncoderCounts encoder2_counts
-#define rightEncoderCounts encoder3_counts
-
-#define LEFT_MOTOR 1
-#define RIGHT_MOTOR 3
+#use StringToFunction.ic
 
 void main()
 {
-    printf("\nPress Start to begin.");
-    start_press();
-    
-    printf("\nSTOPPED");
-    motor(LEFT_MOTOR, 0);
-    motor(RIGHT_MOTOR, 0);
-    sleep(2.);
-    
-    rightEncoderCounts = 0;
-    printf("\nFULL FORWARD");
-    motor(LEFT_MOTOR, 100);
-    motor(RIGHT_MOTOR, 100);
-    sleep(2.);
-    motor(LEFT_MOTOR, 0);
-    motor(RIGHT_MOTOR, 0);
-    printf("\nR Counts:%d", rightEncoderCounts);
-    sleep(2.);
-    
-    rightEncoderCounts = 0;
-    printf("\nFULL BACKWARD");
-    motor(LEFT_MOTOR, -100);
-    motor(RIGHT_MOTOR, -100);
-    sleep(2.);
-    motor(LEFT_MOTOR, 0);
-    motor(RIGHT_MOTOR, 0);
-    printf("\nR Counts:%d", rightEncoderCounts);
-    sleep(2.);
 }

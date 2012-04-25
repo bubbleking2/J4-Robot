@@ -1,0 +1,29 @@
+#define LEFT_SENSOR 2
+#define RIGHT_SENSOR 3
+
+void main()
+{
+    int leftReading;
+    printf("\nPress Start to begin.");
+    start_press();
+    
+    while(!stop_button())
+      {
+        leftReading = analog(LEFT_SENSOR);
+        printf("\nLeft:%d", leftReading);
+        
+        if(leftReading >= 100)
+          {
+            printf("        Right:%d", analog(RIGHT_SENSOR));
+        }
+        else if(leftReading >= 10)
+          {
+            printf("         Right:%d", analog(RIGHT_SENSOR)); 
+        }
+        else
+        {
+            printf("          Right:%d", analog(RIGHT_SENSOR));
+        }
+        msleep(200L);
+    }
+}
