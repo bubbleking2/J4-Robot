@@ -1,1 +1,18 @@
 //CdS Cell Test
+
+#define CDS_PORT 2
+
+void main()
+{
+    printf("\nPress Start to begin.");
+    start_press();
+    
+    while(!stop_button())
+      {
+        printf("\nReading: %d", analog(CDS_PORT));
+        msleep(200L);
+    }
+    
+    printf("\nOperation Terminated");
+    
+}

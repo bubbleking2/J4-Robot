@@ -28,4 +28,7 @@ void main()
         }
         msleep(200L);
     }
+    
+    printf("\nOperation Terminated");
+    
 }

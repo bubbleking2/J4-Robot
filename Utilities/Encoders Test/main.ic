@@ -13,31 +13,71 @@
 
 void main()
 {
+    int leftReading = 0;
+    int stopPressed = 0;
+    
     printf("\nPress Start to begin.");
     start_press();
     
-    printf("\nSTOPPED");
-    motor(LEFT_MOTOR, 0);
-    motor(RIGHT_MOTOR, 0);
-    sleep(2.);
+    while(!stopPressed)
+      {
+        printf("\nSTOPPED");
+        motor(LEFT_MOTOR, 0);
+        motor(RIGHT_MOTOR, 0);
+        sleep(2.);
+        
+        leftEncoderCounts = 0;
+        rightEncoderCounts = 0;
+        printf("\nFULL FORWARD");
+        motor(LEFT_MOTOR, 100);
+        motor(RIGHT_MOTOR, 100);
+        sleep(2.);
+        motor(LEFT_MOTOR, 0);
+        motor(RIGHT_MOTOR, 0);
+        leftReading = leftEncoderCounts;
+        printf("\nLeft:%d", leftReading);
+        if(leftReading >= 100)
+          {
+            printf("        Right:%d", rightEncoderCounts);
+        }
+        else if(leftReading >= 10)
+          {
+            printf("         Right:%d", rightEncoderCounts); 
+        }
+        else
+        {
+            printf("          Right:%d", rightEncoderCounts);
+        }
+        sleep(2.);
+        
+        leftEncoderCounts = 0;
+        rightEncoderCounts = 0;
+        printf("\nFULL BACKWARD");
+        motor(LEFT_MOTOR, -100);
+        motor(RIGHT_MOTOR, -100);
+        sleep(2.);
+        motor(LEFT_MOTOR, 0);
+        motor(RIGHT_MOTOR, 0);
+        leftReading = leftEncoderCounts;
+        printf("\nLeft:%d", leftReading);
+        if(leftReading >= 100)
+          {
+            printf("        Right:%d", rightEncoderCounts);
+        }
+        else if(leftReading >= 10)
+          {
+            printf("         Right:%d", rightEncoderCounts); 
+        }
+        else
+        {
+            printf("          Right:%d", rightEncoderCounts);
+        }
+        sleep(2.);
+        
+        printf("\nPress Start to  test again.");
+        while(!start_button() && !(stopPressed = stop_button()));
+    }
     
-    rightEncoderCounts = 0;
-    printf("\nFULL FORWARD");
-    motor(LEFT_MOTOR, 100);
-    motor(RIGHT_MOTOR, 100);
-    sleep(2.);
-    motor(LEFT_MOTOR, 0);
-    motor(RIGHT_MOTOR, 0);
-    printf("\nR Counts:%d", rightEncoderCounts);
-    sleep(2.);
+    printf("\nOperation Terminated");
     
-    rightEncoderCounts = 0;
-    printf("\nFULL BACKWARD");
-    motor(LEFT_MOTOR, -100);
-    motor(RIGHT_MOTOR, -100);
-    sleep(2.);
-    motor(LEFT_MOTOR, 0);
-    motor(RIGHT_MOTOR, 0);
-    printf("\nR Counts:%d", rightEncoderCounts);
-    sleep(2.);
 }

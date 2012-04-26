@@ -1,0 +1,17 @@
+// /------------------------------------------\
+// | Event Numbers                            |
+// +------------------------------------------+
+// | 0   | NULL  | NULL                       |
+// | 111 | Begin | CourseInitializeKnob       |
+// | 110 | End   | CourseInitializeKnob       |
+// | 121 | Begin | CourseCourseTypeInitialize |
+// | 120 | End   | CourseCourseTypeInitialize |
+// | 211 | Begin | GPSInitialize              |
+// | 210 | End   | GPSInitialize              |
+// | 221 | Begin | GPSDisable                 |
+// | 220 | End   | GPSDisable                 |
+// | 231 | Begin | GPSEnable                  |
+// | 230 | End   | GPSEnable                  |
+// | 241 | Begin | GPSGetData                 |
+// | 240 | End   | GPSGetData                 |
+// \------------------------------------------/

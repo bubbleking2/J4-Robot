@@ -54,4 +54,7 @@ void main()
             printf("      Heading:%d", gps_heading);
         }
     }
+    
+    printf("\nOperation Terminated");
+    
 }

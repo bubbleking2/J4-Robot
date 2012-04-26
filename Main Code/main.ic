@@ -17,7 +17,7 @@ void main()
     #ifdef usingTestLog
       {
         DumpTestLog();
-        ResetTestLog();
+        StartLogging();
     }
     #endif
     

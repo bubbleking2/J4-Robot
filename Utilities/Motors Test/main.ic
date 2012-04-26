@@ -5,30 +5,36 @@
 
 void main()
 {
+    int stopPressed = 0;
+    
     printf("\nPress Start to begin.");
     start_press();
     
-    printf("\nSTOPPED");
-    motor(LEFT_MOTOR, 0);
-    motor(RIGHT_MOTOR, 0);
-    sleep(2.);
+    while(!stopPressed)
+      {
+        printf("\nSTOPPED");
+        motor(LEFT_MOTOR, 0);
+        motor(RIGHT_MOTOR, 0);
+        sleep(2.);
+        
+        printf("\nFULL FORWARD");
+        motor(LEFT_MOTOR, 100);
+        motor(RIGHT_MOTOR, 100);
+        sleep(2.);
+        
+        printf("\nSTOPPED");
+        motor(LEFT_MOTOR, 0);
+        motor(RIGHT_MOTOR, 0);
+        sleep(2.);
+        
+        printf("\nFULL BACKWARD");
+        motor(LEFT_MOTOR, -100);
+        motor(RIGHT_MOTOR, -100);
+        sleep(2.);
+        
+        printf("\nPress Start to  test again.");
+        while(!start_button() && !(stopPressed = stop_button()));
+    }
     
-    printf("\nFULL FORWARD");
-    motor(LEFT_MOTOR, 100);
-    motor(RIGHT_MOTOR, 100);
-    sleep(2.);
-    
-    printf("\nSTOPPED");
-    motor(LEFT_MOTOR, 0);
-    motor(RIGHT_MOTOR, 0);
-    sleep(2.);
-    
-    printf("\nFULL BACKWARD");
-    motor(LEFT_MOTOR, -100);
-    motor(RIGHT_MOTOR, -100);
-    sleep(2.);
-    
-    printf("\nSTOPPED");
-    motor(LEFT_MOTOR, 0);
-    motor(RIGHT_MOTOR, 0);
+    printf("\nOperation Terminated");
 }
