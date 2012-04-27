@@ -2,6 +2,8 @@
 
 #use GPSModule.icb
 
+#define USING_GPS_MODULE 1
+
 int _gps_data[5];
 int gps_x, gps_y, gps_heading, gps_stoplight, gps_generator;
 
@@ -95,7 +97,7 @@ int GPSGetData() //Function #4
     
     #ifdef usingTestLog
       {
-            LogEvent(241);
+        LogEvent(241);
     }
     #endif
     
@@ -128,7 +130,7 @@ int GPSGetData() //Function #4
         
         #ifdef usingTestLog
           {
-              LogEvent(240);
+            LogEvent(240);
         }
         #endif
         
@@ -144,3 +146,91 @@ int GPSGetData() //Function #4
 }
 
 /*-------------------------------------------------------------------------------------------------*/
+
+void GPSGetAbsoluteX() //Function #5
+{
+    int initialX = gps_x;
+    int finalX;
+    
+    #ifdef usingTestLog
+      {
+        LogEvent(251);
+    }
+    #endif
+    
+    while(!GPSGetData());
+    finalX = gps_x;
+           
+    while(initialX != finalX)
+      {
+          initialX = finalX;
+          while(!GPSGetData());
+          finalX = gps_x;
+    }
+    
+    #ifdef usingTestLog
+      {
+        LogEvent(250);
+    }
+    #endif
+}
+
+/*-------------------------------------------------------------------------------------------------*/
+
+void GPSGetAbsoluteY() //Function #6
+{
+    int initialY = gps_y;
+    int finalY;
+    
+    #ifdef usingTestLog
+      {
+        LogEvent(261);
+    }
+    #endif
+    
+    while(!GPSGetData());
+    finalY = gps_y;
+           
+    while(initialY != finalY)
+      {
+          initialY = finalY;
+          while(!GPSGetData());
+          finalY = gps_y;
+    }
+    
+    #ifdef usingTestLog
+      {
+        LogEvent(260);
+    }
+    #endif
+}
+
+/*-------------------------------------------------------------------------------------------------*/
+
+void GPSGetAbsoluteHeading() //Function #7
+{
+    int initialHeading = gps_heading;
+    int finalHeading;
+    
+    #ifdef usingTestLog
+      {
+        LogEvent(271);
+    }
+    #endif
+    
+    while(!GPSGetData());
+    finalHeading = gps_heading;
+           
+    while(initialHeading != finalHeading)
+      {
+          initialHeading = finalHeading;
+          while(!GPSGetData());
+          finalHeading = gps_y;
+    }
+    
+    #ifdef usingTestLog
+      {
+        LogEvent(270);
+    }
+    #endif
+}

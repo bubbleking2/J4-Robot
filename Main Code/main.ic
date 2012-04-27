@@ -1,9 +1,17 @@
 //Main
 
+#define LOWER_CDS_PORT 4
+#define LEFT_MOTOR 1
+#define RIGHT_MOTOR 3
+//#define LEFT_ENCODER 2
+//#define RIGHT_ENCODER 3
+
 #use TestLog\TestLog.ic
 #use Course\CourseInitialize.ic
-#use GPS\GPSModule.ic
+#use DriveFunctions\GPS\GPSModule.ic
+#use DriveFunctions\Encoders\Encoders.ic
 #use DriveFunctions\FromTo.ic
+#use DriveFunctions\Drive.ic
 #use TaskFunctions\PushButton.ic
 #use TaskFunctions\WaitForGo.ic
 
@@ -17,27 +25,42 @@ void main()
     #ifdef usingTestLog
       {
         DumpTestLog();
+        ResetTestLog();
         StartLogging();
     }
     #endif
     
-    
+    //Select course using knob
     course = CourseInitializeKnob();
     
+    //Determine the direction of the arrow on this course
     courseDirection = CourseDirectionInitialize(course);
     
-    GPSInitialize(course);
+    //Connect to this course's GPS system
+    //GPSInitialize(course);
     
-    GPSEnable();
+    //Enable the Handy Board GPS
+    //GPSEnable();
     
-    WaitForGo();
+    //Enable the encoders
+    EncodersInitialize();
     
+    //Get one valid reading from the GPS
+    //while(!GPSGetData());
+    
+    //Wait for the go light on the CdS
+    //WaitForGo();
+    
+    //Travel from start rectangle to traffic rectangle
     FromStartToTraffic(courseDirection);
     
-    FromTrafficToButton(courseDirection);
+    //Travel from traffic rectangle to button
+    //FromTrafficToButton(courseDirection);
     
-    PushButton(courseDirection);
+    //Attempt to push button
+    //PushButton(courseDirection);
     
-    FromButtonToCrank(courseDirection);
+    //Travel from button rectangle to crank rectangle
+    //FromButtonToCrank(courseDirection);
     
 }

@@ -1,0 +1,254 @@
+//File #5
+
+#ifdef LEFT_MOTOR
+#else
+#define LEFT_MOTOR 1
+#endif
+
+#ifdef RIGHT_MOTOR
+#else
+#define RIGHT_MOTOR 3
+#endif
+
+#ifdef USING_ENCODERS
+#else
+#use Encoders\Encoders.ic
+#endif
+
+#ifdef USING_GPS_MODULE
+#else
+#use GPS\GPSModule.ic
+#endif
+
+#define USING_DRIVE 1
+
+/*-------------------------------------------------------------------------------------------------*/
+
+void DriveStraightTime(float time, int power) //Function #1
+{
+    float startTime;
+    
+    #ifdef usingTestLog
+      {
+        LogEvent(511);
+    }
+    #endif
+    
+    startTime = seconds();
+    while(startTime + time > seconds())
+      {
+        motor(LEFT_MOTOR, power);
+        motor(RIGHT_MOTOR, power);
+        if(leftEncoderCounts < rightEncoderCounts)
+          {
+            motor(LEFT_MOTOR, power - power / 33);
+        }
+        else if(leftEncoderCounts > rightEncoderCounts)
+          {
+            motor(RIGHT_MOTOR, power - power / 33);
+        }
+    };
+    motor(LEFT_MOTOR, 0);
+    motor(RIGHT_MOTOR, 0);
+    
+    #ifdef usingTestLog
+      {
+        LogEvent(510);
+    }
+    #endif
+}
+
+void DriveStraightDistance(float inches, int power) //Function #2
+{
+    int ticks = (int)(inches * 3.183098862 - (float)power / 10.) + leftEncoderCounts;
+    
+    #ifdef usingTestLog
+      {
+        LogEvent(521);
+    }
+    #endif
+    
+    while(ticks > leftEncoderCounts)
+      {
+        motor(LEFT_MOTOR, power);
+        motor(RIGHT_MOTOR, power);
+        if(leftEncoderCounts < rightEncoderCounts)
+          {
+            motor(LEFT_MOTOR, power - power / 33);
+        }
+        else if(leftEncoderCounts > rightEncoderCounts)
+          {
+            motor(RIGHT_MOTOR, power - power / 33);
+        }
+    };
+    motor(LEFT_MOTOR, 0);
+    motor(RIGHT_MOTOR, 0);
+    
+    #ifdef usingTestLog
+      {
+        LogEvent(520);
+    }
+    #endif
+}
+
+//DriveStraightTicks(float time, int power) //Function #3
+
+//30 ticks = 90 degrees
+
+void TurnClockwiseTicks(int ticks) //Function #4
+{
+    #ifdef usingTestLog
+      {
+        LogEvent(541);
+    }
+    #endif
+    
+    leftEncoderCounts = 0;
+    rightEncoderCounts = 0;
+    motor(LEFT_MOTOR, 100);
+    motor(RIGHT_MOTOR, -100);
+    while (leftEncoderCounts < ticks && rightEncoderCounts < ticks);
+    motor(LEFT_MOTOR, 0);
+    motor(RIGHT_MOTOR, 0);
+    
+    #ifdef usingTestLog
+      {
+        LogEvent(540);
+    }
+    #endif
+}
+
+void TurnCounterClockwiseTicks(int ticks) //Function #5
+{
+    #ifdef usingTestLog
+      {
+        LogEvent(551);
+    }
+    #endif
+    
+    leftEncoderCounts = 0;
+    rightEncoderCounts = 0;
+    motor(LEFT_MOTOR, -100);
+    motor(RIGHT_MOTOR, 100);
+    while (leftEncoderCounts < ticks && rightEncoderCounts < ticks);
+    motor(LEFT_MOTOR, 0);
+    motor(RIGHT_MOTOR, 0);
+    
+    #ifdef usingTestLog
+      {
+        LogEvent(550);
+    }
+    #endif
+}
+
+void TurnClockwiseDegrees(int degrees) //Function #6
+{
+    int ticks = degrees / 3 - degrees / 15;
+    
+    #ifdef usingTestLog
+      {
+        LogEvent(561);
+    }
+    #endif
+    
+    leftEncoderCounts = 0;
+    rightEncoderCounts = 0;
+    motor(LEFT_MOTOR, 100);
+    motor(RIGHT_MOTOR, -100);
+    while (leftEncoderCounts < ticks && rightEncoderCounts < ticks);
+    motor(LEFT_MOTOR, 0);
+    motor(RIGHT_MOTOR, 0);
+    
+    #ifdef usingTestLog
+      {
+        LogEvent(560);
+    }
+    #endif
+}
+
+void TurnCounterClockwiseDegrees(int degrees) //Function #7
+{
+    int ticks = degrees / 3 - degrees / 15;
+    
+    #ifdef usingTestLog
+      {
+        LogEvent(571);
+    }
+    #endif
+    
+    leftEncoderCounts = 0;
+    rightEncoderCounts = 0;
+    motor(LEFT_MOTOR, -100);
+    motor(RIGHT_MOTOR, 100);
+    while (leftEncoderCounts < ticks  && rightEncoderCounts < ticks);
+    motor(LEFT_MOTOR, 0);
+    motor(RIGHT_MOTOR, 0);
+    
+    #ifdef usingTestLog
+      {
+        LogEvent(570);
+    }
+    #endif
+}
+
+void TurnDegrees(float degrees)
+{
+    int ticks;
+    
+    #ifdef usingTestLog
+      {
+        LogEvent(571);
+    }
+    #endif
+    
+    if (degrees > 0.)
+      ticks = (int)(degrees * 7. / 36.);
+    else
+      ticks = (int)(-degrees * 7. / 36.);
+    
+    leftEncoderCounts = 0;
+    
+    if (degrees > 0.)
+      {
+        motor(LEFT_MOTOR, 25);
+        motor(RIGHT_MOTOR, -25);
+    }
+      else
+      {
+        motor(LEFT_MOTOR, -25);
+        motor(RIGHT_MOTOR, 25);
+    }
+    
+    
+    while (leftEncoderCounts < ticks);
+        
+    motor(LEFT_MOTOR, 0);
+    motor(RIGHT_MOTOR, 0);
+    
+    #ifdef usingTestLog
+      {
+        LogEvent(570);
+    }
+    #endif
+}
+
+void GetTo(int x, int y, int initialDirection)
+{
+    int thisX;
+    int thisY;
+    int newHeading;
+    GPSGetAbsoluteHeading();
+    thisX = gps_x;
+    thisY = gps_y;
+    beep();
+    newHeading = (int)atan((float)(thisX - x) / (float)(thisY - y));
+    beep();
+    
+    
+    //TurnCounterClockwiseDegrees(gps_heading - newHeading);
+}
+
+void TurnTowards(int x, int y, int initialDirection)
+{
+    
+}

@@ -5,10 +5,14 @@ persistent int testLog[TEST_LOG_LENGTH];
 int logIndex;
 int logOn = 0;
 
+/*-------------------------------------------------------------------------------------------------*/
+
 void DumpTestLog(){
     printf("\nPress Start to begin");
     start_press();
 }
+
+/*-------------------------------------------------------------------------------------------------*/
 
 void ResetTestLog()
 {
@@ -22,16 +26,21 @@ void ResetTestLog()
     logIndex = 0;
 }
 
+/*-------------------------------------------------------------------------------------------------*/
+
 void StartLogging()
 {
     logOn = 1;
-    ResetTestLog();
 }
+
+/*-------------------------------------------------------------------------------------------------*/
 
 void StopLogging()
 {
     logOn = 0;
 }
+
+/*-------------------------------------------------------------------------------------------------*/
 
 void LogEvent(int eventNumber)
 {
@@ -53,19 +62,4 @@ void LogEvent(int eventNumber)
     }
 }
 
-// /------------------------------------------\
-// | Event Numbers                            |
-// +------------------------------------------+
-// | 111 | Begin | CourseInitializeKnob       |
-// | 110 | End   | CourseInitializeKnob       |
-// | 121 | Begin | CourseCourseTypeInitialize |
-// | 120 | End   | CourseCourseTypeInitialize |
-// | 211 | Begin | GPSInitialize              |
-// | 210 | End   | GPSInitialize              |
-// | 221 | Begin | GPSDisable                 |
-// | 220 | End   | GPSDisable                 |
-// | 231 | Begin | GPSEnable                  |
-// | 230 | End   | GPSEnable                  |
-// | 241 | Begin | GPSGetData                 |
-// | 240 | End   | GPSGetData                 |
-// \------------------------------------------/
+/*-------------------------------------------------------------------------------------------------*/

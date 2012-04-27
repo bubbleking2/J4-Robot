@@ -1,4 +1,28 @@
-void WaitForGo()
+//File #3
+
+#ifdef LOWER_CDS_PORT
+#else
+#define LOWER_CDS_PORT 3
+#endif
+
+
+/*-------------------------------------------------------------------------------------------------*/
+
+void WaitForGo() //Function #1
 {
-    //while(cds Cell Reading == x);
+    #ifdef usingTestLog
+      {
+        LogEvent(311);
+    }
+    #endif
+    
+    while(analog(LOWER_CDS_PORT) >=  15);
+    
+    #ifdef usingTestLog
+      {
+        LogEvent(310);
+    }
+    #endif
 }
+
+/*-------------------------------------------------------------------------------------------------*/

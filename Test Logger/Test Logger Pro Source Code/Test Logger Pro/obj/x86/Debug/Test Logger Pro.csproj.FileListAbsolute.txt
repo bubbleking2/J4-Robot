@@ -19,3 +19,4 @@ C:\Users\Tyler Wolf Leonhardt\Desktop\J4-Robot\Test Logger\Test Logger Pro Sourc
 C:\Users\Tyler Wolf Leonhardt\Desktop\J4-Robot\Test Logger\Test Logger Pro Source Code\Test Logger Pro\obj\x86\Debug\Test_Logger_Pro.mainForm.resources
 C:\Users\Tyler Wolf Leonhardt\Desktop\J4-Robot\Test Logger\Test Logger Pro Source Code\Test Logger Pro\obj\x86\Debug\Test_Logger_Pro.Properties.Resources.resources
 C:\Users\Tyler Wolf Leonhardt\Desktop\J4-Robot\Test Logger\Test Logger Pro Source Code\Test Logger Pro\obj\x86\Debug\Test Logger Pro.csproj.GenerateResource.Cache
+C:\Users\Tyler Wolf Leonhardt\Desktop\J4-Robot\Test Logger\Test Logger Pro Source Code\Test Logger Pro\obj\x86\Debug\Test Logger Pro.csprojResolveAssemblyReference.cache

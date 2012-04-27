@@ -1,6 +1,6 @@
 //CdS Cell Test
 
-#define CDS_PORT 2
+#define LOWER_CDS_PORT 4
 
 void main()
 {
@@ -9,7 +9,7 @@ void main()
     
     while(!stop_button())
       {
-        printf("\nReading: %d", analog(CDS_PORT));
+        printf("\nReading: %d", analog(LOWER_CDS_PORT));
         msleep(200L);
     }
     

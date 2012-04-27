@@ -1,0 +1,44 @@
+/-------------------------------------------\
+| Event Numbers                             |
++-------------------------------------------+
+| 111 | Begin | CourseInitializeKnob        |
+| 110 | End   | CourseInitializeKnob        |
+| 121 | Begin | CourseCourseTypeInitialize  |
+| 120 | End   | CourseCourseTypeInitialize  |
+| 211 | Begin | GPSInitialize               |
+| 210 | End   | GPSInitialize               |
+| 221 | Begin | GPSDisable                  |
+| 220 | End   | GPSDisable                  |
+| 231 | Begin | GPSEnable                   |
+| 230 | End   | GPSEnable                   |
+| 241 | Begin | GPSGetData                  |
+| 240 | End   | GPSGetData                  |
+| 251 | Begin | GPSGetAbsoluteY             |
+| 250 | End   | GPSGetAbsoluteY             |
+| 261 | Begin | GPSGetAbsoluteX             |
+| 260 | End   | GPSGetAbsoluteX             |
+| 311 | Begin | WaitForGo                   |
+| 310 | End   | WaitForGo                   |
+| 321 | Begin | PushButton                  |
+| 320 | End   | PushButton                  |
+| 411 | Begin | FromStartToTraffic          |
+| 410 | End   | FromStartToTraffic          |
+| 421 | Begin | FromTrafficToButton         |
+| 420 | End   | FromTrafficToButton         |
+| 431 | Begin | FromButtonToCrank           |
+| 430 | End   | FromButtonToCrank           |
+| 511 | Begin | DriveStraightTime           |
+| 510 | End   | DriveStraightTime           |
+| 521 | Begin | DriveStraightDistance       |
+| 520 | End   | DriveStraightDistance       |
+| 541 | Begin | TurnClockwiseTicks          |
+| 540 | End   | TurnClockwiseTicks          |
+| 551 | Begin | TurnCounterClockwiseTicks   |
+| 550 | End   | TurnCounterClockwiseTicks   |
+| 561 | Begin | TurnClockwiseDegrees        |
+| 560 | End   | TurnClockwiseDegrees        |
+| 571 | Begin | TurnCounterClockwiseDegrees |
+| 570 | End   | TurnCounterClockwiseDegrees |
+| 611 | Begin | EncodersInitialize          |
+| 610 | End   | EncodersInitialize          |
+\-------------------------------------------/

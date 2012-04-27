@@ -1,7 +1,6 @@
 // /------------------------------------------\
 // | Event Numbers                            |
 // +------------------------------------------+
-// | 0   | NULL  | NULL                       |
 // | 111 | Begin | CourseInitializeKnob       |
 // | 110 | End   | CourseInitializeKnob       |
 // | 121 | Begin | CourseCourseTypeInitialize |

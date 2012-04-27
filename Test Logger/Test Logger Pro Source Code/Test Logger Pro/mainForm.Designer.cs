@@ -37,6 +37,7 @@
             this.outputBox = new System.Windows.Forms.ListBox();
             this.outputLabel = new System.Windows.Forms.Label();
             this.chooseOutput = new System.Windows.Forms.Button();
+            this.clearButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // saveFile
@@ -83,9 +84,9 @@
             // 
             this.inputBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.inputBox.Location = new System.Drawing.Point(10, 24);
+            this.inputBox.Location = new System.Drawing.Point(8, 24);
             this.inputBox.Name = "inputBox";
-            this.inputBox.Size = new System.Drawing.Size(264, 20);
+            this.inputBox.Size = new System.Drawing.Size(208, 20);
             this.inputBox.TabIndex = 3;
             // 
             // outputBox
@@ -93,6 +94,9 @@
             this.outputBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.outputBox.BackColor = System.Drawing.Color.Black;
+            this.outputBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.outputBox.ForeColor = System.Drawing.Color.Lime;
             this.outputBox.FormattingEnabled = true;
             this.outputBox.HorizontalScrollbar = true;
             this.outputBox.Location = new System.Drawing.Point(10, 64);
@@ -123,11 +127,23 @@
             this.chooseOutput.UseVisualStyleBackColor = true;
             this.chooseOutput.Click += new System.EventHandler(this.chooseOutput_Click);
             // 
+            // clearButton
+            // 
+            this.clearButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.clearButton.Location = new System.Drawing.Point(224, 24);
+            this.clearButton.Name = "clearButton";
+            this.clearButton.Size = new System.Drawing.Size(51, 20);
+            this.clearButton.TabIndex = 8;
+            this.clearButton.Text = "Clear";
+            this.clearButton.UseVisualStyleBackColor = true;
+            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 342);
+            this.Controls.Add(this.clearButton);
             this.Controls.Add(this.chooseOutput);
             this.Controls.Add(this.outputLabel);
             this.Controls.Add(this.outputBox);
@@ -154,6 +170,7 @@
         private System.Windows.Forms.ListBox outputBox;
         private System.Windows.Forms.Label outputLabel;
         private System.Windows.Forms.Button chooseOutput;
+        private System.Windows.Forms.Button clearButton;
     }
 }
 

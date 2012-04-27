@@ -1,4 +1,38 @@
-void PushButton(int courseDirection)
+//File #3
+
+/*-------------------------------------------------------------------------------------------------*/
+
+void PushButton(int courseDirection) //Function #2
 {
+    #ifdef usingTestLog
+      {
+        LogEvent(321);
+    }
+    #endif
     
+    msleep(200L);
+    DriveStraightDistance(8., -100);
+    msleep(200L);
+    
+    if(courseDirection == -1)
+      {
+         TurnCounterClockwiseDegrees(100);
+    }
+    else
+      {
+         TurnCounterClockwiseDegrees(-100);
+    }
+   
+    
+    msleep(200L);
+    DriveStraightDistance(48., 100);
+    //TurnDegrees(150., -100);
+    
+    #ifdef usingTestLog
+      {
+        LogEvent(320);
+    }
+    #endif
 }
+
+/*-------------------------------------------------------------------------------------------------*/

@@ -1,12 +1,14 @@
 //Encoders Test
 
-//#use sencdr2.icb
-//#use sencdr3.icb
-#use fencdr2.icb
-#use fencdr3.icb
+#use sencdr2.icb
+#use sencdr3.icb
+//#use fencdr2.icb
+//#use fencdr3.icb
 
 #define leftEncoderCounts encoder2_counts
 #define rightEncoderCounts encoder3_counts
+#define leftEncoderHighThreshold encoder2_high_threshold
+#define rightEncoderHighThreshold encoder3_high_threshold
 
 #define LEFT_MOTOR 1
 #define RIGHT_MOTOR 3
@@ -15,6 +17,8 @@ void main()
 {
     int leftReading = 0;
     int stopPressed = 0;
+    leftEncoderHighThreshold = 100;
+    rightEncoderHighThreshold = 100;
     
     printf("\nPress Start to begin.");
     start_press();

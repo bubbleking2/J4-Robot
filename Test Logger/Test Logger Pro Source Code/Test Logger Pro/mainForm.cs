@@ -17,7 +17,7 @@ namespace Test_Logger_Pro
         Dictionary<int, string> parseInstructionFile()
         {
             Dictionary<int, string> instructions = new Dictionary<int,string>();
-            string[] instructionsList = System.IO.File.ReadAllLines("commandReference.txt");
+            string[] instructionsList = System.IO.File.ReadAllLines("Event List.txt");
 
             for(int i = 0; i < instructionsList.Length; i++)
             {
@@ -153,7 +153,7 @@ namespace Test_Logger_Pro
         public mainForm()
         {
             InitializeComponent();
-            System.IO.File.AppendAllText("commandReference.txt", "");
+            System.IO.File.AppendAllText("Event List.txt", "");
             instructions = parseInstructionFile();
             saveFile.InitialDirectory = System.IO.Directory.GetCurrentDirectory();
             if (!instructionsFileValid)
@@ -189,6 +189,11 @@ namespace Test_Logger_Pro
         private void chooseOutput_Click(object sender, EventArgs e)
         {
             saveFile.ShowDialog();
+        }
+
+        private void clearButton_Click(object sender, EventArgs e)
+        {
+            inputBox.Text = "";
         }
     }
 }

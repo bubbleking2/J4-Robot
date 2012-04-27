@@ -1,16 +1,79 @@
-void FromStartToTraffic(int courseDirection)
+//File #4
+
+#ifdef USING_DRIVE
+#else
+#use Drive.ic
+#endif
+
+/*-------------------------------------------------------------------------------------------------*/
+
+void FromStartToTraffic(int courseDirection) //Function #1
 {
-    //DriveStraight(int distance);
-}
+    #ifdef usingTestLog
+      {
+        LogEvent(411);
+    }
+    #endif
     
-void FromTrafficToButton(int courseDirection)
-{
-    //TurnToAngle(int heading);
-    //DriveStraight(int distance);
+    //Go forward a set distance
+    //DriveStraightDistance(41., 100);
+    TurnDegrees(90.);
+    
+    #ifdef usingTestLog
+      {
+        LogEvent(410);
+    }
+    #endif
 }
 
-void FromButtonToCrank(int courseDirection)
+/*-------------------------------------------------------------------------------------------------*/
+
+void FromTrafficToButton(int courseDirection) //Function #2
 {
-    //TurnToAngle(int heading);
-    //DriveStraight(int distance);
+    #ifdef usingTestLog
+      {
+        LogEvent(421);
+    }
+    #endif
+    
+    //TurnDegrees(125., -100);
+    if(courseDirection == -1)
+      {
+        TurnCounterClockwiseDegrees(130);
+    }
+    else
+      {
+        TurnClockwiseDegrees(130);
+    }
+    
+    DriveStraightDistance(28., 100);
+    
+    #ifdef usingTestLog
+      {
+        LogEvent(420);
+    }
+    #endif
 }
+
+/*-------------------------------------------------------------------------------------------------*/
+
+void FromButtonToCrank(int courseDirection) //Function #3
+{
+    #ifdef usingTestLog
+      {
+        LogEvent(431);
+    }
+    #endif
+    
+    //GetTo(0,0,1);
+    
+    //DriveStraightDistance(48., 100);
+    
+    #ifdef usingTestLog
+      {
+        LogEvent(430);
+    }
+    #endif
+}
+
+/*-------------------------------------------------------------------------------------------------*/
