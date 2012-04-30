@@ -1,0 +1,123 @@
+//File #5
+
+#ifdef LEFT_MOTOR
+#else
+#define LEFT_MOTOR 1
+#endif
+
+#ifdef RIGHT_MOTOR
+#else
+#define RIGHT_MOTOR 3
+#endif
+
+#ifdef USING_ENCODERS
+#else
+#use Encoders\Encoders.ic
+#endif
+
+#define USING_DRIVE 1
+
+persistent float leftCalibration;
+persistent float rightCalibration;
+/*-------------------------------------------------------------------------------------------------*/
+
+void calibrateMotors()
+{
+    leftCalibration = 1.;
+    rightCalibration = 1.;
+    leftEncoderCounts = 0;
+    rightEncoderCounts = 0;
+    
+    DriveTicks(200, 100.);
+    
+    if(leftEncoderCounts > rightEncoderCounts)
+        leftCalibration = (float)rightEncoderCounts / (float)leftEncoderCounts;
+    else
+        rightCalibration = (float)leftEncoderCounts / (float)rightEncoderCounts;
+}
+
+void DriveTicks(int ticks, float power)
+{
+    int slowPoint;
+    
+    ticks += leftEncoderCounts;
+    slowPoint = ticks - 30;
+    
+    while(ticks > leftEncoderCounts)
+      {         
+        motor(LEFT_MOTOR, (int)(power * leftCalibration));
+        motor(RIGHT_MOTOR, (int)(power * rightCalibration)); 
+              
+        if (leftEncoderCounts > slowPoint)
+          {
+            power = 25.;
+        }
+        
+    };
+    motor(LEFT_MOTOR, 0);
+    motor(RIGHT_MOTOR, 0);
+}
+
+void DriveStraightDistance(float inches, float power) //Function #2
+{
+    int ticks;
+    
+    #ifdef usingTestLog
+      {
+        LogEvent(521);
+    }
+    #endif
+    
+    ticks = (int)(inches * 3.183098862);
+    
+    DriveTicks(ticks, power);
+    
+    #ifdef usingTestLog
+      {
+        LogEvent(520);
+    }
+    #endif
+}
+
+void TurnTicks(int ticks)
+{
+    leftEncoderCounts = 0;
+    
+    if (ticks > 0)
+      {
+        motor(LEFT_MOTOR, 25);
+        motor(RIGHT_MOTOR, -25);
+    }
+    else
+      {
+        motor(LEFT_MOTOR, -25);
+        motor(RIGHT_MOTOR, 25);
+        ticks = -ticks;
+    }
+    
+    while (leftEncoderCounts < ticks);
+    
+    motor(LEFT_MOTOR, 0);
+    motor(RIGHT_MOTOR, 0);
+}
+
+void TurnDegrees(float degrees)
+{
+    int ticks;
+    
+    #ifdef usingTestLog
+      {
+        LogEvent(571);
+    }
+    #endif
+    
+    ticks = (int)(degrees * 7. / 36.);
+    
+    TurnTicks(ticks);
+    
+    #ifdef usingTestLog
+      {
+        LogEvent(570);
+    }
+    #endif
+}

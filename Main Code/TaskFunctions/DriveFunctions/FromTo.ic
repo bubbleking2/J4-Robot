@@ -16,8 +16,7 @@ void FromStartToTraffic(int courseDirection) //Function #1
     #endif
     
     //Go forward a set distance
-    //DriveStraightDistance(41., 100);
-    TurnDegrees(90.);
+    DriveStraightDistance(41., 100);
     
     #ifdef usingTestLog
       {
@@ -36,15 +35,7 @@ void FromTrafficToButton(int courseDirection) //Function #2
     }
     #endif
     
-    //TurnDegrees(125., -100);
-    if(courseDirection == -1)
-      {
-        TurnCounterClockwiseDegrees(130);
-    }
-    else
-      {
-        TurnClockwiseDegrees(130);
-    }
+    TurnDegrees(135. * courseDirection);
     
     DriveStraightDistance(28., 100);
     
@@ -65,9 +56,9 @@ void FromButtonToCrank(int courseDirection) //Function #3
     }
     #endif
     
-    //GetTo(0,0,1);
+    TurnDegrees(-100. * courseDirection);
     
-    //DriveStraightDistance(48., 100);
+    DriveStraightDistance(48., 100);
     
     #ifdef usingTestLog
       {

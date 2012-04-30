@@ -1,0 +1,28 @@
+//Drive Straight Test
+
+#define LEFT_MOTOR 1
+#define RIGHT_MOTOR 3
+//#define LEFT_ENCODER 2
+//#define RIGHT_ENCODER 3
+
+#use TaskFunctions\DriveFunctions\Encoders\Encoders.ic
+#use TaskFunctions\DriveFunctions\Drive.ic
+
+void main()
+{
+    //Enable the encoders
+    EncodersInitialize();
+    
+    printf("\nPress Start to begin.");
+    start_press();
+    calibrateMotors();
+    
+    while(!stop_button())
+      {
+        printf("\nPress Start to begin.");
+        start_press();
+        DriveStraightDistance(36., 100.);
+    }
+    
+    printf("\nOperation Terminated");
+}

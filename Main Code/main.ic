@@ -8,10 +8,10 @@
 
 #use TestLog\TestLog.ic
 #use Course\CourseInitialize.ic
-#use DriveFunctions\GPS\GPSModule.ic
-#use DriveFunctions\Encoders\Encoders.ic
-#use DriveFunctions\FromTo.ic
-#use DriveFunctions\Drive.ic
+#use TaskFunctions\DriveFunctions\GPS\GPSModule.ic
+#use TaskFunctions\DriveFunctions\Encoders\Encoders.ic
+#use TaskFunctions\DriveFunctions\FromTo.ic
+#use TaskFunctions\DriveFunctions\Drive.ic
 #use TaskFunctions\PushButton.ic
 #use TaskFunctions\WaitForGo.ic
 
@@ -49,18 +49,18 @@ void main()
     //while(!GPSGetData());
     
     //Wait for the go light on the CdS
-    //WaitForGo();
+    WaitForGo();
     
     //Travel from start rectangle to traffic rectangle
     FromStartToTraffic(courseDirection);
     
     //Travel from traffic rectangle to button
-    //FromTrafficToButton(courseDirection);
+    FromTrafficToButton(courseDirection);
     
     //Attempt to push button
-    //PushButton(courseDirection);
+    PushButton(courseDirection);
     
     //Travel from button rectangle to crank rectangle
-    //FromButtonToCrank(courseDirection);
+    FromButtonToCrank(courseDirection);
     
 }

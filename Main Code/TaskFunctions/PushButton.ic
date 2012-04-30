@@ -1,5 +1,10 @@
 //File #3
 
+#ifdef USING_DRIVE
+#else
+#use DriveFunctions\Drive.ic
+#endif
+
 /*-------------------------------------------------------------------------------------------------*/
 
 void PushButton(int courseDirection) //Function #2
@@ -13,20 +18,6 @@ void PushButton(int courseDirection) //Function #2
     msleep(200L);
     DriveStraightDistance(8., -100);
     msleep(200L);
-    
-    if(courseDirection == -1)
-      {
-         TurnCounterClockwiseDegrees(100);
-    }
-    else
-      {
-         TurnCounterClockwiseDegrees(-100);
-    }
-   
-    
-    msleep(200L);
-    DriveStraightDistance(48., 100);
-    //TurnDegrees(150., -100);
     
     #ifdef usingTestLog
       {
