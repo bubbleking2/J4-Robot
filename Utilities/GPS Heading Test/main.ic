@@ -1,0 +1,88 @@
+//Main
+#define LEFT_MOTOR 1
+#define RIGHT_MOTOR 3
+//#define LEFT_ENCODER 2
+//#define RIGHT_ENCODER 3
+
+#use TestLog\TestLog.ic
+#use Course\CourseInitialize.ic
+#use TaskFunctions\DriveFunctions\GPS\GPSModule.ic
+#use TaskFunctions\DriveFunctions\Encoders\Encoders.ic
+#use TaskFunctions\DriveFunctions\Drive.ic
+#use MathFunctions\Arctan.ic
+
+void main()
+{
+    //Declare course
+    int course;
+    int courseDirection;
+    int x = 0;
+    int y = 130;
+    float turn;
+    
+    //Declare whether this course is being logged
+    #ifdef usingTestLog
+      {
+        DumpTestLog();
+        ResetTestLog();
+        StartLogging();
+    }
+    #endif
+    
+    //Select course using knob
+    course = CourseInitializeKnob();
+    
+    //Determine the direction of the arrow on this course
+    courseDirection = CourseDirectionInitialize(course);
+    
+    //Connect to this course's GPS system
+    GPSInitialize(course);
+    
+    //Enable the Handy Board GPS
+    GPSEnable();
+    
+    //Enable the encoders
+    EncodersInitialize();
+    
+    //Get one valid reading from the GPS
+    while(!GPSGetData());
+    
+    while(!stop_button())
+      {
+        printf("\nPress Start to begin.");
+        start_press();
+        GPSGetAbsoluteHeading();
+        if(gps_y > y)
+          {
+            if(gps_x > x)
+              {
+                turn = (float)(gps_heading - 90 - Arctan(gps_x - x, gps_y - y));
+            }
+            else
+              {
+                turn = (float)(gps_heading + 90 - Arctan(gps_x - x, gps_y - y));
+            }
+        }
+        else
+          {
+            if(gps_x > x)
+              {
+                turn = (float)(gps_heading + Arctan(gps_x - x, gps_y - y));
+            }
+            else
+              {
+                turn = (float)(gps_heading + Arctan(gps_x - x, gps_y - y));
+            }
+        }
+        if(turn > 180.)
+          turn = turn - 360.;
+        else if(turn < -180.)
+          turn = turn + 360.;
+        
+        TurnDegrees(turn);
+        printf("\nReading:%d Turn Degrees:%f", gps_heading, turn);
+        sleep(2.);
+    }
+          
+}
+          

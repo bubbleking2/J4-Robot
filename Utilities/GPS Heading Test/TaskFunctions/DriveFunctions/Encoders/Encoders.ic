@@ -1,0 +1,28 @@
+//File #6
+
+#use sencdr2.icb
+#use sencdr3.icb
+
+#define USING_ENCODERS 1
+#define leftEncoderCounts encoder2_counts
+#define rightEncoderCounts encoder3_counts
+#define leftEncoderHighThreshold encoder2_high_threshold
+#define rightEncoderHighThreshold encoder3_high_threshold
+
+void EncodersInitialize() //Function #1
+{
+    #ifdef usingTestLog
+      {
+        LogEvent(611);
+    }
+    #endif
+    
+    leftEncoderHighThreshold = 100;
+    rightEncoderHighThreshold = 100;
+    
+    #ifdef usingTestLog
+      {
+        LogEvent(610);
+    }
+    #endif
+}

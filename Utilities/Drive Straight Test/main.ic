@@ -15,7 +15,7 @@ void main()
     
     printf("\nPress Start to begin.");
     start_press();
-    calibrateMotors();
+    CalibrateMotors();
     
     while(!stop_button())
       {

@@ -15,28 +15,16 @@
 #use Encoders\Encoders.ic
 #endif
 
+#ifdef USING_GPS_MODULE
+#else
+#use GPS\GPSModule.ic
+#endif
+
 #define USING_DRIVE 1
 
-persistent float leftCalibration;
-persistent float rightCalibration;
 /*-------------------------------------------------------------------------------------------------*/
 
-void CalibrateMotors()
-{
-    leftCalibration = 1.;
-    rightCalibration = 1.;
-    leftEncoderCounts = 0;
-    rightEncoderCounts = 0;
-    
-    DriveTicks(200, 100.);
-    
-    if(leftEncoderCounts > rightEncoderCounts)
-      leftCalibration = (float)rightEncoderCounts / (float)leftEncoderCounts;
-    else
-      rightCalibration = (float)leftEncoderCounts / (float)rightEncoderCounts;
-}
-
-void DriveTicks(int ticks, float power)
+void DriveTicks(int ticks, int power)
 {
     int slowPoint;
     
@@ -44,13 +32,22 @@ void DriveTicks(int ticks, float power)
     slowPoint = ticks - 30;
     
     while(ticks > leftEncoderCounts)
-      {         
-        motor(LEFT_MOTOR, (int)(power * leftCalibration));
-        motor(RIGHT_MOTOR, (int)(power * rightCalibration)); 
+      {
+        motor(LEFT_MOTOR, power);
+        motor(RIGHT_MOTOR, power);
+        
+        if(leftEncoderCounts < rightEncoderCounts)
+          {
+            motor(LEFT_MOTOR, power - power / 75);
+        }
+        else if(leftEncoderCounts > rightEncoderCounts)
+          {
+            motor(RIGHT_MOTOR, power - power / 75);
+        }
         
         if (leftEncoderCounts > slowPoint)
           {
-            power = 25.;
+            power = 25;
         }
         
     };
@@ -58,7 +55,7 @@ void DriveTicks(int ticks, float power)
     motor(RIGHT_MOTOR, 0);
 }
 
-void DriveStraightDistance(float inches, float power) //Function #2
+void DriveStraightDistance(float inches, int power) //Function #2
 {
     int ticks;
     
@@ -120,4 +117,25 @@ void TurnDegrees(float degrees)
         LogEvent(570);
     }
     #endif
+}
+
+void GetTo(int x, int y, int initialDirection)
+{
+    int thisX;
+    int thisY;
+    int newHeading;
+    GPSGetAbsoluteHeading();
+    thisX = gps_x;
+    thisY = gps_y;
+    beep();
+    newHeading = (int)atan((float)(thisX - x) / (float)(thisY - y));
+    beep();
+    
+    
+    //TurnCounterClockwiseDegrees(gps_heading - newHeading);
+}
+
+void TurnTowards(int x, int y, int initialDirection)
+{
+    
 }
