@@ -1,0 +1,236 @@
+/*-------------------------------------------------------------------------------------------------*/
+//File #7
+/*-------------------------------------------------------------------------------------------------*/
+
+#if ENCODERS*ARCTAN*GPS
+
+#define DRIVE 1
+
+persistent float leftCalibration = 1.;
+persistent float rightCalibration = 1.;
+
+/*-------------------------------------------------------------------------------------------------*/
+//Function #1
+/*-------------------------------------------------------------------------------------------------*/
+
+void CalibrateMotors()
+{
+    #ifdef TEST_LOG
+      {
+        LogEvent(711);
+    }
+    #endif
+    
+    leftCalibration = 1.;
+    rightCalibration = 1.;
+    leftEncoderCounts = 0;
+    rightEncoderCounts = 0;
+    
+    DriveTicks(200, 100.);
+    
+    if(leftEncoderCounts > rightEncoderCounts)
+      leftCalibration = (float)rightEncoderCounts / (float)leftEncoderCounts;
+    else
+      rightCalibration = (float)leftEncoderCounts / (float)rightEncoderCounts;
+    
+    #ifdef TEST_LOG
+      {
+        LogEvent(710);
+    }
+    #endif
+}
+
+/*-------------------------------------------------------------------------------------------------*/
+//Function #2
+/*-------------------------------------------------------------------------------------------------*/
+
+void DriveTicks(int ticks, float power)
+{
+    int slowPoint;
+    
+    #ifdef TEST_LOG
+      {
+        LogEvent(721);
+    }
+    #endif
+    
+    ticks += leftEncoderCounts;
+    slowPoint = ticks - 30;
+    
+    while(ticks > leftEncoderCounts)
+      {         
+        motor(LEFT_MOTOR, (int)(power * leftCalibration));
+        motor(RIGHT_MOTOR, (int)(power * rightCalibration)); 
+        
+        if (leftEncoderCounts > slowPoint)
+          {
+            power = 25.;
+        }
+        
+    };
+    motor(LEFT_MOTOR, 0);
+    motor(RIGHT_MOTOR, 0);
+    
+    #ifdef TEST_LOG
+      {
+        LogEvent(720);
+    }
+    #endif
+}
+
+/*-------------------------------------------------------------------------------------------------*/
+//Function #3
+/*-------------------------------------------------------------------------------------------------*/
+
+void DriveDistance(float inches, float power)
+{
+    int ticks;
+    
+    #ifdef TEST_LOG
+      {
+        LogEvent(731);
+    }
+    #endif
+    
+    ticks = (int)(inches * 3.183098862);
+    
+    DriveTicks(ticks, power);
+    
+    #ifdef TEST_LOG
+      {
+        LogEvent(730);
+    }
+    #endif
+}
+
+/*-------------------------------------------------------------------------------------------------*/
+//Function #4
+/*-------------------------------------------------------------------------------------------------*/
+
+void TurnTicks(int ticks)
+{
+    leftEncoderCounts = 0;
+    
+    #ifdef TEST_LOG
+      {
+        LogEvent(741);
+    }
+    #endif
+    
+    if (ticks > 0)
+      {
+        motor(LEFT_MOTOR, 25);
+        motor(RIGHT_MOTOR, -25);
+    }
+    else
+      {
+        motor(LEFT_MOTOR, -25);
+        motor(RIGHT_MOTOR, 25);
+        ticks = -ticks;
+    }
+    
+    while (leftEncoderCounts < ticks);
+    
+    motor(LEFT_MOTOR, 0);
+    motor(RIGHT_MOTOR, 0);
+    
+    #ifdef TEST_LOG
+      {
+        LogEvent(740);
+    }
+    #endif
+}
+
+/*-------------------------------------------------------------------------------------------------*/
+//Function #5
+/*-------------------------------------------------------------------------------------------------*/
+
+void TurnDegrees(int degrees)
+{
+    int ticks;
+    
+    #ifdef TEST_LOG
+      {
+        LogEvent(751);
+    }
+    #endif
+    
+    ticks = (int)(degrees * 7 / 36);
+    
+    TurnTicks(ticks);
+    
+    #ifdef TEST_LOG
+      {
+        LogEvent(750);
+    }
+    #endif
+}
+
+/*-------------------------------------------------------------------------------------------------*/
+//Function #6
+/*-------------------------------------------------------------------------------------------------*/
+
+void TurnTowards(int x, int y, int initialDirection)
+{
+    int turn;
+    
+    #ifdef TEST_LOG
+      {
+        LogEvent(761);
+    }
+    #endif
+    
+    GPSGetAbsoluteHeading();
+    
+    if(initialDirection)
+      if(gps_y > y)
+        turn = gps_heading + 180 + Arctan(gps_x - x, gps_y - y);
+      else
+        turn = gps_heading + Arctan(gps_x - x, gps_y - y);
+    else
+      {
+        if(gps_y > y)
+          turn = -gps_heading + 180 + Arctan(gps_x - x, gps_y - y);
+        else
+          turn = -gps_heading + Arctan(gps_x - x, gps_y - y);
+    }
+    if(turn > 180)
+      turn = turn - 360;
+    else if(turn < -180)
+      turn = turn + 360;
+    
+    TurnDegrees(turn);
+    
+    #ifdef TEST_LOG
+      {
+        LogEvent(760);
+    }
+    #endif
+}
+
+/*-------------------------------------------------------------------------------------------------*/
+//Function #7
+/*-------------------------------------------------------------------------------------------------*/
+
+void GetTo(int x, int y, int initialDirection)
+{
+    #ifdef TEST_LOG
+      {
+        LogEvent(771);
+    }
+    #endif
+    
+    TurnTowards(x, y, initialDirection);
+    DriveDistance(.25 * sqrt((float)((y - gps_y) * (y - gps_y) + (x - gps_x) * (x - gps_x))), 100.);
+    
+    #ifdef TEST_LOG
+      {
+        LogEvent(770);
+    }
+    #endif
+}
+
+/*-------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------*/
+
+#endif

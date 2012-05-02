@@ -57,17 +57,17 @@ void main()
     //Wait for the go light on the CdS
     WaitForGo();
     
-    //Travel from start rectangle to traffic rectangle
+    //Travel from start to traffic
     FromStartToTraffic(courseDirection);
     
-    //Travel from traffic rectangle to button
+    //Travel from traffic to button
     FromTrafficToButton(courseDirection);
     
     //Attempt to push button
-    PushButton(courseDirection);
+    //PushButton(courseDirection);
     
-    //Travel from button rectangle to crank rectangle
-    FromButtonToCrank(courseDirection);
+    //Travel from button to crank
+    //FromButtonToCrank(courseDirection);
     
     #ifdef TEST_LOG
       {

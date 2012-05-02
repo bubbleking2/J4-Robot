@@ -1,26 +1,38 @@
 /*-------------------------------------------------------------------------------------------------*/
-//CdS Cell Test
+//File #5
 /*-------------------------------------------------------------------------------------------------*/
 
-#use GlobalVariables\GlobalVariables.ic
+#define ENCODERS 1
+
+#use sencdr2.icb
+#use sencdr3.icb
+
+
+#define leftEncoderCounts encoder2_counts
+#define rightEncoderCounts encoder3_counts
+#define leftEncoderHighThreshold encoder2_high_threshold
+#define rightEncoderHighThreshold encoder3_high_threshold
 
 /*-------------------------------------------------------------------------------------------------*/
 //Function #1
 /*-------------------------------------------------------------------------------------------------*/
 
-void main()
+void EncodersInitialize()
 {
-    printf("\nPress Start to begin.");
-    start_press();
-    
-    while(!stop_button())
+    #ifdef TEST_LOG
       {
-        printf("\nReading: %d", analog(LOWER_CDS_PORT));
-        msleep(200L);
+        LogEvent(511);
     }
+    #endif
     
-    printf("\nOperation Terminated");
+    leftEncoderHighThreshold = 100;
+    rightEncoderHighThreshold = 100;
     
+    #ifdef TEST_LOG
+      {
+        LogEvent(510);
+    }
+    #endif
 }
 
 /*-------------------------------------------------------------------------------------------------*/

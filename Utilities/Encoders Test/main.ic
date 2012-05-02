@@ -1,22 +1,21 @@
+/*-------------------------------------------------------------------------------------------------*/
 //Encoders Test
+/*-------------------------------------------------------------------------------------------------*/
 
-#use sencdr2.icb
-#use sencdr3.icb
-//#use fencdr2.icb
-//#use fencdr3.icb
+#use GlobalVariables\GlobalVariables.ic
+#use MathFunctions\Arctan.ic
+#use EncoderFunctions\Encoders.ic
+#use GPSFunctions\GPSModule.ic
+#use DriveFunctions\Drive.ic
 
-#define leftEncoderCounts encoder2_counts
-#define rightEncoderCounts encoder3_counts
-#define leftEncoderHighThreshold encoder2_high_threshold
-#define rightEncoderHighThreshold encoder3_high_threshold
-
-#define LEFT_MOTOR 1
-#define RIGHT_MOTOR 3
+/*-------------------------------------------------------------------------------------------------*/
+//Function #1
+/*-------------------------------------------------------------------------------------------------*/
 
 void main()
 {
-    int leftReading = 0;
     int stopPressed = 0;
+    int leftReading = 0;
     leftEncoderHighThreshold = 100;
     rightEncoderHighThreshold = 100;
     
@@ -83,5 +82,7 @@ void main()
     }
     
     printf("\nOperation Terminated");
-    
 }
+
+/*-------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------*/

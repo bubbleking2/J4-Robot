@@ -40,10 +40,8 @@ void FromTrafficToButton(int courseDirection)
     }
     #endif
     
-    TurnDegrees(-45);
+    TurnDegrees(-90 * courseDirection);
     GetTo(button.x, button.y, 1);
-    
-    //DriveStraightDistance(28., 100.);
     
     #ifdef TEST_LOG
       {

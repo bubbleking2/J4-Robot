@@ -1,12 +1,16 @@
+/*-------------------------------------------------------------------------------------------------*/
 //Turn Test
+/*-------------------------------------------------------------------------------------------------*/
 
-#define LEFT_MOTOR 1
-#define RIGHT_MOTOR 3
-//#define LEFT_ENCODER 2
-//#define RIGHT_ENCODER 3
+#use GlobalVariables\GlobalVariables.ic
+#use MathFunctions\Arctan.ic
+#use EncoderFunctions\Encoders.ic
+#use GPSFunctions\GPSModule.ic
+#use DriveFunctions\Drive.ic
 
-#use TaskFunctions\DriveFunctions\Encoders\Encoders.ic
-#use TaskFunctions\DriveFunctions\Drive.ic
+/*-------------------------------------------------------------------------------------------------*/
+//Function #1
+/*-------------------------------------------------------------------------------------------------*/
 
 void main()
 {
@@ -17,8 +21,11 @@ void main()
       {
         printf("\nPress Start to begin.");
         start_press();
-        TurnDegrees(90.);
+        TurnDegrees(90);
     }
     
     printf("\nOperation Terminated");
 }
+
+/*-------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------*/
