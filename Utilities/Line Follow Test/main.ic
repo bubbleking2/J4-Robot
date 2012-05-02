@@ -1,0 +1,57 @@
+//Line Follow Test
+
+#define LEFT_MOTOR 1
+#define RIGHT_MOTOR 3
+
+#define LEFT_OPTOSENSOR 4
+#define CENTER_OPTOSENSOR 5
+#define RIGHT_OPTOSENSOR 6
+
+#define FOLLOW_SPEED 50
+
+void main()
+{
+    int stopPressed = 0;
+    long endTime;
+    
+    printf("\nPress Start to begin.");
+    start_press();
+    
+    while(!stopPressed)
+      {
+        motor(LEFT_MOTOR, FOLLOW_SPEED);
+        motor(RIGHT_MOTOR, FOLLOW_SPEED);
+        
+        endTime = mseconds() + 10000L;
+        while(mseconds() < endTime)
+          {
+            if(analog(CENTER_OPTOSENSOR) < 100)
+              {
+                while(analog(LEFT_OPTOSENSOR) > 100)
+                  {
+                    motor(LEFT_MOTOR, 0);
+                }
+                
+                motor(LEFT_MOTOR, FOLLOW_SPEED);
+                motor(RIGHT_MOTOR, FOLLOW_SPEED);
+                
+                while(analog(RIGHT_OPTOSENSOR) > 100)
+                  {
+                    motor(RIGHT_MOTOR, 0);
+                }
+            }
+            
+            motor(LEFT_MOTOR, FOLLOW_SPEED);
+            motor(RIGHT_MOTOR, FOLLOW_SPEED);
+        }
+        motor(LEFT_MOTOR, 0);
+        motor(RIGHT_MOTOR, 0);
+        printf("\nPress Start to  test again.");
+        while(!start_button() && !(stopPressed = stop_button()));
+    }
+}
+
+void checkSensors()
+{
+    
+}

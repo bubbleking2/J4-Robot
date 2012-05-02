@@ -1,33 +1,45 @@
 /*-------------------------------------------------------------------------------------------------*/
-//File #9
+//File #2
 /*-------------------------------------------------------------------------------------------------*/
 
-#ifdef GLOBAL_VARIABLES
+#define GLOBAL_VARIABLES 1
 
-#define WAIT_FOR_GO 1
+#define LOWER_CDS_PORT 4
+#define LEFT_MOTOR 1
+#define RIGHT_MOTOR 3
+//#define LEFT_ENCODER 2
+//#define RIGHT_ENCODER 3
+//#define GPS 4
+
+struct Location{
+    int x;
+    int y;
+}
+
+traffic = {0, 205},
+button = {-90, 160};
 
 /*-------------------------------------------------------------------------------------------------*/
 //Function #1
 /*-------------------------------------------------------------------------------------------------*/
 
-void WaitForGo()
+void setLocations(int courseDirection)
 {
     #ifdef TEST_LOG
       {
-        LogEvent(911);
+        LogEvent(211);
     }
     #endif
     
-    while(analog(LOWER_CDS_PORT) >=  15);
+    traffic.x *= courseDirection;
+    button.x *= courseDirection;
     
     #ifdef TEST_LOG
       {
-        LogEvent(910);
+        LogEvent(210);
     }
     #endif
 }
 
 /*-------------------------------------------------------------------------------------------------*/
 /*-------------------------------------------------------------------------------------------------*/
-
-#endif

@@ -1,32 +1,35 @@
-//Main
-
-#define LOWER_CDS_PORT 4
-#define LEFT_MOTOR 1
-#define RIGHT_MOTOR 3
-//#define LEFT_ENCODER 2
-//#define RIGHT_ENCODER 3
+/*-------------------------------------------------------------------------------------------------*/
+//File #1
+/*-------------------------------------------------------------------------------------------------*/
 
 #use TestLog\TestLog.ic
-#use Course\CourseInitialize.ic
-#use TaskFunctions\DriveFunctions\GPS\GPSModule.ic
-#use TaskFunctions\DriveFunctions\Encoders\Encoders.ic
-#use TaskFunctions\DriveFunctions\FromTo.ic
-#use TaskFunctions\DriveFunctions\Drive.ic
-#use TaskFunctions\PushButton.ic
+#use GlobalVariables\GlobalVariables.ic
+#use MathFunctions\Arctan.ic
+#use CourseFunctions\CourseInitialize.ic
+#use EncoderFunctions\Encoders.ic
+#use GPSFunctions\GPSModule.ic
+#use DriveFunctions\Drive.ic
+#use DriveFunctions\FromTo.ic
 #use TaskFunctions\WaitForGo.ic
+#use TaskFunctions\PushButton.ic
+
+/*-------------------------------------------------------------------------------------------------*/
+//Function #1
+/*-------------------------------------------------------------------------------------------------*/
 
 void main()
 {
     //Declare course
     int course;
-    float courseDirection;
+    int courseDirection;
     
     //Declare whether this course is being logged
-    #ifdef usingTestLog
+    #ifdef TEST_LOG
       {
         DumpTestLog();
         ResetTestLog();
         StartLogging();
+        LogEvent(111);
     }
     #endif
     
@@ -36,20 +39,23 @@ void main()
     //Determine the direction of the arrow on this course
     courseDirection = CourseDirectionInitialize(course);
     
+    //Set the location of the objects on the course
+    setLocations(courseDirection);
+    
+    //Enable the encoders
+    EncodersInitialize();
+    
     //Connect to this course's GPS system
     GPSInitialize(course);
     
     //Enable the Handy Board GPS
     GPSEnable();
     
-    //Enable the encoders
-    EncodersInitialize();
-    
     //Get one valid reading from the GPS
     while(!GPSGetData());
     
     //Wait for the go light on the CdS
-    //WaitForGo();
+    WaitForGo();
     
     //Travel from start rectangle to traffic rectangle
     FromStartToTraffic(courseDirection);
@@ -58,8 +64,17 @@ void main()
     FromTrafficToButton(courseDirection);
     
     //Attempt to push button
-    //PushButton(courseDirection);
+    PushButton(courseDirection);
     
     //Travel from button rectangle to crank rectangle
-    //FromButtonToCrank(courseDirection);
+    FromButtonToCrank(courseDirection);
+    
+    #ifdef TEST_LOG
+      {
+        LogEvent(110);
+    }
+    #endif
 }
+
+/*-------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------*/

@@ -4,7 +4,6 @@
 //#define LEFT_ENCODER 2
 //#define RIGHT_ENCODER 3
 
-#use TestLog\TestLog.ic
 #use Course\CourseInitialize.ic
 #use TaskFunctions\DriveFunctions\GPS\GPSModule.ic
 #use TaskFunctions\DriveFunctions\Encoders\Encoders.ic
@@ -16,6 +15,7 @@ void main()
     //Declare course
     int course;
     int courseDirection;
+    int initialDirection = 1;
     int x = -90;
     int y = 160;
     float turn;
@@ -52,33 +52,24 @@ void main()
         printf("\nPress Start to begin.");
         start_press();
         GPSGetAbsoluteHeading();
-        if(gps_y > y)
-          {
-            if(gps_x > x)
-              {
-                turn = (float)(gps_heading - 90 - Arctan(gps_x - x, gps_y - y));
-            }
-            else
-              {
-                turn = (float)(gps_heading + 90 - Arctan(gps_x - x, gps_y - y));
-            }
-        }
+        
+        if(initialDirection)
+          if(gps_y > y)
+            turn = (float)(gps_heading + 180 + Arctan(gps_x - x, gps_y - y));
+          else
+            turn = (float)(gps_heading + Arctan(gps_x - x, gps_y - y));
         else
           {
-            if(gps_x > x)
-              {
-                turn = (float)(gps_heading + Arctan(gps_x - x, gps_y - y));
-            }
+            if(gps_y > y)
+              turn = (float)(-gps_heading + 180 + Arctan(gps_x - x, gps_y - y));
             else
-              {
-                turn = (float)(gps_heading + Arctan(gps_x - x, gps_y - y));
-            }
+              turn = (float)(-gps_heading + Arctan(gps_x - x, gps_y - y));
         }
         
         if(turn > 180.)
-          turn = turn - 360;
+          turn = turn - 360.;
         else if(turn < -180.)
-          turn = turn + 360;
+          turn = turn + 360.;
         
         TurnDegrees(turn);
         printf("\nReading:%d Turn Degrees:%f", gps_heading, turn);

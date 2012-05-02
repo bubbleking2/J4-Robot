@@ -1,7 +1,7 @@
 //Optisensor Test
 
-#define LEFT_SENSOR 2
-#define RIGHT_SENSOR 3
+#define LEFT_SENSOR 5
+#define RIGHT_SENSOR 6
 
 void main()
 {

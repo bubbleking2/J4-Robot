@@ -1,4 +1,4 @@
-#define usingTestLog 1
+#define TEST_LOG 1
 #define TEST_LOG_LENGTH 256
 
 persistent int testLog[TEST_LOG_LENGTH];

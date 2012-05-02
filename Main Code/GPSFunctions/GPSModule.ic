@@ -1,21 +1,25 @@
-//File #2
+/*-------------------------------------------------------------------------------------------------*/
+//File #6
+/*-------------------------------------------------------------------------------------------------*/
+
+#define GPS 1
 
 #use GPSModule.icb
-
-#define USING_GPS_MODULE 1
 
 int _gps_data[5];
 int gps_x, gps_y, gps_heading, gps_stoplight, gps_generator;
 
 /*-------------------------------------------------------------------------------------------------*/
+//Function #1
+/*-------------------------------------------------------------------------------------------------*/
 
-void GPSInitialize(int region) //Function #1
+void GPSInitialize(int region)
 {
     region = (int)region;
     
-    #ifdef usingTestLog
+    #ifdef TEST_LOG
       {
-        LogEvent(211);
+        LogEvent(611);
     }
     #endif
     
@@ -39,20 +43,22 @@ void GPSInitialize(int region) //Function #1
     // Physically enable RF receiver
     set_digital_out(0);
     
-    #ifdef usingTestLog
+    #ifdef TEST_LOG
       {
-        LogEvent(210);
+        LogEvent(610);
     }
     #endif
 }
 
 /*-------------------------------------------------------------------------------------------------*/
+//Function #2
+/*-------------------------------------------------------------------------------------------------*/
 
-void GPSDisable() //Function #2
+void GPSDisable()
 {
-    #ifdef usingTestLog
+    #ifdef TEST_LOG
       {
-        LogEvent(221);
+        LogEvent(621);
     }
     #endif
     
@@ -61,43 +67,47 @@ void GPSDisable() //Function #2
     // Prepare the HandyBoard for serial communication and disables reception of GPS packets
     gps_disable_asm(0);
     
-    #ifdef usingTestLog
+    #ifdef TEST_LOG
       {
-        LogEvent(220);
+        LogEvent(620);
     }
     #endif
 }
 
 /*-------------------------------------------------------------------------------------------------*/
+//Function #3
+/*-------------------------------------------------------------------------------------------------*/
 
-int GPSEnable() //Function #3
+int GPSEnable()
 {
-    #ifdef usingTestLog
+    #ifdef TEST_LOG
       {
-        LogEvent(231);
+        LogEvent(631);
     }
     #endif
     
     // Enables software reception of GPS packets
     gps_enable_asm(0);
     
-    #ifdef usingTestLog
+    #ifdef TEST_LOG
       {
-        LogEvent(230);
+        LogEvent(630);
     }
     #endif
 }
 
 /*-------------------------------------------------------------------------------------------------*/
+//Function #4
+/*-------------------------------------------------------------------------------------------------*/
 
-int GPSGetData() //Function #4
+int GPSGetData()
 {
     int gps_data_size;
     int counter = 0;
     
-    #ifdef usingTestLog
+    #ifdef TEST_LOG
       {
-        LogEvent(241);
+        LogEvent(641);
     }
     #endif
     
@@ -131,30 +141,36 @@ int GPSGetData() //Function #4
         // Clear ready flag (so that gps_ready(0) will return 0 until the next packet comes in)
         gps_clear(0);
         
-        #ifdef usingTestLog
+        #ifdef TEST_LOG
           {
-            LogEvent(240);
+            LogEvent(640);
         }
         #endif
-        
         return 1;
     }
     else
       {
+        #ifdef usingTestLog
+          {
+            LogEvent(640);
+        }
+        #endif
         return 0;
     }
 }
 
 /*-------------------------------------------------------------------------------------------------*/
+//Function #5
+/*-------------------------------------------------------------------------------------------------*/
 
-void GPSGetAbsoluteX() //Function #5
+void GPSGetAbsoluteX()
 {
     int initialX = gps_x;
     int finalX;
     
     #ifdef usingTestLog
       {
-        LogEvent(251);
+        LogEvent(651);
     }
     #endif
     
@@ -170,21 +186,23 @@ void GPSGetAbsoluteX() //Function #5
     
     #ifdef usingTestLog
       {
-        LogEvent(250);
+        LogEvent(650);
     }
     #endif
 }
 
 /*-------------------------------------------------------------------------------------------------*/
+//Function #6
+/*-------------------------------------------------------------------------------------------------*/
 
-void GPSGetAbsoluteY() //Function #6
+void GPSGetAbsoluteY()
 {
     int initialY = gps_y;
     int finalY;
     
-    #ifdef usingTestLog
+    #ifdef TEST_LOG
       {
-        LogEvent(261);
+        LogEvent(661);
     }
     #endif
     
@@ -198,23 +216,25 @@ void GPSGetAbsoluteY() //Function #6
         finalY = gps_y;
     }
     
-    #ifdef usingTestLog
+    #ifdef TEST_LOG
       {
-        LogEvent(260);
+        LogEvent(660);
     }
     #endif
 }
 
 /*-------------------------------------------------------------------------------------------------*/
+//Function #7
+/*-------------------------------------------------------------------------------------------------*/
 
-void GPSGetAbsoluteHeading() //Function #7
+void GPSGetAbsoluteHeading()
 {
     int initialHeading = gps_heading;
     int finalHeading;
     
-    #ifdef usingTestLog
+    #ifdef TEST_LOG
       {
-        LogEvent(271);
+        LogEvent(671);
     }
     #endif
     
@@ -228,9 +248,12 @@ void GPSGetAbsoluteHeading() //Function #7
         finalHeading = gps_y;
     }
     
-    #ifdef usingTestLog
+    #ifdef TEST_LOG
       {
-        LogEvent(270);
+        LogEvent(670);
     }
     #endif
 }
+
+/*-------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------*/

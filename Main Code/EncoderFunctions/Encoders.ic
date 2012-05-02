@@ -1,33 +1,39 @@
 /*-------------------------------------------------------------------------------------------------*/
-//File #9
+//File #5
 /*-------------------------------------------------------------------------------------------------*/
 
-#ifdef GLOBAL_VARIABLES
+#define ENCODERS 1
 
-#define WAIT_FOR_GO 1
+#use sencdr2.icb
+#use sencdr3.icb
+
+
+#define leftEncoderCounts encoder2_counts
+#define rightEncoderCounts encoder3_counts
+#define leftEncoderHighThreshold encoder2_high_threshold
+#define rightEncoderHighThreshold encoder3_high_threshold
 
 /*-------------------------------------------------------------------------------------------------*/
 //Function #1
 /*-------------------------------------------------------------------------------------------------*/
 
-void WaitForGo()
+void EncodersInitialize()
 {
     #ifdef TEST_LOG
       {
-        LogEvent(911);
+        LogEvent(511);
     }
     #endif
     
-    while(analog(LOWER_CDS_PORT) >=  15);
+    leftEncoderHighThreshold = 100;
+    rightEncoderHighThreshold = 100;
     
     #ifdef TEST_LOG
       {
-        LogEvent(910);
+        LogEvent(510);
     }
     #endif
 }
 
 /*-------------------------------------------------------------------------------------------------*/
 /*-------------------------------------------------------------------------------------------------*/
-
-#endif
