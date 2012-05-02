@@ -29,7 +29,7 @@ int CourseInitializeKnob() //Function #1
 
 /*-------------------------------------------------------------------------------------------------*/
 
-int CourseDirectionInitialize(int course) //Function #2
+float CourseDirectionInitialize(int course) //Function #2
 {
     #ifdef usingTestLog
       {
@@ -37,21 +37,21 @@ int CourseDirectionInitialize(int course) //Function #2
     }
     #endif
     
-    if(course == 65 || course == 67 || course == 69 || course == 71)
-      {
-        course = -1;
-    }
-    else
-      {
-        course = 1;
-    }
-    
     #ifdef usingTestLog
       {
         LogEvent(120);
     }
     #endif
-    return course;
+    
+    if(course == 65 || course == 67 || course == 69 || course == 71)
+      {
+        return -1.;
+    }
+    else
+      {
+        return 1.;
+    }
+    
 }
 
 /*-------------------------------------------------------------------------------------------------*/

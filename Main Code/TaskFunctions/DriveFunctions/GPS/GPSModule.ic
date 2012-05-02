@@ -128,14 +128,14 @@ int GPSGetData() //Function #4
         gps_stoplight = _gps_data[4]&0x1;
         gps_generator = ( _gps_data[4]&0x2 ) / 2;
         
+        // Clear ready flag (so that gps_ready(0) will return 0 until the next packet comes in)
+        gps_clear(0);
+        
         #ifdef usingTestLog
           {
             LogEvent(240);
         }
         #endif
-        
-        // Clear ready flag (so that gps_ready(0) will return 0 until the next packet comes in)
-        gps_clear(0);
         
         return 1;
     }
@@ -160,12 +160,12 @@ void GPSGetAbsoluteX() //Function #5
     
     while(!GPSGetData());
     finalX = gps_x;
-           
+    
     while(initialX != finalX)
       {
-          initialX = finalX;
-          while(!GPSGetData());
-          finalX = gps_x;
+        initialX = finalX;
+        while(!GPSGetData());
+        finalX = gps_x;
     }
     
     #ifdef usingTestLog
@@ -190,12 +190,12 @@ void GPSGetAbsoluteY() //Function #6
     
     while(!GPSGetData());
     finalY = gps_y;
-           
+    
     while(initialY != finalY)
       {
-          initialY = finalY;
-          while(!GPSGetData());
-          finalY = gps_y;
+        initialY = finalY;
+        while(!GPSGetData());
+        finalY = gps_y;
     }
     
     #ifdef usingTestLog
@@ -220,12 +220,12 @@ void GPSGetAbsoluteHeading() //Function #7
     
     while(!GPSGetData());
     finalHeading = gps_heading;
-           
+    
     while(initialHeading != finalHeading)
       {
-          initialHeading = finalHeading;
-          while(!GPSGetData());
-          finalHeading = gps_y;
+        initialHeading = finalHeading;
+        while(!GPSGetData());
+        finalHeading = gps_y;
     }
     
     #ifdef usingTestLog

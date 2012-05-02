@@ -1,5 +1,7 @@
 //File #5
 
+#use MathFunctions\Arctan.ic
+
 #ifdef LEFT_MOTOR
 #else
 #define LEFT_MOTOR 1
@@ -22,9 +24,27 @@
 
 #define USING_DRIVE 1
 
+persistent float leftCalibration = 1.;
+persistent float rightCalibration = 1.;
+
 /*-------------------------------------------------------------------------------------------------*/
 
-void DriveTicks(int ticks, int power)
+void CalibrateMotors()
+{
+    leftCalibration = 1.;
+    rightCalibration = 1.;
+    leftEncoderCounts = 0;
+    rightEncoderCounts = 0;
+    
+    DriveTicks(200, 100.);
+    
+    if(leftEncoderCounts > rightEncoderCounts)
+      leftCalibration = (float)rightEncoderCounts / (float)leftEncoderCounts;
+    else
+      rightCalibration = (float)leftEncoderCounts / (float)rightEncoderCounts;
+}
+
+void DriveTicks(int ticks, float power)
 {
     int slowPoint;
     
@@ -32,22 +52,13 @@ void DriveTicks(int ticks, int power)
     slowPoint = ticks - 30;
     
     while(ticks > leftEncoderCounts)
-      {
-        motor(LEFT_MOTOR, power);
-        motor(RIGHT_MOTOR, power);
-        
-        if(leftEncoderCounts < rightEncoderCounts)
-          {
-            motor(LEFT_MOTOR, power - power / 75);
-        }
-        else if(leftEncoderCounts > rightEncoderCounts)
-          {
-            motor(RIGHT_MOTOR, power - power / 75);
-        }
+      {         
+        motor(LEFT_MOTOR, (int)(power * leftCalibration));
+        motor(RIGHT_MOTOR, (int)(power * rightCalibration)); 
         
         if (leftEncoderCounts > slowPoint)
           {
-            power = 25;
+            power = 25.;
         }
         
     };
@@ -55,7 +66,7 @@ void DriveTicks(int ticks, int power)
     motor(RIGHT_MOTOR, 0);
 }
 
-void DriveStraightDistance(float inches, int power) //Function #2
+void DriveStraightDistance(float inches, float power) //Function #2
 {
     int ticks;
     
@@ -119,23 +130,71 @@ void TurnDegrees(float degrees)
     #endif
 }
 
-void GetTo(int x, int y, int initialDirection)
-{
-    int thisX;
-    int thisY;
-    int newHeading;
-    GPSGetAbsoluteHeading();
-    thisX = gps_x;
-    thisY = gps_y;
-    beep();
-    newHeading = (int)atan((float)(thisX - x) / (float)(thisY - y));
-    beep();
-    
-    
-    //TurnCounterClockwiseDegrees(gps_heading - newHeading);
-}
-
 void TurnTowards(int x, int y, int initialDirection)
 {
+    float turn;
+    GPSGetAbsoluteHeading();
+    if(initialDirection)
+    {
+        if(gps_y > y)
+          {
+            if(gps_x > x)
+              {
+                turn = (float)(gps_heading - 90 - Arctan(gps_x - x, gps_y - y));
+            }
+            else
+              {
+                turn = (float)(gps_heading + 90 - Arctan(gps_x - x, gps_y - y));
+            }
+        }
+        else
+          {
+            if(gps_x > x)
+              {
+                turn = (float)(gps_heading + Arctan(gps_x - x, gps_y - y));
+            }
+            else
+              {
+                turn = (float)(gps_heading + Arctan(gps_x - x, gps_y - y));
+            }
+        }
+    }
+    else
+    {
+        if(gps_y > y)
+          {
+            if(gps_x > x)
+              {
+                turn = (float)(-gps_heading - 90 - Arctan(gps_x - x, gps_y - y));
+            }
+            else
+              {
+                turn = (float)(-gps_heading + 90 - Arctan(gps_x - x, gps_y - y));
+            }
+        }
+        else
+          {
+            if(gps_x > x)
+              {
+                turn = (float)(-gps_heading + Arctan(gps_x - x, gps_y - y));
+            }
+            else
+              {
+                turn = (float)(-gps_heading + Arctan(gps_x - x, gps_y - y));
+            }
+        }
+    }
+    if(turn > 180.)
+      turn = turn - 360.;
+    else if(turn < -180.)
+      turn = turn + 360.;
     
+    TurnDegrees(turn);
+    
+}
+
+void GetTo(int x, int y, int initialDirection)
+{
+    TurnTowards(x, y, initialDirection);
+    DriveStraightDistance(.25 * sqrt((float)((y - gps_y) * (y - gps_y) + (x - gps_x) * (x - gps_x))), 100.);
 }

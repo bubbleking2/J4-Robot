@@ -7,7 +7,7 @@
 
 /*-------------------------------------------------------------------------------------------------*/
 
-void FromStartToTraffic(int courseDirection) //Function #1
+void FromStartToTraffic(float courseDirection) //Function #1
 {
     #ifdef usingTestLog
       {
@@ -15,8 +15,8 @@ void FromStartToTraffic(int courseDirection) //Function #1
     }
     #endif
     
-    //Go forward a set distance
-    DriveStraightDistance(41., 100);
+    
+    DriveStraightDistance(41., 100.);
     
     #ifdef usingTestLog
       {
@@ -27,7 +27,7 @@ void FromStartToTraffic(int courseDirection) //Function #1
 
 /*-------------------------------------------------------------------------------------------------*/
 
-void FromTrafficToButton(int courseDirection) //Function #2
+void FromTrafficToButton(float courseDirection) //Function #2
 {
     #ifdef usingTestLog
       {
@@ -35,9 +35,10 @@ void FromTrafficToButton(int courseDirection) //Function #2
     }
     #endif
     
-    TurnDegrees(135. * courseDirection);
+    TurnDegrees(-45.);
+    GetTo(-90, 180, 1);
     
-    DriveStraightDistance(28., 100);
+    //DriveStraightDistance(28., 100.);
     
     #ifdef usingTestLog
       {
@@ -48,7 +49,7 @@ void FromTrafficToButton(int courseDirection) //Function #2
 
 /*-------------------------------------------------------------------------------------------------*/
 
-void FromButtonToCrank(int courseDirection) //Function #3
+void FromButtonToCrank(float courseDirection) //Function #3
 {
     #ifdef usingTestLog
       {
@@ -58,7 +59,7 @@ void FromButtonToCrank(int courseDirection) //Function #3
     
     TurnDegrees(-100. * courseDirection);
     
-    DriveStraightDistance(48., 100);
+    DriveStraightDistance(48., 100.);
     
     #ifdef usingTestLog
       {

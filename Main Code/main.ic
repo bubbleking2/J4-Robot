@@ -19,7 +19,7 @@ void main()
 {
     //Declare course
     int course;
-    int courseDirection;
+    float courseDirection;
     
     //Declare whether this course is being logged
     #ifdef usingTestLog
@@ -37,19 +37,19 @@ void main()
     courseDirection = CourseDirectionInitialize(course);
     
     //Connect to this course's GPS system
-    //GPSInitialize(course);
+    GPSInitialize(course);
     
     //Enable the Handy Board GPS
-    //GPSEnable();
+    GPSEnable();
     
     //Enable the encoders
     EncodersInitialize();
     
     //Get one valid reading from the GPS
-    //while(!GPSGetData());
+    while(!GPSGetData());
     
     //Wait for the go light on the CdS
-    WaitForGo();
+    //WaitForGo();
     
     //Travel from start rectangle to traffic rectangle
     FromStartToTraffic(courseDirection);
@@ -58,9 +58,8 @@ void main()
     FromTrafficToButton(courseDirection);
     
     //Attempt to push button
-    PushButton(courseDirection);
+    //PushButton(courseDirection);
     
     //Travel from button rectangle to crank rectangle
-    FromButtonToCrank(courseDirection);
-    
+    //FromButtonToCrank(courseDirection);
 }

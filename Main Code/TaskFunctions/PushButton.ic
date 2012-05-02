@@ -7,7 +7,7 @@
 
 /*-------------------------------------------------------------------------------------------------*/
 
-void PushButton(int courseDirection) //Function #2
+void PushButton(float courseDirection) //Function #2
 {
     #ifdef usingTestLog
       {
@@ -16,7 +16,7 @@ void PushButton(int courseDirection) //Function #2
     #endif
     
     msleep(200L);
-    DriveStraightDistance(8., -100);
+    DriveStraightDistance(8., -100.);
     msleep(200L);
     
     #ifdef usingTestLog
