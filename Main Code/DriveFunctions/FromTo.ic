@@ -18,8 +18,7 @@ void FromStartToTraffic(int courseDirection)
     }
     #endif
     
-    
-    DriveDistance(41., 100.);
+    GetTo(traffic.x, traffic.y, 1);
     
     #ifdef TEST_LOG
       {
@@ -34,6 +33,8 @@ void FromStartToTraffic(int courseDirection)
 
 void FromTrafficToButton(int courseDirection)
 {
+    int process;
+    
     #ifdef TEST_LOG
       {
         LogEvent(821);
@@ -41,7 +42,12 @@ void FromTrafficToButton(int courseDirection)
     #endif
     
     TurnDegrees(-90 * courseDirection);
-    GetTo(button.x, button.y, 1);
+    msleep(500L);
+    process = start_process(GetTo(button.x, button.y, 1));
+    msleep(5000L);
+    kill_process(process);
+    motor(LEFT_MOTOR, 0);
+    motor(RIGHT_MOTOR, 0);
     
     #ifdef TEST_LOG
       {
@@ -62,9 +68,9 @@ void FromButtonToCrank(int courseDirection)
     }
     #endif
     
-    TurnDegrees(-100 * courseDirection);
-    
-    DriveDistance(48., 100.);
+    DriveDistance(6., -100.);
+    GetTo(topCenterRamp.x, topCenterRamp.y, 1);
+    GetTo(crankLineStart.x, crankLineStart.y, -1);
     
     #ifdef TEST_LOG
       {

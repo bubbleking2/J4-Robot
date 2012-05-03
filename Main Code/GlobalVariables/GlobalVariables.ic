@@ -25,8 +25,12 @@ struct Location{
     int x;
     int y;
 }
-traffic = {0, 205},
-button = {-90, 160};
+start = {0, 26},
+traffic = {0, 188},
+button = {-90, 180},
+topCenterRamp = {0,167},
+crankLineStart = {-55, 167},
+crankLineEnd = {88, 167};
 
 /*-------------------------------------------------------------------------------------------------*/
 //Function #1
@@ -40,8 +44,12 @@ void setLocations(int courseDirection)
     }
     #endif
     
+    start.x *= courseDirection;
     traffic.x *= courseDirection;
     button.x *= courseDirection;
+    topCenterRamp.x *= courseDirection;
+    crankLineStart.x *= courseDirection;
+    crankLineEnd.x *= courseDirection;
     
     #ifdef TEST_LOG
       {

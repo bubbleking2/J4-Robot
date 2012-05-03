@@ -67,7 +67,11 @@ void main()
     //PushButton(courseDirection);
     
     //Travel from button to crank
-    //FromButtonToCrank(courseDirection);
+    FromButtonToCrank(courseDirection);
+    
+    //FromCrankToTopCenterRamp();
+    
+    //FromTopCenterRampToBottomCenterRamp();
     
     #ifdef TEST_LOG
       {

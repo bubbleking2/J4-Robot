@@ -52,7 +52,7 @@
             this.windowDumpButton.Location = new System.Drawing.Point(9, 280);
             this.windowDumpButton.Name = "windowDumpButton";
             this.windowDumpButton.Size = new System.Drawing.Size(264, 23);
-            this.windowDumpButton.TabIndex = 0;
+            this.windowDumpButton.TabIndex = 1;
             this.windowDumpButton.Text = "Dump to Window";
             this.windowDumpButton.UseVisualStyleBackColor = true;
             this.windowDumpButton.Click += new System.EventHandler(this.windowDumpButton_Click);
@@ -64,6 +64,7 @@
             this.fileDumpButton.Name = "fileDumpButton";
             this.fileDumpButton.Size = new System.Drawing.Size(128, 23);
             this.fileDumpButton.TabIndex = 1;
+            this.fileDumpButton.TabStop = false;
             this.fileDumpButton.Text = "Dump to File";
             this.fileDumpButton.UseVisualStyleBackColor = true;
             this.fileDumpButton.Click += new System.EventHandler(this.fileDumpButton_Click);
@@ -87,7 +88,7 @@
             this.inputBox.Location = new System.Drawing.Point(8, 24);
             this.inputBox.Name = "inputBox";
             this.inputBox.Size = new System.Drawing.Size(208, 20);
-            this.inputBox.TabIndex = 3;
+            this.inputBox.TabIndex = 0;
             // 
             // outputBox
             // 
@@ -103,6 +104,7 @@
             this.outputBox.Name = "outputBox";
             this.outputBox.Size = new System.Drawing.Size(264, 212);
             this.outputBox.TabIndex = 4;
+            this.outputBox.TabStop = false;
             // 
             // outputLabel
             // 
@@ -123,6 +125,7 @@
             this.chooseOutput.Name = "chooseOutput";
             this.chooseOutput.Size = new System.Drawing.Size(128, 23);
             this.chooseOutput.TabIndex = 7;
+            this.chooseOutput.TabStop = false;
             this.chooseOutput.Text = "Choose Output File";
             this.chooseOutput.UseVisualStyleBackColor = true;
             this.chooseOutput.Click += new System.EventHandler(this.chooseOutput_Click);
@@ -134,6 +137,7 @@
             this.clearButton.Name = "clearButton";
             this.clearButton.Size = new System.Drawing.Size(51, 20);
             this.clearButton.TabIndex = 8;
+            this.clearButton.TabStop = false;
             this.clearButton.Text = "Clear";
             this.clearButton.UseVisualStyleBackColor = true;
             this.clearButton.Click += new System.EventHandler(this.clearButton_Click);

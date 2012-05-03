@@ -58,13 +58,13 @@ void main()
         sel = select_string(a,TESTNUM);
         if(sel==0) testmotors();
         else if(sel==1) testservo(); 
-          else if(sel==2) testdigitals();
-            else if(sel==3) testanalogs();
-              else if(sel==4) testknob();
-                else if(sel==5) testir();
-                  else if(sel==6) testsonar(); 
-                    else if(sel==7) testcmu();
-                      else if(sel==8) break;
+        else if(sel==2) testdigitals();
+        else if(sel==3) testanalogs();
+        else if(sel==4) testknob();
+        else if(sel==5) testir();
+        else if(sel==6) testsonar(); 
+        else if(sel==7) testcmu();
+        else if(sel==8) break;
     }
     printf("Done\n");
 }
@@ -262,9 +262,9 @@ int chosen_button()
     if(start_button())
       return START_B;
     else if(stop_button())
-        return STOP_B;
-      else 
-        return NEITHER_B;
+      return STOP_B;
+    else 
+    return NEITHER_B;
 }  
 
 /* wait until button is depressed(DOWN_B), released(UP_B), or
@@ -278,18 +278,18 @@ int wait_button(int i)
         return chosen_button();
     }
     else if (i==UP_B) {
-          int b;
-          b=chosen_button();
-          while(start_button() || stop_button());
-          return b;
-      }
-      else {
-          int b;
-          while(!(start_button() || stop_button()));
-          b=chosen_button();
-          while(start_button() || stop_button());
-          return b;
-      }
+        int b;
+        b=chosen_button();
+        while(start_button() || stop_button());
+        return b;
+    }
+    else {
+        int b;
+        while(!(start_button() || stop_button()));
+        b=chosen_button();
+        while(start_button() || stop_button());
+        return b;
+    }
 } 
 
 /********************* Knob to Number routines*****************************/
