@@ -1,54 +1,30 @@
-/-------------------------------------------\
-| Event Numbers                             |
-+-------------------------------------------+
-| 111 | Begin | main                        |
-| 110 | End   | main                        |
-| 211 | Begin | setLocations                |
-| 210 | End   | setLocations                |
-| 311 | Begin | Arctan                      |
-| 310 | End   | Arctan                      |
-| 411 | Begin | CourseInitializeKnob        |
-| 410 | End   | CourseInitializeKnob        |
-| 421 | Begin | CourseDirectionInitialize   |
-| 420 | End   | CourseDirectionInitialize   |
-| 511 | Begin | EncodersInitialize          |
-| 510 | End   | EncodersInitialize          |
-| 611 | Begin | GPSInitialize               |
-| 610 | End   | GPSInitialize               |
-| 621 | Begin | GPSDisable                  |
-| 620 | End   | GPSDisable                  |
-| 631 | Begin | GPSEnable                   |
-| 630 | End   | GPSEnable                   |
-| 641 | Begin | GPSGetData                  |
-| 640 | End   | GPSGetData                  |
-| 651 | Begin | GPSGetAbsoluteX             |
-| 650 | End   | GPSGetAbsoluteX             |
-| 661 | Begin | GPSGetAbsoluteY             |
-| 660 | End   | GPSGetAbsoluteY             |
-| 671 | Begin | GPSGetAbsoluteHeading       |
-| 670 | End   | GPSGetAbsoluteHeading       |
-| 711 | Begin | CalibrateMotors             |
-| 710 | End   | CalibrateMotors             |
-| 721 | Begin | DriveTicks                  |
-| 720 | End   | DriveTicks                  |
-| 731 | Begin | DriveDistance               |
-| 730 | End   | DriveDistance               |
-| 741 | Begin | TurnTicks                   |
-| 740 | End   | TurnTicks                   |
-| 751 | Begin | TurnDegrees                 |
-| 750 | End   | TurnDegrees                 |
-| 761 | Begin | TurnTowards                 |
-| 760 | End   | TurnTowards                 |
-| 771 | Begin | GetTo                       |
-| 770 | End   | GetTo                       |
-| 811 | Begin | FromStartToTraffic          |
-| 810 | End   | FromStartToTraffic          |
-| 821 | Begin | FromTrafficToButton         |
-| 820 | End   | FromTrafficToButton         |
-| 831 | Begin | FromButtonToCrank           |
-| 830 | End   | FromButtonToCrank           |
-| 911 | Begin | WaitForGo                   |
-| 910 | End   | WaitForGo                   |
-| 921 | Begin | PushButton                  |
-| 920 | End   | PushButton                  |
-\-------------------------------------------/
+/----------------------------------\
+| Event Numbers                    |
++----------------------------------+
+| 11 | main                        |
+| 21 | setLocations                |
+| 31 | Arctan                      |
+| 41 | CourseInitializeKnob        |
+| 42 | CourseDirectionInitialize   |
+| 51 | EncodersInitialize          |
+| 61 | GPSInitialize               |
+| 62 | GPSDisable                  |
+| 63 | GPSEnable                   |
+| 64 | GPSGetData                  |
+| 65 | GPSGetAbsoluteX             |
+| 66 | GPSGetAbsoluteY             |
+| 67 | GPSGetAbsoluteHeading       |
+| 71 | CalibrateMotors             |
+| 72 | DriveTicks                  |
+| 73 | DriveDistance               |
+| 74 | TurnTicks                   |
+| 75 | TurnDegrees                 |
+| 76 | TurnTowards                 |
+| 77 | GetTo                       |
+| 78 | Face                        |
+| 81 | FromStartToTraffic          |
+| 82 | FromTrafficToButtonStart    |
+| 83 | FromButtonToCrank           |
+| 91 | WaitForGo                   |
+| 92 | PushButton                  |
+\----------------------------------/

@@ -1,16 +1,29 @@
-// /------------------------------------------\
-// | Event Numbers                            |
-// +------------------------------------------+
-// | 111 | Begin | CourseInitializeKnob       |
-// | 110 | End   | CourseInitializeKnob       |
-// | 121 | Begin | CourseCourseTypeInitialize |
-// | 120 | End   | CourseCourseTypeInitialize |
-// | 211 | Begin | GPSInitialize              |
-// | 210 | End   | GPSInitialize              |
-// | 221 | Begin | GPSDisable                 |
-// | 220 | End   | GPSDisable                 |
-// | 231 | Begin | GPSEnable                  |
-// | 230 | End   | GPSEnable                  |
-// | 241 | Begin | GPSGetData                 |
-// | 240 | End   | GPSGetData                 |
-// \------------------------------------------/
+/----------------------------------\
+| Event Numbers                    |
++----------------------------------+
+| 11 | main                        |
+| 21 | setLocations                |
+| 31 | Arctan                      |
+| 41 | CourseInitializeKnob        |
+| 42 | CourseDirectionInitialize   |
+| 51 | EncodersInitialize          |
+| 61 | GPSInitialize               |
+| 62 | GPSDisable                  |
+| 63 | GPSEnable                   |
+| 64 | GPSGetData                  |
+| 65 | GPSGetAbsoluteX             |
+| 66 | GPSGetAbsoluteY             |
+| 67 | GPSGetAbsoluteHeading       |
+| 71 | CalibrateMotors             |
+| 72 | DriveTicks                  |
+| 73 | DriveDistance               |
+| 74 | TurnTicks                   |
+| 75 | TurnDegrees                 |
+| 76 | TurnTowards                 |
+| 77 | GetTo                       |
+| 81 | FromStartToTraffic          |
+| 82 | FromTrafficToButton         |
+| 83 | FromButtonToCrank           |
+| 91 | WaitForGo                   |
+| 92 | PushButton                  |
+\----------------------------------/

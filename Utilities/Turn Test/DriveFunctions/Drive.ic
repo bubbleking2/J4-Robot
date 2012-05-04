@@ -119,13 +119,13 @@ void TurnTicks(int ticks)
     
     if (ticks > 0)
       {
-        motor(LEFT_MOTOR, 25);
-        motor(RIGHT_MOTOR, -25);
+        motor(LEFT_MOTOR, 35);
+        motor(RIGHT_MOTOR, -35);
     }
     else
       {
-        motor(LEFT_MOTOR, -25);
-        motor(RIGHT_MOTOR, 25);
+        motor(LEFT_MOTOR, -35);
+        motor(RIGHT_MOTOR, 35);
         ticks = -ticks;
     }
     
@@ -155,7 +155,7 @@ void TurnDegrees(int degrees)
     }
     #endif
     
-    ticks = (int)(degrees * 7 / 36);
+    ticks = (int)(degrees * 7 / 36) * 110 / 100;
     
     TurnTicks(ticks);
     

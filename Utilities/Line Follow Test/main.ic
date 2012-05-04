@@ -26,9 +26,9 @@ void main()
         endTime = mseconds() + 10000L;
         while(mseconds() < endTime)
           {
-            if(analog(CENTER_OPTOSENSOR) < 100)
+            if(analog(CENTER_OPTOSENSOR) < 160)
               {
-                while(analog(LEFT_OPTOSENSOR) > 100)
+                while(analog(LEFT_OPTOSENSOR) > 160)
                   {
                     motor(LEFT_MOTOR, 0);
                 }
@@ -36,7 +36,7 @@ void main()
                 motor(LEFT_MOTOR, FOLLOW_SPEED);
                 motor(RIGHT_MOTOR, FOLLOW_SPEED);
                 
-                while(analog(RIGHT_OPTOSENSOR) > 100)
+                while(analog(RIGHT_OPTOSENSOR) > 160)
                   {
                     motor(RIGHT_MOTOR, 0);
                 }

@@ -25,12 +25,15 @@ struct Location{
     int x;
     int y;
 }
-start = {0, 26},
+start = {0, 24},
 traffic = {0, 188},
-button = {-90, 180},
-topCenterRamp = {0,167},
-crankLineStart = {-55, 167},
-crankLineEnd = {88, 167};
+trafficLeft = {-13, 216},//{-10, 193},
+buttonStart = {-47, 190},
+button = {-47, 180},
+topCenterRamp = {0,165},
+bottomCenterRamp = {0, 80},
+crankLineStart = {-45, 167},
+crankLineEnd = {872, 167};
 
 /*-------------------------------------------------------------------------------------------------*/
 //Function #1
@@ -46,8 +49,10 @@ void setLocations(int courseDirection)
     
     start.x *= courseDirection;
     traffic.x *= courseDirection;
+    buttonStart.x *= courseDirection;
     button.x *= courseDirection;
     topCenterRamp.x *= courseDirection;
+    bottomCenterRamp.x *= courseDirection;
     crankLineStart.x *= courseDirection;
     crankLineEnd.x *= courseDirection;
     
