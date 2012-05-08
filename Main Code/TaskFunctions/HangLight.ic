@@ -12,10 +12,40 @@
 
 void HangLight(int courseDirection)
 {
-    TurnDegrees(-12);
+    int processID;
+    
+    #ifdef TEST_LOG
+      {
+        LogEvent(931);
+    }
+    #endif
+    
+    TurnDegrees(-68);
     facingLeft = 1;
-    GetTo(trafficLeft.x, trafficLeft.y);
-    DriveDistance(5., 50.);
+    
+    TurnTowards(trafficLeft.x, trafficLeft.y);
+    
+    processID = start_process(GetTo(trafficLeft.x, trafficLeft.y, 50.));
+    while(analog(CENTER_OPTOSENSOR) > 140)
+      printf("\n%d", analog(CENTER_OPTOSENSOR));
+    kill_process(processID);
+    motor(LEFT_MOTOR, 0);
+    motor(RIGHT_MOTOR, 0);
+    #ifdef TEST_LOG
+      {
+        LogEvent(772);
+    }
+    #endif
+    
+    TurnTowards(trafficLeft.x, trafficLeft.y);
+    
+    FollowLine(1000L);
+    
+    #ifdef TEST_LOG
+      {
+        LogEvent(930);
+    }
+    #endif
 }
 
 /*-------------------------------------------------------------------------------------------------*/

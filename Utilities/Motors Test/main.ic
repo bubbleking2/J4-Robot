@@ -40,6 +40,9 @@ void main()
         motor(RIGHT_MOTOR, -100);
         sleep(2.);
         
+        motor(LEFT_MOTOR, 0);
+        motor(RIGHT_MOTOR, 0);
+        
         printf("\nPress Start to  test again.");
         while(!start_button() && !(stopPressed = stop_button()));
     }

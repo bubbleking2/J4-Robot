@@ -6,6 +6,9 @@
 
 #define LEFT_ENCODER 2
 #define RIGHT_ENCODER 3
+#define LEFT_FOLLOWER 4
+#define CENTER_FOLLOWER 5
+#define RIGHT_FOLLOWER 6
 
 /*-------------------------------------------------------------------------------------------------*/
 //Function #1
@@ -19,20 +22,20 @@ void main()
     
     while(!stop_button())
       {
-        leftReading = analog(LEFT_ENCODER);
+        leftReading = analog(LEFT_FOLLOWER);
         printf("\nLeft:%d", leftReading);
         
         if(leftReading >= 100)
           {
-            printf("        Right:%d", analog(RIGHT_ENCODER));
+            printf("        Right:%d", analog(RIGHT_FOLLOWER));
         }
         else if(leftReading >= 10)
           {
-            printf("         Right:%d", analog(RIGHT_ENCODER)); 
+            printf("         Right:%d", analog(RIGHT_FOLLOWER)); 
         }
         else
         {
-            printf("          Right:%d", analog(RIGHT_ENCODER));
+            printf("          Right:%d", analog(RIGHT_FOLLOWER));
         }
         msleep(200L);
     }

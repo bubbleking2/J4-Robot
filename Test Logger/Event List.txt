@@ -2,7 +2,7 @@
 | Event Numbers                    |
 +----------------------------------+
 | 11 | main                        |
-| 21 | setLocations                |
+| 21 | SetLocations                |
 | 31 | Arctan                      |
 | 41 | CourseInitializeKnob        |
 | 42 | CourseDirectionInitialize   |
@@ -22,9 +22,11 @@
 | 76 | TurnTowards                 |
 | 77 | GetTo                       |
 | 78 | Face                        |
+| 79 | FollowLine                  |
 | 81 | FromStartToTraffic          |
 | 82 | FromTrafficToButtonStart    |
 | 83 | FromButtonToCrank           |
 | 91 | WaitForGo                   |
 | 92 | PushButton                  |
+| 93 | HangLight                   |
 \----------------------------------/

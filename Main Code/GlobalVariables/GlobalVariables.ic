@@ -20,14 +20,17 @@
 //Servo Ports
 //#define GPS 4
 
+//Speeds
+#define FOLLOW_SPEED 35
+
 //Point Locations
 struct Location{
     int x;
     int y;
 }
 start = {0, 24},
-traffic = {0, 188},
-trafficLeft = {-13, 216},//{-10, 193},
+traffic = {0, 190},
+trafficLeft = {-15, 215},//{-10, 193},
 buttonStart = {-47, 190},
 button = {-47, 180},
 topCenterRamp = {0,165},
@@ -39,7 +42,7 @@ crankLineEnd = {872, 167};
 //Function #1
 /*-------------------------------------------------------------------------------------------------*/
 
-void setLocations(int courseDirection)
+void SetLocations(int courseDirection)
 {
     #ifdef TEST_LOG
       {

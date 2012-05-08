@@ -26,9 +26,6 @@ void main()
     int course;
     int courseDirection;
     
-    printf("\nPress Start to begin");
-    while(!start_button())
-    
     //Declare whether this course is being logged
     #ifdef TEST_LOG
       {
@@ -40,13 +37,10 @@ void main()
     
     //Select course using knob
     //course = CourseInitializeKnob();
-    course = 66;
+    course = 72; //Course H
     
     //Determine the direction of the arrow on this course
     courseDirection = CourseDirectionInitialize(course);
-    
-    //Set the location of the objects on the course
-    setLocations(courseDirection);
     
     //Enable the encoders
     EncodersInitialize();
@@ -60,13 +54,30 @@ void main()
     //Get one valid reading from the GPS
     while(!GPSGetData());
     
-    //Make sure the Robot knows which way it is looking
-    face();
+    msleep(100L);
+    while(!start_button())
+      {
+        printf("\nStart: Begin    Stop: Calibrate");
+        msleep(100L);
+        if(stop_button())
+          CalibrateMotors();
+    }
     
     //Wait for the go light on the CdS
+    printf("\nWaiting for go");
     WaitForGo();
     
+    //Get another valid reading from the GPS
+    while(!GPSGetData());
+    
+    //Set the location of the objects on the course
+    SetLocations(courseDirection);
+    
+    //Make sure the Robot knows which way it is looking
+    Face();
+    
     //Travel from start to traffic
+    printf("\nFrom start to traffic");
     FromStartToTraffic(courseDirection);
     
     HangLight(courseDirection);
