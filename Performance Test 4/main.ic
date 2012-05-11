@@ -13,7 +13,6 @@
 #use TaskFunctions\WaitForGo.ic
 #use TaskFunctions\PushButton.ic
 #use TaskFunctions\HangLight.ic
-#use TaskFunctions\ReadCdS.ic
 
 
 
@@ -27,7 +26,7 @@ void main()
     int course;
     int courseDirection;
     
-    //Declare whether this run is being logged
+    //Declare whether this course is being logged
     #ifdef TEST_LOG
       {
         ResetTestLog();
@@ -54,6 +53,15 @@ void main()
     //Get one valid reading from the GPS
     while(!GPSGetData());
     
+    msleep(100L);
+    while(!start_button())
+      {
+        printf("\nStart: Begin    Stop: Calibrate");
+        msleep(100L);
+        if(stop_button())
+          CalibrateMotors();
+    }
+    
     //Wait for the go light on the CdS
     printf("\nWaiting for go");
     WaitForGo();
@@ -62,7 +70,7 @@ void main()
     while(!GPSGetData());
     
     //Set the location of the objects on the course
-    SetLocations(courseDirection, gps_stoplight);
+    SetLocations(courseDirection);
     
     //Make sure the Robot knows which way it is looking
     Face();
@@ -71,7 +79,6 @@ void main()
     printf("\nFrom start to traffic");
     FromStartToTraffic(courseDirection);
     
-    printf("\nHang light");
     HangLight(courseDirection);
     
     //Travel from traffic to button
@@ -87,20 +94,9 @@ void main()
     
     //FromTopCenterRampToBottomCenterRamp();
     
-    printf("\nTo top ramp");
     GetTo(topCenterRamp.x, topCenterRamp.y, 100.);
-    printf("\nTo bottom ramp");
     TurnDegrees(-55);
-    facingLeft = 0;
-    GPSGetAbsolute();
-    TurnTowards(gps_x, gps_y - 100);
-    DriveDistance(19., 50.);
-    printf("\nRead CdS");
-    ReadCdS(courseDirection);
-    facingLeft = 0;
-    msleep(1000L);
-    printf("\nTo garbage");
-    GetTo(rightGarbageCan.x, rightGarbageCan.y, 100.);
+    GetTo(bottomCenterRamp.x, bottomCenterRamp.y, 50.);
     
     #ifdef TEST_LOG
       {

@@ -22,9 +22,7 @@ int CourseInitializeKnob()
       {
         printf("\nRegion: %c", knob()/32+65);
         msleep(200L);
-    }
-    
-    msleep(200L);
+    } 
     
     #ifdef TEST_LOG
       {

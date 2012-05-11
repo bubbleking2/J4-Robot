@@ -22,20 +22,20 @@ void main()
     
     while(!stop_button())
       {
-        leftReading = analog(LEFT_FOLLOWER);
+        leftReading = analog(LEFT_ENCODER);
         printf("\nLeft:%d", leftReading);
         
         if(leftReading >= 100)
           {
-            printf("        Right:%d", analog(RIGHT_FOLLOWER));
+            printf("        Right:%d", analog(RIGHT_ENCODER));
         }
         else if(leftReading >= 10)
           {
-            printf("         Right:%d", analog(RIGHT_FOLLOWER)); 
+            printf("         Right:%d", analog(RIGHT_ENCODER)); 
         }
         else
         {
-            printf("          Right:%d", analog(RIGHT_FOLLOWER));
+            printf("          Right:%d", analog(RIGHT_ENCODER));
         }
         msleep(200L);
     }

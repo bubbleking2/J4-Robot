@@ -2,31 +2,34 @@
 //File #9
 /*-------------------------------------------------------------------------------------------------*/
 
-#if DRIVE * FROM_TO == 1
+#if DRIVE * FROM_TO * GPS == 1
 
 #define HANG_LIGHT 1
 
 /*-------------------------------------------------------------------------------------------------*/
-//Function #3
+//Function #4
 /*-------------------------------------------------------------------------------------------------*/
 
-void HangLight(int courseDirection)
+void ReadCdS(int courseDirection)
 {
     int processID;
+    int frontCdS;
+    int rearCdS;
     
     #ifdef TEST_LOG
       {
-        LogEvent(931);
+        LogEvent(941);
     }
     #endif
     
-    TurnDegrees(-68);
-    facingLeft = 1;
+    TurnDegrees(-65);
+    facingLeft = 0;
+    GPSGetAbsolute();
+    TurnTowards(gps_x + 100, gps_y);
+    DriveDistance(6., -100.);
+    TurnTowards(gps_x + 100, gps_y);
     
-    printf("\nTurning towards traffic");
-    TurnTowards(trafficLeft.x, trafficLeft.y);
-    
-    processID = start_process(DriveDistance(24., 35.));
+    processID = start_process(DriveDistance(12., 35.));
     while(analog(CENTER_OPTOSENSOR) > FOLLOW_THRESHOLD && analog(LEFT_OPTOSENSOR) > FOLLOW_THRESHOLD && analog(RIGHT_OPTOSENSOR) > FOLLOW_THRESHOLD);
     kill_process(processID);
     motor(LEFT_MOTOR, 0);
@@ -34,16 +37,30 @@ void HangLight(int courseDirection)
     
     #ifdef TEST_LOG
       {
-        LogEvent(772);
+        LogEvent(732);
     }
     #endif
     
-    printf("\nLine following");
     processID = start_process(FollowLine());
-    msleep(1500L);
+    while(frontCdS = analog(FRONT_CDS_PORT) > 12 && rearCdS = analog(BACK_CDS_PORT) > 30);
     kill_process(processID);
     motor(LEFT_MOTOR, 0);
     motor(RIGHT_MOTOR, 0);
+    
+    if(frontCdS < 12)
+      {
+        if(frontCdS < 5)
+          printf("\nThe light is Red");
+        else
+          printf("\nThe light is Blue");
+    }
+    else
+      {
+        if(rearCdS < 11)
+          printf("\nThe light is Red");
+        else
+          printf("\nThe light is Blue");
+    }
     
     #ifdef TEST_LOG
       {
@@ -51,13 +68,9 @@ void HangLight(int courseDirection)
     }
     #endif
     
-    DriveDistance(10., -100.);
-    TurnDegrees(58);
-    facingLeft = 0;
-    
     #ifdef TEST_LOG
       {
-        LogEvent(930);
+        LogEvent(940);
     }
     #endif
 }

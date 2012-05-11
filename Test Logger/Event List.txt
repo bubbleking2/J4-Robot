@@ -11,9 +11,7 @@
 | 62 | GPSDisable                  |
 | 63 | GPSEnable                   |
 | 64 | GPSGetData                  |
-| 65 | GPSGetAbsoluteX             |
-| 66 | GPSGetAbsoluteY             |
-| 67 | GPSGetAbsoluteHeading       |
+| 65 | GPSGetAbsolute              |
 | 71 | CalibrateMotors             |
 | 72 | DriveTicks                  |
 | 73 | DriveDistance               |
@@ -29,4 +27,5 @@
 | 91 | WaitForGo                   |
 | 92 | PushButton                  |
 | 93 | HangLight                   |
+| 94 | ReadCdS                     |
 \----------------------------------/

@@ -4,7 +4,7 @@
 
 #use GlobalVariables\GlobalVariables.ic
 
-#define FOLLOW_SPEED 50
+#define FOLLOW_SPEED 35
 
 /*-------------------------------------------------------------------------------------------------*/
 //Function #1
@@ -26,9 +26,9 @@ void main()
         endTime = mseconds() + 10000L;
         while(mseconds() < endTime)
           {
-            if(analog(CENTER_OPTOSENSOR) < 140)
+            if(analog(CENTER_OPTOSENSOR) < 120)
               {
-                while(analog(LEFT_OPTOSENSOR) > 140)
+                while(analog(LEFT_OPTOSENSOR) > 120)
                   {
                     motor(RIGHT_MOTOR, 0);
                 }
@@ -36,7 +36,7 @@ void main()
                 motor(LEFT_MOTOR, FOLLOW_SPEED);
                 motor(RIGHT_MOTOR, FOLLOW_SPEED);
                 
-                while(analog(RIGHT_OPTOSENSOR) > 140)
+                while(analog(RIGHT_OPTOSENSOR) > 120)
                   {
                     motor(LEFT_MOTOR, 0);
                 }

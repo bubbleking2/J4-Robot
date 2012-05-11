@@ -16,8 +16,8 @@ void main()
 {
     int stopPressed = 0;
     int leftReading = 0;
-    leftEncoderHighThreshold = 100;
-    rightEncoderHighThreshold = 100;
+    leftEncoderHighThreshold = 170;
+    rightEncoderHighThreshold = 170;
     
     printf("\nPress Start to begin.");
     start_press();

@@ -199,16 +199,16 @@ void TurnTowards(int x, int y)
     }
     #endif
     
-    GPSGetAbsolute();
+    GPSGetAbsoluteHeading();
     
     if(facingLeft)
-      if(gps_y >= y)
+      if(gps_y > y)
         turn = gps_heading + 180 + Arctan(gps_x - x, gps_y - y);
       else
         turn = gps_heading + Arctan(gps_x - x, gps_y - y);
     else
       {
-        if(gps_y >= y)
+        if(gps_y > y)
           turn = gps_heading + Arctan(gps_x - x, gps_y - y);
         else
           turn = gps_heading + 180 + Arctan(gps_x - x, gps_y - y);
@@ -298,9 +298,9 @@ void FollowLine()
     motor(RIGHT_MOTOR, FOLLOW_SPEED);
     while(1)
       {
-        if(analog(CENTER_OPTOSENSOR) < FOLLOW_THRESHOLD)
+        if(analog(CENTER_OPTOSENSOR) < 120)
           {
-            while(analog(LEFT_OPTOSENSOR) > FOLLOW_THRESHOLD)
+            while(analog(LEFT_OPTOSENSOR) > 120)
               {
                 motor(RIGHT_MOTOR, 0);
             }
@@ -308,7 +308,7 @@ void FollowLine()
             motor(LEFT_MOTOR, FOLLOW_SPEED);
             motor(RIGHT_MOTOR, FOLLOW_SPEED);
             
-            while(analog(RIGHT_OPTOSENSOR) > FOLLOW_THRESHOLD)
+            while(analog(RIGHT_OPTOSENSOR) > 120)
               {
                 motor(LEFT_MOTOR, 0);
             }

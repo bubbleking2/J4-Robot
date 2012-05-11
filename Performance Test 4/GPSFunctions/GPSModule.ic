@@ -163,47 +163,94 @@ int GPSGetData()
 //Function #5
 /*-------------------------------------------------------------------------------------------------*/
 
-void GPSGetAbsolute()
+void GPSGetAbsoluteX()
 {
-    int initialHeading;
-    int finalHeading;
-    int initialX;
+    int initialX = gps_x;
     int finalX;
-    int initialY;
-    int finalY;
     
-    #ifdef TEST_LOG
+    #ifdef usingTestLog
       {
         LogEvent(651);
     }
     #endif
     
-    msleep(200L);
-    
     while(!GPSGetData());
-    initialHeading = gps_heading;
-    initialX = gps_x;
-    initialY = gps_y;
-    
-    while(!GPSGetData());
-    finalHeading = gps_heading;
     finalX = gps_x;
+    
+    while(initialX != finalX)
+      {
+        initialX = finalX;
+        while(!GPSGetData());
+        finalX = gps_x;
+    }
+    
+    #ifdef usingTestLog
+      {
+        LogEvent(650);
+    }
+    #endif
+}
+
+/*-------------------------------------------------------------------------------------------------*/
+//Function #6
+/*-------------------------------------------------------------------------------------------------*/
+
+void GPSGetAbsoluteY()
+{
+    int initialY = gps_y;
+    int finalY;
+    
+    #ifdef TEST_LOG
+      {
+        LogEvent(661);
+    }
+    #endif
+    
+    while(!GPSGetData());
     finalY = gps_y;
     
-    while(initialHeading != finalHeading || initialX != finalX || initialY != finalY)
+    while(initialY != finalY)
       {
-        initialHeading = finalHeading;
-        initialX = finalX;
         initialY = finalY;
         while(!GPSGetData());
-        finalHeading = gps_heading;
-        finalX = gps_x;
         finalY = gps_y;
     }
     
     #ifdef TEST_LOG
       {
-        LogEvent(650);
+        LogEvent(660);
+    }
+    #endif
+}
+
+/*-------------------------------------------------------------------------------------------------*/
+//Function #7
+/*-------------------------------------------------------------------------------------------------*/
+
+void GPSGetAbsoluteHeading()
+{
+    int initialHeading = gps_heading;
+    int finalHeading;
+    
+    #ifdef TEST_LOG
+      {
+        LogEvent(671);
+    }
+    #endif
+    
+    while(!GPSGetData());
+    finalHeading = gps_heading;
+    
+    while(initialHeading != finalHeading)
+      {
+        initialHeading = finalHeading;
+        while(!GPSGetData());
+        finalHeading = gps_y;
+    }
+    
+    #ifdef TEST_LOG
+      {
+        LogEvent(670);
     }
     #endif
 }

@@ -25,7 +25,7 @@ void main()
       {
         printf("\nPress Start to begin.");
         start_press();
-        DriveDistance(36., 100.);
+        DriveDistance(24., 100.);
     }
     
     printf("\nOperation Terminated");

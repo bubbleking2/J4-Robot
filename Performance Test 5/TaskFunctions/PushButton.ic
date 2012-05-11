@@ -2,28 +2,29 @@
 //File #9
 /*-------------------------------------------------------------------------------------------------*/
 
-#ifdef GLOBAL_VARIABLES
+#ifdef DRIVE
 
-#define WAIT_FOR_GO 1
+#define PUSH_BUTTON 1
 
 /*-------------------------------------------------------------------------------------------------*/
-//Function #1
+//Function #2
 /*-------------------------------------------------------------------------------------------------*/
 
-void WaitForGo()
+void PushButton(int courseDirection)
 {
     #ifdef TEST_LOG
       {
-        LogEvent(911);
+        LogEvent(921);
     }
     #endif
     
-    while(analog(FRONT_CDS_PORT) >=  10)
-      defer();
+    msleep(200L);
+    DriveDistance(8., -100.);
+    msleep(200L);
     
     #ifdef TEST_LOG
       {
-        LogEvent(910);
+        LogEvent(920);
     }
     #endif
 }

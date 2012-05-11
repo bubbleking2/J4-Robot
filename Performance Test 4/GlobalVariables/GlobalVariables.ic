@@ -14,15 +14,14 @@
 #define LEFT_OPTOSENSOR 4
 #define CENTER_OPTOSENSOR 5
 #define RIGHT_OPTOSENSOR 6
-#define FRONT_CDS_PORT 16
-#define BACK_CDS_PORT 17
+#define LOWER_CDS_PORT 16
+#define UPPER_CDS_PORT 17
 
 //Servo Ports
 //#define GPS 4
 
 //Speeds
 #define FOLLOW_SPEED 35
-#define FOLLOW_THRESHOLD 140
 
 //Point Locations
 struct Location{
@@ -31,20 +30,19 @@ struct Location{
 }
 start = {0, 24},
 traffic = {0, 190},
-trafficLeft = {-15, 213},
-buttonStart = {-47, 195},
+trafficLeft = {-15, 205/*215*/},//{-10, 193},
+buttonStart = {-47, 190},
 button = {-47, 180},
-topCenterRamp = {0,170},
+topCenterRamp = {0,165},
 bottomCenterRamp = {0, 80},
 crankLineStart = {-45, 167},
-crankLineEnd = {87, 167},
-rightGarbageCan = {75, 10};
+crankLineEnd = {872, 167};
 
 /*-------------------------------------------------------------------------------------------------*/
 //Function #1
 /*-------------------------------------------------------------------------------------------------*/
 
-void SetLocations(int courseDirection, int trafficIsRight)
+void SetLocations(int courseDirection)
 {
     #ifdef TEST_LOG
       {
