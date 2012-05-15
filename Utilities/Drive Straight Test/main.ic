@@ -17,9 +17,9 @@ void main()
     //Enable the encoders
     EncodersInitialize();
     
-    printf("\nPress Start to begin.");
-    start_press();
-    CalibrateMotors();
+    printf("\nPress Start to calibrate.");
+    //start_press();
+    //CalibrateMotors();
     
     while(!stop_button())
       {

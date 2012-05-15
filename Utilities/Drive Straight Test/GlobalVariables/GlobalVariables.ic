@@ -1,11 +1,12 @@
 /*-------------------------------------------------------------------------------------------------*/
-//File #2
+//File #1
 /*-------------------------------------------------------------------------------------------------*/
 
 #define GLOBAL_VARIABLES 1
 
 //Motor Ports
 #define LEFT_MOTOR 1
+#define CRANK 2
 #define RIGHT_MOTOR 3
 
 //Digital Ports
@@ -14,38 +15,62 @@
 #define LEFT_OPTOSENSOR 4
 #define CENTER_OPTOSENSOR 5
 #define RIGHT_OPTOSENSOR 6
-#define LOWER_CDS_PORT 16
-#define UPPER_CDS_PORT 17
+#define FRONT_CDS_PORT 16
+#define BACK_CDS_PORT 17
 
 //Servo Ports
 //#define GPS 4
+
+//Speeds
+#define FOLLOW_SPEED 35
+#define FOLLOW_THRESHOLD 140
+
+//Traffic
+//#define trafficIsRight gps_traffic;
 
 //Point Locations
 struct Location{
     int x;
     int y;
 }
-traffic = {0, 205},
-button = {-90, 160};
+start = {0, 24},
+traffic = {0, 191},
+trafficLeft = {-15, 216},
+buttonStart = {-47, 185},
+button = {-97, 161},
+topCenterRamp = {0,174},
+bottomCenterRamp = {0, 80},
+crankLineStart = {50, 172},
+crankLine = {70, 172},
+rightGarbageCan = {75, 10};
 
 /*-------------------------------------------------------------------------------------------------*/
-//Function #1
+//Function #0
 /*-------------------------------------------------------------------------------------------------*/
 
-void setLocations(int courseDirection)
+void SetLocations(int courseDirection, int trafficIsRight)
 {
     #ifdef TEST_LOG
       {
-        LogEvent(211);
+        LogEvent(101);
     }
     #endif
     
+    start.x *= courseDirection;
     traffic.x *= courseDirection;
+    buttonStart.x *= courseDirection;
     button.x *= courseDirection;
+    topCenterRamp.x *= courseDirection;
+    bottomCenterRamp.x *= courseDirection;
+    crankLineStart.x *= courseDirection;
+    crankLine.x *= courseDirection;
+    
+    if(trafficIsRight)
+      trafficLeft.x *= -1;
     
     #ifdef TEST_LOG
       {
-        LogEvent(210);
+        LogEvent(100);
     }
     #endif
 }

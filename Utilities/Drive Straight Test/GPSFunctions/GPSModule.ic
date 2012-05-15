@@ -1,16 +1,20 @@
 /*-------------------------------------------------------------------------------------------------*/
-//File #6
+//File #5
 /*-------------------------------------------------------------------------------------------------*/
 
 #define GPS 1
 
 #use GPSModule.icb
 
+#define trafficIsRight gps_stoplight
+
+
+int facingLeft = 1;
 int _gps_data[5];
 int gps_x, gps_y, gps_heading, gps_stoplight, gps_generator;
 
 /*-------------------------------------------------------------------------------------------------*/
-//Function #1
+//Function #0
 /*-------------------------------------------------------------------------------------------------*/
 
 void GPSInitialize(int region)
@@ -19,7 +23,7 @@ void GPSInitialize(int region)
     
     #ifdef TEST_LOG
       {
-        LogEvent(611);
+        LogEvent(501);
     }
     #endif
     
@@ -45,20 +49,20 @@ void GPSInitialize(int region)
     
     #ifdef TEST_LOG
       {
-        LogEvent(610);
+        LogEvent(500);
     }
     #endif
 }
 
 /*-------------------------------------------------------------------------------------------------*/
-//Function #2
+//Function #1
 /*-------------------------------------------------------------------------------------------------*/
 
 void GPSDisable()
 {
     #ifdef TEST_LOG
       {
-        LogEvent(621);
+        LogEvent(511);
     }
     #endif
     
@@ -69,20 +73,20 @@ void GPSDisable()
     
     #ifdef TEST_LOG
       {
-        LogEvent(620);
+        LogEvent(510);
     }
     #endif
 }
 
 /*-------------------------------------------------------------------------------------------------*/
-//Function #3
+//Function #2
 /*-------------------------------------------------------------------------------------------------*/
 
 int GPSEnable()
 {
     #ifdef TEST_LOG
       {
-        LogEvent(631);
+        LogEvent(521);
     }
     #endif
     
@@ -91,13 +95,13 @@ int GPSEnable()
     
     #ifdef TEST_LOG
       {
-        LogEvent(630);
+        LogEvent(520);
     }
     #endif
 }
 
 /*-------------------------------------------------------------------------------------------------*/
-//Function #4
+//Function #3
 /*-------------------------------------------------------------------------------------------------*/
 
 int GPSGetData()
@@ -107,7 +111,7 @@ int GPSGetData()
     
     #ifdef TEST_LOG
       {
-        LogEvent(641);
+        LogEvent(531);
     }
     #endif
     
@@ -143,7 +147,7 @@ int GPSGetData()
         
         #ifdef TEST_LOG
           {
-            LogEvent(640);
+            LogEvent(530);
         }
         #endif
         return 1;
@@ -152,7 +156,7 @@ int GPSGetData()
       {
         #ifdef usingTestLog
           {
-            LogEvent(640);
+            LogEvent(530);
         }
         #endif
         return 0;
@@ -160,97 +164,78 @@ int GPSGetData()
 }
 
 /*-------------------------------------------------------------------------------------------------*/
-//Function #5
+//Function #4
 /*-------------------------------------------------------------------------------------------------*/
 
-void GPSGetAbsoluteX()
+void GPSGetAbsolute()
 {
-    int initialX = gps_x;
+    int initialHeading;
+    int finalHeading;
+    int initialX;
     int finalX;
-    
-    #ifdef usingTestLog
-      {
-        LogEvent(651);
-    }
-    #endif
-    
-    while(!GPSGetData());
-    finalX = gps_x;
-    
-    while(initialX != finalX)
-      {
-        initialX = finalX;
-        while(!GPSGetData());
-        finalX = gps_x;
-    }
-    
-    #ifdef usingTestLog
-      {
-        LogEvent(650);
-    }
-    #endif
-}
-
-/*-------------------------------------------------------------------------------------------------*/
-//Function #6
-/*-------------------------------------------------------------------------------------------------*/
-
-void GPSGetAbsoluteY()
-{
-    int initialY = gps_y;
+    int initialY;
     int finalY;
     
     #ifdef TEST_LOG
       {
-        LogEvent(661);
+        LogEvent(541);
     }
     #endif
     
+    msleep(250L);
+    
     while(!GPSGetData());
+    initialHeading = gps_heading;
+    initialX = gps_x;
+    initialY = gps_y;
+    
+    while(!GPSGetData());
+    finalHeading = gps_heading;
+    finalX = gps_x;
     finalY = gps_y;
     
-    while(initialY != finalY)
+    while(initialHeading != finalHeading || initialX != finalX || initialY != finalY)
       {
+        initialHeading = finalHeading;
+        initialX = finalX;
         initialY = finalY;
         while(!GPSGetData());
+        finalHeading = gps_heading;
+        finalX = gps_x;
         finalY = gps_y;
     }
     
     #ifdef TEST_LOG
       {
-        LogEvent(660);
+        LogEvent(540);
     }
     #endif
 }
 
 /*-------------------------------------------------------------------------------------------------*/
-//Function #7
+//Function #5
 /*-------------------------------------------------------------------------------------------------*/
 
-void GPSGetAbsoluteHeading()
+void Face()
 {
-    int initialHeading = gps_heading;
-    int finalHeading;
-    
     #ifdef TEST_LOG
       {
-        LogEvent(671);
+        LogEvent(551);
     }
     #endif
     
-    while(!GPSGetData());
-    finalHeading = gps_heading;
-    
-    while(initialHeading != finalHeading)
+    if (gps_heading < 90)
       {
-        initialHeading = finalHeading;
-        while(!GPSGetData());
-        finalHeading = gps_y;
+        facingLeft = 1;
+    }
+    else
+      {
+        facingLeft = 0;
     }
     
     #ifdef TEST_LOG
       {
-        LogEvent(670);
+        LogEvent(550);
     }
     #endif
 }

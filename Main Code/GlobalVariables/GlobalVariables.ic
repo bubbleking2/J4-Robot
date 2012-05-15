@@ -34,14 +34,14 @@ struct Location{
     int y;
 }
 start = {0, 24},
-traffic = {0, 190},
-trafficLeft = {-15, 213},
-buttonStart = {-45, 185},
-button = {-99, 161},
-topCenterRamp = {0,167},
+traffic = {0, 191},
+trafficLeft = {-15, 216},
+buttonStart = {-47, 185},
+button = {-97, 161},
+topCenterRamp = {0,174},
 bottomCenterRamp = {0, 80},
-crankLineStart = {45, 167},
-crankLine = {70, 167},
+crankLineStart = {50, 172},
+crankLine = {70, 172},
 rightGarbageCan = {75, 10};
 
 /*-------------------------------------------------------------------------------------------------*/
@@ -66,7 +66,7 @@ void SetLocations(int courseDirection, int trafficIsRight)
     crankLine.x *= courseDirection;
     
     if(trafficIsRight)
-      trafficLeft.x *= courseDirection;
+      trafficLeft.x *= -1;
     
     #ifdef TEST_LOG
       {

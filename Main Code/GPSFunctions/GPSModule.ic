@@ -182,7 +182,7 @@ void GPSGetAbsolute()
     }
     #endif
     
-    msleep(300L);
+    msleep(250L);
     
     while(!GPSGetData());
     initialHeading = gps_heading;

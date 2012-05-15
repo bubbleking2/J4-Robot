@@ -45,7 +45,7 @@ void TurnCrank(int courseDirection)
     #endif
     
     motor(CRANK, 100);
-    msleep(500L);
+    msleep(750L);
     motor(CRANK, 0);
     
     #ifdef TEST_LOG
