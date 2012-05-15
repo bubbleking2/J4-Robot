@@ -1,49 +1,13 @@
 /*-------------------------------------------------------------------------------------------------*/
-//File #7
+//File #6
 /*-------------------------------------------------------------------------------------------------*/
 
 #if ENCODERS*ARCTAN*GPS
 
 #define DRIVE 1
 
-persistent float leftCalibration = 1.;
-persistent float rightCalibration = 1.;
-
-int facingLeft = 1;
-
 /*-------------------------------------------------------------------------------------------------*/
-//Function #1
-/*-------------------------------------------------------------------------------------------------*/
-
-void CalibrateMotors()
-{
-    #ifdef TEST_LOG
-      {
-        LogEvent(711);
-    }
-    #endif
-    
-    leftCalibration = 1.;
-    rightCalibration = 1.;
-    leftEncoderCounts = 0;
-    rightEncoderCounts = 0;
-    
-    DriveTicks(200, 100.);
-    
-    if(leftEncoderCounts > rightEncoderCounts)
-      leftCalibration = (float)rightEncoderCounts / (float)leftEncoderCounts;
-    else
-      rightCalibration = (float)leftEncoderCounts / (float)rightEncoderCounts;
-    
-    #ifdef TEST_LOG
-      {
-        LogEvent(710);
-    }
-    #endif
-}
-
-/*-------------------------------------------------------------------------------------------------*/
-//Function #2
+//Function #0
 /*-------------------------------------------------------------------------------------------------*/
 
 void DriveTicks(int ticks, float power)
@@ -53,7 +17,7 @@ void DriveTicks(int ticks, float power)
     
     #ifdef TEST_LOG
       {
-        LogEvent(721);
+        LogEvent(601);
     }
     #endif
     
@@ -68,37 +32,36 @@ void DriveTicks(int ticks, float power)
     while(ticks > leftEncoderCounts && drivePower < power)
       {
         if (drivePower > 0.)
-          motor(RIGHT_MOTOR, (int)(++drivePower * rightCalibration));
+          motor(RIGHT_MOTOR, (int)(++drivePower));
         else
-          motor(RIGHT_MOTOR, (int)(--drivePower * rightCalibration));
-        motor(LEFT_MOTOR, (int)(drivePower * leftCalibration));
+          motor(RIGHT_MOTOR, (int)(--drivePower));
+        motor(LEFT_MOTOR, (int)(drivePower));
     }
     
     while(ticks > leftEncoderCounts)
       {
-        motor(RIGHT_MOTOR, (int)(power * rightCalibration));
-        motor(LEFT_MOTOR, (int)(power * leftCalibration));
+        motor(RIGHT_MOTOR, (int)(power));
+        motor(LEFT_MOTOR, (int)(power));
         
         if (leftEncoderCounts > slowPoint)
           {
             if (power > 0.)
-              power = 25.;
+              power = 27.;
             else
-              power = -25.;
+              power = -27.;
         }
     };
-    motor(LEFT_MOTOR, 0);
-    motor(RIGHT_MOTOR, 0);
+    ao();
     
     #ifdef TEST_LOG
       {
-        LogEvent(720);
+        LogEvent(600);
     }
     #endif
 }
 
 /*-------------------------------------------------------------------------------------------------*/
-//Function #3
+//Function #1
 /*-------------------------------------------------------------------------------------------------*/
 
 void DriveDistance(float inches, float power)
@@ -107,7 +70,7 @@ void DriveDistance(float inches, float power)
     
     #ifdef TEST_LOG
       {
-        LogEvent(731);
+        LogEvent(611);
     }
     #endif
     
@@ -117,13 +80,13 @@ void DriveDistance(float inches, float power)
     
     #ifdef TEST_LOG
       {
-        LogEvent(730);
+        LogEvent(610);
     }
     #endif
 }
 
 /*-------------------------------------------------------------------------------------------------*/
-//Function #4
+//Function #2
 /*-------------------------------------------------------------------------------------------------*/
 
 void TurnTicks(int ticks)
@@ -132,7 +95,7 @@ void TurnTicks(int ticks)
     
     #ifdef TEST_LOG
       {
-        LogEvent(741);
+        LogEvent(621);
     }
     #endif
     
@@ -150,18 +113,17 @@ void TurnTicks(int ticks)
     
     while (leftEncoderCounts < ticks);
     
-    motor(LEFT_MOTOR, 0);
-    motor(RIGHT_MOTOR, 0);
+    ao();
     
     #ifdef TEST_LOG
       {
-        LogEvent(740);
+        LogEvent(620);
     }
     #endif
 }
 
 /*-------------------------------------------------------------------------------------------------*/
-//Function #5
+//Function #3
 /*-------------------------------------------------------------------------------------------------*/
 
 void TurnDegrees(int degrees)
@@ -170,7 +132,7 @@ void TurnDegrees(int degrees)
     
     #ifdef TEST_LOG
       {
-        LogEvent(751);
+        LogEvent(631);
     }
     #endif
     
@@ -180,13 +142,13 @@ void TurnDegrees(int degrees)
     
     #ifdef TEST_LOG
       {
-        LogEvent(750);
+        LogEvent(630);
     }
     #endif
 }
 
 /*-------------------------------------------------------------------------------------------------*/
-//Function #6
+//Function #4
 /*-------------------------------------------------------------------------------------------------*/
 
 void TurnTowards(int x, int y)
@@ -195,7 +157,7 @@ void TurnTowards(int x, int y)
     
     #ifdef TEST_LOG
       {
-        LogEvent(761);
+        LogEvent(641);
     }
     #endif
     
@@ -227,20 +189,72 @@ void TurnTowards(int x, int y)
     
     #ifdef TEST_LOG
       {
-        LogEvent(760);
+        LogEvent(640);
     }
     #endif
 }
 
 /*-------------------------------------------------------------------------------------------------*/
-//Function #7
+//Function #5
+/*-------------------------------------------------------------------------------------------------*/
+
+void TurnAgainst(int x, int y)
+{
+    int turn;
+    
+    #ifdef TEST_LOG
+      {
+        LogEvent(651);
+    }
+    #endif
+    
+    GPSGetAbsolute();
+    
+    if(facingLeft)
+      if(gps_y >= y)
+        turn = gps_heading + 180 + Arctan(gps_x - x, gps_y - y);
+      else
+        turn = gps_heading + Arctan(gps_x - x, gps_y - y);
+    else
+      {
+        if(gps_y >= y)
+          turn = gps_heading + Arctan(gps_x - x, gps_y - y);
+        else
+          turn = gps_heading + 180 + Arctan(gps_x - x, gps_y - y);
+    }
+    if(turn >= 180)
+      turn = turn - 360;
+    else if(turn <= -180)
+      turn = turn + 360;
+    
+    turn += 180;
+    
+    if(turn >= 180)
+      turn = turn - 360;
+    
+    TurnDegrees(turn);
+    
+    if(gps_heading + turn > 179 || gps_heading + turn < 0)
+      {
+        facingLeft = !facingLeft;
+    }
+    
+    #ifdef TEST_LOG
+      {
+        LogEvent(650);
+    }
+    #endif
+}
+
+/*-------------------------------------------------------------------------------------------------*/
+//Function #6
 /*-------------------------------------------------------------------------------------------------*/
 
 void GetTo(int x, int y, float speed)
 {
     #ifdef TEST_LOG
       {
-        LogEvent(771);
+        LogEvent(661);
     }
     #endif
     
@@ -249,48 +263,20 @@ void GetTo(int x, int y, float speed)
     
     #ifdef TEST_LOG
       {
-        LogEvent(770);
+        LogEvent(660);
     }
     #endif
 }
 
 /*-------------------------------------------------------------------------------------------------*/
-//Function #8
-/*-------------------------------------------------------------------------------------------------*/
-
-void Face()
-{
-    #ifdef TEST_LOG
-      {
-        LogEvent(781);
-    }
-    #endif
-    
-    if (gps_heading < 90)
-      {
-        facingLeft = 1;
-    }
-    else
-      {
-        facingLeft = 0;
-    }
-    
-    #ifdef TEST_LOG
-      {
-        LogEvent(780);
-    }
-    #endif
-}
-
-/*-------------------------------------------------------------------------------------------------*/
-//Function #9
+//Function #7
 /*-------------------------------------------------------------------------------------------------*/
 
 void FollowLine()
 {
     #ifdef TEST_LOG
       {
-        LogEvent(791);
+        LogEvent(671);
     }
     #endif
     
@@ -317,12 +303,55 @@ void FollowLine()
         motor(LEFT_MOTOR, FOLLOW_SPEED);
         motor(RIGHT_MOTOR, FOLLOW_SPEED);
     }
-    motor(LEFT_MOTOR, 0);
-    motor(RIGHT_MOTOR, 0);
+    ao();
     
     #ifdef TEST_LOG
       {
-        LogEvent(790);
+        LogEvent(670);
+    }
+    #endif
+}
+
+/*-------------------------------------------------------------------------------------------------*/
+//Function #8
+/*-------------------------------------------------------------------------------------------------*/
+
+void FollowLineBackwards()
+{
+    #ifdef TEST_LOG
+      {
+        LogEvent(681);
+    }
+    #endif
+    
+    motor(LEFT_MOTOR, -FOLLOW_SPEED);
+    motor(RIGHT_MOTOR, -FOLLOW_SPEED);
+    while(1)
+      {
+        if(analog(CENTER_OPTOSENSOR) < FOLLOW_THRESHOLD)
+          {
+            while(analog(LEFT_OPTOSENSOR) > FOLLOW_THRESHOLD)
+              {
+                motor(LEFT_MOTOR, 0);
+            }
+            
+            motor(LEFT_MOTOR, -FOLLOW_SPEED);
+            motor(RIGHT_MOTOR, -FOLLOW_SPEED);
+            
+            while(analog(RIGHT_OPTOSENSOR) > FOLLOW_THRESHOLD)
+              {
+                motor(RIGHT_MOTOR, 0);
+            }
+        }
+        
+        motor(LEFT_MOTOR, -FOLLOW_SPEED);
+        motor(RIGHT_MOTOR, -FOLLOW_SPEED);
+    }
+    ao();
+    
+    #ifdef TEST_LOG
+      {
+        LogEvent(680);
     }
     #endif
 }

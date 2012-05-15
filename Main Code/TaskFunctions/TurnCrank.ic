@@ -2,38 +2,30 @@
 //File #8
 /*-------------------------------------------------------------------------------------------------*/
 
-#if DRIVE * FROM_TO * GPS == 1
+#if DRIVE * GPS == 1
 
 #define HANG_LIGHT 1
 
 /*-------------------------------------------------------------------------------------------------*/
-//Function #4
+//Function #3
 /*-------------------------------------------------------------------------------------------------*/
 
-void ReadCdS(int courseDirection)
+void TurnCrank(int courseDirection)
 {
     int processID;
-    int frontCdS;
-    int rearCdS;
     
     #ifdef TEST_LOG
       {
-        LogEvent(841);
+        LogEvent(831);
     }
     #endif
     
-    TurnDegrees(-65);
-    facingLeft = 0;
-    GPSGetAbsolute();
-    TurnTowards(gps_x + 100, gps_y);
-    DriveDistance(6., -100.);
-    TurnTowards(gps_x + 100, gps_y);
+    TurnAgainst(crankLine.x, crankLine.y);
     
-    processID = start_process(DriveDistance(12., 35.));
+    processID = start_process(DriveDistance(24., -40.));
     while(analog(CENTER_OPTOSENSOR) > FOLLOW_THRESHOLD && analog(LEFT_OPTOSENSOR) > FOLLOW_THRESHOLD && analog(RIGHT_OPTOSENSOR) > FOLLOW_THRESHOLD);
     kill_process(processID);
-    motor(LEFT_MOTOR, 0);
-    motor(RIGHT_MOTOR, 0);
+    ao();
     
     #ifdef TEST_LOG
       {
@@ -41,36 +33,24 @@ void ReadCdS(int courseDirection)
     }
     #endif
     
-    processID = start_process(FollowLine());
-    while(frontCdS = analog(FRONT_CDS_PORT) > 12 && rearCdS = analog(BACK_CDS_PORT) > 30);
+    processID = start_process(FollowLineBackwards());
+    msleep(1500L);
     kill_process(processID);
-    motor(LEFT_MOTOR, 0);
-    motor(RIGHT_MOTOR, 0);
-    
-    if(frontCdS < 12)
-      {
-        if(frontCdS < 5)
-          printf("\nThe light is Red");
-        else
-          printf("\nThe light is Blue");
-    }
-    else
-      {
-        if(rearCdS < 11)
-          printf("\nThe light is Red");
-        else
-          printf("\nThe light is Blue");
-    }
+    ao();
     
     #ifdef TEST_LOG
       {
-        LogEvent(712);
+        LogEvent(682);
     }
     #endif
     
+    motor(CRANK, 100);
+    msleep(500L);
+    motor(CRANK, 0);
+    
     #ifdef TEST_LOG
       {
-        LogEvent(840);
+        LogEvent(831);
     }
     #endif
 }

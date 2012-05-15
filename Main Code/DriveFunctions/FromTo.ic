@@ -1,5 +1,5 @@
 /*-------------------------------------------------------------------------------------------------*/
-//File #8
+//File #7
 /*-------------------------------------------------------------------------------------------------*/
 
 #ifdef DRIVE
@@ -7,14 +7,14 @@
 #define FROM_TO 1
 
 /*-------------------------------------------------------------------------------------------------*/
-//Function #1
+//Function #0
 /*-------------------------------------------------------------------------------------------------*/
 
 void FromStartToTraffic(int courseDirection)
 {
     #ifdef TEST_LOG
       {
-        LogEvent(811);
+        LogEvent(701);
     }
     #endif
     
@@ -22,7 +22,29 @@ void FromStartToTraffic(int courseDirection)
     
     #ifdef TEST_LOG
       {
-        LogEvent(810);
+        LogEvent(700);
+    }
+    #endif
+}
+
+/*-------------------------------------------------------------------------------------------------*/
+//Function #1
+/*-------------------------------------------------------------------------------------------------*/
+
+void FromTrafficToButtonStart(int courseDirection)
+{
+    
+    #ifdef TEST_LOG
+      {
+        LogEvent(711);
+    }
+    #endif
+    
+    GetTo(buttonStart.x, buttonStart.y, 100.);   
+    
+    #ifdef TEST_LOG
+      {
+        LogEvent(710);
     }
     #endif
 }
@@ -31,46 +53,23 @@ void FromStartToTraffic(int courseDirection)
 //Function #2
 /*-------------------------------------------------------------------------------------------------*/
 
-void FromTrafficToButtonStart(int courseDirection)
-{
-    int process;
-    
-    #ifdef TEST_LOG
-      {
-        LogEvent(821);
-    }
-    #endif
-    
-    TurnDegrees(-90 * courseDirection);
-    msleep(500L);
-    GetTo(buttonStart.x, buttonStart.y, 100.);   
-    
-    #ifdef TEST_LOG
-      {
-        LogEvent(820);
-    }
-    #endif
-}
-
-/*-------------------------------------------------------------------------------------------------*/
-//Function #3
-/*-------------------------------------------------------------------------------------------------*/
-
 void FromButtonToCrank(int courseDirection)
 {
     #ifdef TEST_LOG
       {
-        LogEvent(831);
+        LogEvent(721);
     }
     #endif
     
-    GetTo(topCenterRamp.x, topCenterRamp.y, 100.);
-    facingLeft = 0;
-    GetTo(crankLineStart.x, crankLineStart.y, 100.);
+    TurnAgainst(topCenterRamp.x, topCenterRamp.y);
+    GPSGetAbsolute();
+    DriveDistance(.25 * sqrt((float)((topCenterRamp.y - gps_y) * (topCenterRamp.y - gps_y) + (topCenterRamp.x - gps_x) * (topCenterRamp.x - gps_x))), -100.);
+    TurnAgainst(crankLineStart.x, crankLineStart.y);
+    DriveDistance(.25 * sqrt((float)((crankLineStart.y - gps_y) * (crankLineStart.y - gps_y) + (crankLineStart.x - gps_x) * (crankLineStart.x - gps_x))), -100.);
     
     #ifdef TEST_LOG
       {
-        LogEvent(830);
+        LogEvent(720);
     }
     #endif
 }

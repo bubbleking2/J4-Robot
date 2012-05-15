@@ -1,16 +1,20 @@
 /*-------------------------------------------------------------------------------------------------*/
-//File #6
+//File #5
 /*-------------------------------------------------------------------------------------------------*/
 
 #define GPS 1
 
 #use GPSModule.icb
 
+#define trafficIsRight gps_stoplight
+
+
+int facingLeft = 1;
 int _gps_data[5];
 int gps_x, gps_y, gps_heading, gps_stoplight, gps_generator;
 
 /*-------------------------------------------------------------------------------------------------*/
-//Function #1
+//Function #0
 /*-------------------------------------------------------------------------------------------------*/
 
 void GPSInitialize(int region)
@@ -19,7 +23,7 @@ void GPSInitialize(int region)
     
     #ifdef TEST_LOG
       {
-        LogEvent(611);
+        LogEvent(501);
     }
     #endif
     
@@ -45,20 +49,20 @@ void GPSInitialize(int region)
     
     #ifdef TEST_LOG
       {
-        LogEvent(610);
+        LogEvent(500);
     }
     #endif
 }
 
 /*-------------------------------------------------------------------------------------------------*/
-//Function #2
+//Function #1
 /*-------------------------------------------------------------------------------------------------*/
 
 void GPSDisable()
 {
     #ifdef TEST_LOG
       {
-        LogEvent(621);
+        LogEvent(511);
     }
     #endif
     
@@ -69,20 +73,20 @@ void GPSDisable()
     
     #ifdef TEST_LOG
       {
-        LogEvent(620);
+        LogEvent(510);
     }
     #endif
 }
 
 /*-------------------------------------------------------------------------------------------------*/
-//Function #3
+//Function #2
 /*-------------------------------------------------------------------------------------------------*/
 
 int GPSEnable()
 {
     #ifdef TEST_LOG
       {
-        LogEvent(631);
+        LogEvent(521);
     }
     #endif
     
@@ -91,13 +95,13 @@ int GPSEnable()
     
     #ifdef TEST_LOG
       {
-        LogEvent(630);
+        LogEvent(520);
     }
     #endif
 }
 
 /*-------------------------------------------------------------------------------------------------*/
-//Function #4
+//Function #3
 /*-------------------------------------------------------------------------------------------------*/
 
 int GPSGetData()
@@ -107,7 +111,7 @@ int GPSGetData()
     
     #ifdef TEST_LOG
       {
-        LogEvent(641);
+        LogEvent(531);
     }
     #endif
     
@@ -143,7 +147,7 @@ int GPSGetData()
         
         #ifdef TEST_LOG
           {
-            LogEvent(640);
+            LogEvent(530);
         }
         #endif
         return 1;
@@ -152,7 +156,7 @@ int GPSGetData()
       {
         #ifdef usingTestLog
           {
-            LogEvent(640);
+            LogEvent(530);
         }
         #endif
         return 0;
@@ -160,7 +164,7 @@ int GPSGetData()
 }
 
 /*-------------------------------------------------------------------------------------------------*/
-//Function #5
+//Function #4
 /*-------------------------------------------------------------------------------------------------*/
 
 void GPSGetAbsolute()
@@ -174,11 +178,11 @@ void GPSGetAbsolute()
     
     #ifdef TEST_LOG
       {
-        LogEvent(651);
+        LogEvent(541);
     }
     #endif
     
-    msleep(200L);
+    msleep(300L);
     
     while(!GPSGetData());
     initialHeading = gps_heading;
@@ -203,7 +207,35 @@ void GPSGetAbsolute()
     
     #ifdef TEST_LOG
       {
-        LogEvent(650);
+        LogEvent(540);
+    }
+    #endif
+}
+
+/*-------------------------------------------------------------------------------------------------*/
+//Function #5
+/*-------------------------------------------------------------------------------------------------*/
+
+void Face()
+{
+    #ifdef TEST_LOG
+      {
+        LogEvent(551);
+    }
+    #endif
+    
+    if (gps_heading < 90)
+      {
+        facingLeft = 1;
+    }
+    else
+      {
+        facingLeft = 0;
+    }
+    
+    #ifdef TEST_LOG
+      {
+        LogEvent(550);
     }
     #endif
 }

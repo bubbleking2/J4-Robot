@@ -1,5 +1,5 @@
 /*-------------------------------------------------------------------------------------------------*/
-//File #9
+//File #8
 /*-------------------------------------------------------------------------------------------------*/
 
 #if DRIVE * FROM_TO == 1
@@ -7,7 +7,7 @@
 #define HANG_LIGHT 1
 
 /*-------------------------------------------------------------------------------------------------*/
-//Function #3
+//Function #1
 /*-------------------------------------------------------------------------------------------------*/
 
 void HangLight(int courseDirection)
@@ -16,48 +16,60 @@ void HangLight(int courseDirection)
     
     #ifdef TEST_LOG
       {
-        LogEvent(931);
+        LogEvent(811);
     }
     #endif
     
-    TurnDegrees(-68);
-    facingLeft = 1;
+    if(trafficIsRight)
+      {
+        TurnDegrees(68);
+        facingLeft = 0;
+    }
+    else
+      {
+        TurnDegrees(-68);
+        facingLeft = 1;
+    }
     
-    printf("\nTurning towards traffic");
     TurnTowards(trafficLeft.x, trafficLeft.y);
     
     processID = start_process(DriveDistance(24., 35.));
     while(analog(CENTER_OPTOSENSOR) > FOLLOW_THRESHOLD && analog(LEFT_OPTOSENSOR) > FOLLOW_THRESHOLD && analog(RIGHT_OPTOSENSOR) > FOLLOW_THRESHOLD);
     kill_process(processID);
-    motor(LEFT_MOTOR, 0);
-    motor(RIGHT_MOTOR, 0);
+    ao();
     
     #ifdef TEST_LOG
       {
-        LogEvent(772);
+        LogEvent(612);
     }
     #endif
     
-    printf("\nLine following");
     processID = start_process(FollowLine());
     msleep(1500L);
     kill_process(processID);
-    motor(LEFT_MOTOR, 0);
-    motor(RIGHT_MOTOR, 0);
+    ao();
     
     #ifdef TEST_LOG
       {
-        LogEvent(792);
+        LogEvent(672);
     }
     #endif
     
     DriveDistance(10., -100.);
-    TurnDegrees(58);
-    facingLeft = 0;
+    if(courseDirection == 1)
+      {
+        TurnDegrees(-58);
+        facingLeft = 1;
+    }
+    else
+      {
+        TurnDegrees(58);
+        facingLeft = 0;
+    }
     
     #ifdef TEST_LOG
       {
-        LogEvent(930);
+        LogEvent(810);
     }
     #endif
 }

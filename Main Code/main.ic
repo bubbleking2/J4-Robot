@@ -1,5 +1,5 @@
 /*-------------------------------------------------------------------------------------------------*/
-//File #1
+//File #9
 /*-------------------------------------------------------------------------------------------------*/
 
 #use TestLog\TestLog.ic
@@ -11,14 +11,15 @@
 #use DriveFunctions\Drive.ic
 #use DriveFunctions\FromTo.ic
 #use TaskFunctions\WaitForGo.ic
-#use TaskFunctions\PushButton.ic
 #use TaskFunctions\HangLight.ic
+#use TaskFunctions\PushButton.ic
+#use TaskFunctions\TurnCrank.ic
 #use TaskFunctions\ReadCdS.ic
 
 
 
 /*-------------------------------------------------------------------------------------------------*/
-//Function #1
+//Function #0
 /*-------------------------------------------------------------------------------------------------*/
 
 void main()
@@ -26,13 +27,14 @@ void main()
     //Declare course
     int course;
     int courseDirection;
+    //1 for Right, -1 for Left
     
     //Declare whether this run is being logged
     #ifdef TEST_LOG
       {
         ResetTestLog();
         StartLogging();
-        LogEvent(111);
+        LogEvent(901);
     }
     #endif
     
@@ -62,7 +64,7 @@ void main()
     while(!GPSGetData());
     
     //Set the location of the objects on the course
-    SetLocations(courseDirection, gps_stoplight);
+    SetLocations(courseDirection, trafficIsRight);
     
     //Make sure the Robot knows which way it is looking
     Face();
@@ -71,40 +73,48 @@ void main()
     printf("\nFrom start to traffic");
     FromStartToTraffic(courseDirection);
     
+    //Hang the traffic light
     printf("\nHang light");
     HangLight(courseDirection);
     
-    //Travel from traffic to button
-    //FromTrafficToButtonStart(courseDirection);
+    //Travel from traffic to button area
+    printf("\nFrom traffic to button start");
+    FromTrafficToButtonStart(courseDirection);
     
     //Attempt to push button
-    //PushButton(courseDirection);
+    printf("\nPush button");
+    PushButton(courseDirection);
     
     //Travel from button to crank
-    //FromButtonToCrank(courseDirection);
+    printf("\nFrom button to crank");
+    FromButtonToCrank(courseDirection);
+    
+    //Turn crank
+    printf("\nTurn crank");
+    TurnCrank(courseDirection);
     
     //FromCrankToTopCenterRamp();
     
     //FromTopCenterRampToBottomCenterRamp();
     
-    printf("\nTo top ramp");
-    GetTo(topCenterRamp.x, topCenterRamp.y, 100.);
-    printf("\nTo bottom ramp");
-    TurnDegrees(-55);
-    facingLeft = 0;
-    GPSGetAbsolute();
-    TurnTowards(gps_x, gps_y - 100);
-    DriveDistance(19., 50.);
-    printf("\nRead CdS");
-    ReadCdS(courseDirection);
-    facingLeft = 0;
-    msleep(1000L);
-    printf("\nTo garbage");
-    GetTo(rightGarbageCan.x, rightGarbageCan.y, 100.);
+    //printf("\nTo top ramp");
+    //GetTo(topCenterRamp.x, topCenterRamp.y, 100.);
+    //printf("\nTo bottom ramp");
+    //TurnDegrees(-55);
+    //facingLeft = 0;
+    //GPSGetAbsolute();
+    //TurnTowards(gps_x, gps_y - 100);
+    //DriveDistance(19., 50.);
+    //printf("\nRead CdS");
+    //ReadCdS(courseDirection);
+    //facingLeft = 0;
+    //msleep(1000L);
+    //printf("\nTo garbage");
+    //GetTo(rightGarbageCan.x, rightGarbageCan.y, 100.);
     
     #ifdef TEST_LOG
       {
-        LogEvent(110);
+        LogEvent(900);
     }
     #endif
 }

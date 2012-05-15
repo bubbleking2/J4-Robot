@@ -1,5 +1,5 @@
 /*-------------------------------------------------------------------------------------------------*/
-//File #9
+//File #8
 /*-------------------------------------------------------------------------------------------------*/
 
 #ifdef DRIVE
@@ -12,19 +12,31 @@
 
 void PushButton(int courseDirection)
 {
+    int processID;
+    
     #ifdef TEST_LOG
       {
-        LogEvent(921);
+        LogEvent(821);
     }
     #endif
     
-    msleep(200L);
-    DriveDistance(8., -100.);
-    msleep(200L);
+    TurnTowards(button.x, button.y);
+    
+    processID = start_process(DriveDistance(18., 100.));
+    msleep(1200L);
+    kill_process(processID);
+    motor(LEFT_MOTOR, 0);
+    motor(RIGHT_MOTOR, 0);
+    #ifdef TEST_LOG
+      {
+        LogEvent(612);
+    }
+    #endif
+    DriveDistance(4., -100.);
     
     #ifdef TEST_LOG
       {
-        LogEvent(920);
+        LogEvent(820);
     }
     #endif
 }

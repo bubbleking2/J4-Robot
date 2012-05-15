@@ -1,18 +1,18 @@
 /*-------------------------------------------------------------------------------------------------*/
-//File #4
+//File #3
 /*-------------------------------------------------------------------------------------------------*/
 
 #define COURSE_INITIALIZE 1
 
 /*-------------------------------------------------------------------------------------------------*/
-//Function #1
+//Function #0
 /*-------------------------------------------------------------------------------------------------*/
 
 int CourseInitializeKnob()
 {
     #ifdef TEST_LOG
       {
-        LogEvent(411);
+        LogEvent(301);
     }
     #endif
     
@@ -28,7 +28,7 @@ int CourseInitializeKnob()
     
     #ifdef TEST_LOG
       {
-        LogEvent(410);
+        LogEvent(300);
     }
     #endif
     
@@ -36,14 +36,14 @@ int CourseInitializeKnob()
 }
 
 /*-------------------------------------------------------------------------------------------------*/
-//Function #2
+//Function #1
 /*-------------------------------------------------------------------------------------------------*/
 
-int CourseDirectionInitialize(int course) //Function #2
+int CourseDirectionInitialize(int course)
 {
     #ifdef TEST_LOG
       {
-        LogEvent(421);
+        LogEvent(311);
     }
     #endif
     
@@ -60,7 +60,7 @@ int CourseDirectionInitialize(int course) //Function #2
       {
         #ifdef TEST_LOG
           {
-            LogEvent(420);
+            LogEvent(310);
         }
         #endif
         return 1;
