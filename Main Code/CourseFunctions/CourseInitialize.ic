@@ -51,7 +51,7 @@ int CourseDirectionInitialize(int course)
       {
         #ifdef TEST_LOG
           {
-            LogEvent(420);
+            LogEvent(310);
         }
         #endif
         return -1;

@@ -3,6 +3,7 @@
 /*-------------------------------------------------------------------------------------------------*/
 
 #use TestLog\TestLog.ic
+#use TestLog\GPSLog.ic
 #use GlobalVariables\GlobalVariables.ic
 #use MathFunctions\Arctan.ic
 #use CourseFunctions\CourseInitialize.ic
@@ -35,6 +36,14 @@ void main()
         ResetTestLog();
         StartLogging();
         LogEvent(901);
+    }
+    #endif
+    
+    //Declare whether this run is logging GPS
+    #ifdef GPS_LOG
+      {
+        ResetGPSLog();
+        StartGPSLogging();
     }
     #endif
     

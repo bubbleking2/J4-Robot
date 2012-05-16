@@ -1,72 +1,65 @@
 /*-------------------------------------------------------------------------------------------------*/
-//Test Log
+//GPS Log
 /*-------------------------------------------------------------------------------------------------*/
 
-#define TEST_LOG 1
-#define TEST_LOG_LENGTH 256
+#define GPS_LOG 1
+#define GPS_LOG_LENGTH 50
 
-persistent int testLog[TEST_LOG_LENGTH];
+persistent int gpsLog[GPS_LOG_LENGTH][4];
 
-int logIndex = 0;
-int logOn = 0;
+int gpsLogIndex = 0;
+int gpsLogOn = 0;
 
 /*-------------------------------------------------------------------------------------------------*/
-//ResetTestLog
+//ResetGPSLog
 /*-------------------------------------------------------------------------------------------------*/
 
-void ResetTestLog()
+void ResetGPSLog()
 {
     int index = 0;
-    printf("\nPress Start to reset test log.");
-    start_press();
-    printf("\nResetting Test  Log");
-    while(index < TEST_LOG_LENGTH)
+    printf("\nResetting GPS  Log");
+    while(index < GPS_LOG_LENGTH)
       {
-        testLog[index] = 0;
+        gpsLog[index][0] = 0;
+        gpsLog[index][1] = 0;
+        gpsLog[index][2] = 0;
+        gpsLog[index][3] = 0;
         index++;
     }
-    logIndex = 0;
+    gpsLogIndex = 0;
 }
 
 /*-------------------------------------------------------------------------------------------------*/
-//StartLogging
+//StartGPSLogging
 /*-------------------------------------------------------------------------------------------------*/
 
-void StartLogging()
+void StartGPSLogging()
 {
-    logOn = 1;
+    gpsLogOn = 1;
 }
 
 /*-------------------------------------------------------------------------------------------------*/
-//StopLogging
+//StopGPSLogging
 /*-------------------------------------------------------------------------------------------------*/
 
-void StopLogging()
+void StopGPSLogging()
 {
-    logOn = 0;
+    gpsLogOn = 0;
 }
 
 /*-------------------------------------------------------------------------------------------------*/
-//LogEvent
+//LogGPS
 /*-------------------------------------------------------------------------------------------------*/
 
-void LogEvent(int eventNumber)
+void LogGPS(int x, int y, int heading, int facingLeft)
 {
-    if(logIndex < TEST_LOG_LENGTH && logOn)
+    if(gpsLogIndex < GPS_LOG_LENGTH && gpsLogOn)
       {
-        if(logIndex >= 2)
-          {
-            if(testLog[logIndex - 1] != eventNumber && testLog[logIndex - 2] != eventNumber)
-              {
-                testLog[logIndex] = eventNumber;
-                logIndex++;
-            }
-        }
-        else
-          {
-            testLog[logIndex] = eventNumber;
-            logIndex++;
-        }
+        gpsLog[gpsLogIndex][0] = x;
+        gpsLog[gpsLogIndex][1] = y;
+        gpsLog[gpsLogIndex][2] = heading;
+        gpsLog[gpsLogIndex][3] = facingLeft;
+        gpsLogIndex++;
     }
 }
 

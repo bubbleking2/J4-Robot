@@ -205,6 +205,12 @@ void GPSGetAbsolute()
         finalY = gps_y;
     }
     
+    #ifdef GPS_LOG
+      {
+        LogGPS(gps_x, gps_y, gps_heading, facingLeft);
+    }
+    #endif
+    
     #ifdef TEST_LOG
       {
         LogEvent(540);
@@ -239,6 +245,28 @@ void Face()
     }
     #endif
 }
+
+/*-------------------------------------------------------------------------------------------------*/
+//Function #6
+/*-------------------------------------------------------------------------------------------------*/
+
+/*void CorrectHeading(int heading)
+{
+    GPSGetAbsolute();
+    while(gps_heading - heading < 2 || gps_heading - heading > -2)
+      {
+        if(gps_heading - heading < -2)
+          {
+            TurnDegrees(-5);
+        }
+        else if(gps_heading - heading > 2)
+          {
+            TurnDegrees(5);
+        }
+        
+        GPSGetAbsolute();
+    }
+}*/
 
 /*-------------------------------------------------------------------------------------------------*/
 /*-------------------------------------------------------------------------------------------------*/

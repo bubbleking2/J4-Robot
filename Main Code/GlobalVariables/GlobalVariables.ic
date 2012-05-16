@@ -34,9 +34,9 @@ struct Location{
     int y;
 }
 start = {0, 24},
-traffic = {0, 191},
+traffic = {0, 190},
 trafficLeft = {-15, 216},
-buttonStart = {-47, 185},
+buttonStart = {-48, 185},
 button = {-97, 161},
 topCenterRamp = {0,174},
 bottomCenterRamp = {0, 80},

@@ -114,7 +114,7 @@ void TurnTicks(int ticks)
         ticks = -ticks;
     }
     
-    while ((leftEncoderCounts + rightEncoderCounts) / 2 < ticks);
+    while (leftEncoderCounts < ticks);
     
     ao();
     

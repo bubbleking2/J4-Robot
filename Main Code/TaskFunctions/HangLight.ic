@@ -22,12 +22,12 @@ void HangLight(int courseDirection)
     
     if(trafficIsRight)
       {
-        TurnDegrees(68);
+        TurnDegrees(55);
         facingLeft = 0;
     }
     else
       {
-        TurnDegrees(-68);
+        TurnDegrees(-55);
         facingLeft = 1;
     }
     
@@ -48,7 +48,7 @@ void HangLight(int courseDirection)
     msleep(1500L);
     kill_process(processID);
     ao();    
-
+    
     #ifdef TEST_LOG
       {
         LogEvent(672);
@@ -66,7 +66,7 @@ void HangLight(int courseDirection)
         TurnDegrees(58);
         facingLeft = 0;
     }
-
+    
     #ifdef TEST_LOG
       {
         LogEvent(810);
