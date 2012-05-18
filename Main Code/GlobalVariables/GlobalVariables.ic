@@ -35,7 +35,7 @@ struct Location{
 }
 start = {0, 24},
 traffic = {0, 190},
-trafficLeft = {-15, 216},
+trafficLeft = {-15, 213},
 buttonStart = {-48, 185},
 button = {-97, 161},
 topCenterRamp = {0,174},
