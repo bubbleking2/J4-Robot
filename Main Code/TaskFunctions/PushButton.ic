@@ -22,16 +22,14 @@ void PushButton(int courseDirection)
     
     TurnTowards(button.x, button.y);
     
-    processID = start_process(DriveDistance(18., 100.));
-    msleep(1200L);
-    kill_process(processID);
-    motor(LEFT_MOTOR, 0);
-    motor(RIGHT_MOTOR, 0);
+    RunFor(DriveDistance(18., 100.), 1200L);
+    
     #ifdef TEST_LOG
       {
         LogEvent(612);
     }
     #endif
+    
     DriveDistance(4., -100.);
     
     #ifdef TEST_LOG

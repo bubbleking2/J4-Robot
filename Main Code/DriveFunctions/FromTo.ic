@@ -40,7 +40,7 @@ void FromTrafficToButtonStart(int courseDirection)
     }
     #endif
     
-    GetTo(buttonStart.x, buttonStart.y, 100.);   
+    GetTo(buttonStart.x, buttonStart.y, 100.);
     
     #ifdef TEST_LOG
       {
@@ -74,6 +74,30 @@ void FromButtonToCrank(int courseDirection)
     #endif
 }
 
+/*-------------------------------------------------------------------------------------------------*/
+//Function #3
+/*-------------------------------------------------------------------------------------------------*/
+
+void FromCrankToStart(int courseDirection)
+{
+    #ifdef TEST_LOG
+      {
+        LogEvent(731);
+    }
+    #endif
+    
+    GetTo(topCenterRamp.x, topCenterRamp.y, 100.);
+    GetTo(0, 24, 100.);
+    
+    
+    #ifdef TEST_LOG
+      {
+        LogEvent(730);
+    }
+    #endif
+}
+
+/*-------------------------------------------------------------------------------------------------*/
 /*-------------------------------------------------------------------------------------------------*/
 
 #endif

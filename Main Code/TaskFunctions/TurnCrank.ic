@@ -22,10 +22,7 @@ void TurnCrank(int courseDirection)
     
     TurnAgainst(crankLine.x, crankLine.y);
     
-    processID = start_process(DriveDistance(24., -40.));
-    while(analog(CENTER_OPTOSENSOR) > FOLLOW_THRESHOLD && analog(LEFT_OPTOSENSOR) > FOLLOW_THRESHOLD && analog(RIGHT_OPTOSENSOR) > FOLLOW_THRESHOLD);
-    kill_process(processID);
-    ao();
+    RunWhileFor(DriveDistance(24., -40.), analog(CENTER_OPTOSENSOR) > FOLLOW_THRESHOLD && analog(LEFT_OPTOSENSOR) > FOLLOW_THRESHOLD && analog(RIGHT_OPTOSENSOR) > FOLLOW_THRESHOLD, 2000L);
     
     #ifdef TEST_LOG
       {
@@ -33,10 +30,7 @@ void TurnCrank(int courseDirection)
     }
     #endif
     
-    processID = start_process(FollowLineBackwards());
-    msleep(1500L);
-    kill_process(processID);
-    ao();
+    RunFor(FollowLineBackwards(), 2000L);
     
     #ifdef TEST_LOG
       {

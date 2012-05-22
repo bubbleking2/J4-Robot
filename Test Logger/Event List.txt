@@ -25,6 +25,7 @@
 | 70 | FromStartToTraffic          |
 | 71 | FromTrafficToButtonStart    |
 | 72 | FromButtonToCrank           |
+| 73 | FromCrankToStart            |
 | 80 | WaitForGo                   |
 | 81 | HangLight                   |
 | 82 | PushButton                  |

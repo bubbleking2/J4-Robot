@@ -139,7 +139,7 @@ void TurnDegrees(int degrees)
     }
     #endif
     
-    ticks = (int)(degrees * 7 / 36) * 110/100;
+    ticks = (int)(degrees * 7 / 36) * 11/10;
     
     TurnTicks(ticks);
     
@@ -179,16 +179,11 @@ void TurnTowards(int x, int y)
           turn = gps_heading + 180 + Arctan(gps_x - x, gps_y - y);
     }
     if(turn >= 180)
-      turn = turn - 360;
+      turn -= 360;
     else if(turn <= -180)
-      turn = turn + 360;
+      turn += 360;
     
     TurnDegrees(turn);
-    
-    if(gps_heading + turn > 179 || gps_heading + turn < 0)
-      {
-        facingLeft = !facingLeft;
-    }
     
     #ifdef TEST_LOG
       {
@@ -225,22 +220,17 @@ void TurnAgainst(int x, int y)
         else
           turn = gps_heading + 180 + Arctan(gps_x - x, gps_y - y);
     }
+    
+    turn -= 180;
+    
     if(turn >= 180)
-      turn = turn - 360;
+      turn -= 360;
     else if(turn <= -180)
-      turn = turn + 360;
-    
-    turn += 180;
-    
-    if(turn >= 180)
-      turn = turn - 360;
+      {
+        turn += 360;
+    }
     
     TurnDegrees(turn);
-    
-    if(gps_heading + turn > 179 || gps_heading + turn < 0)
-      {
-        facingLeft = !facingLeft;
-    }
     
     #ifdef TEST_LOG
       {
@@ -355,6 +345,46 @@ void FollowLineBackwards()
     #ifdef TEST_LOG
       {
         LogEvent(680);
+    }
+    #endif
+}
+
+/*-------------------------------------------------------------------------------------------------*/
+//Function #9
+/*-------------------------------------------------------------------------------------------------*/
+
+void CorrectHeading(int heading)
+{
+    #ifdef TEST_LOG
+      {
+        LogEvent(691);
+    }
+    #endif
+    
+    GPSGetAbsolute();
+    while(gps_heading - heading > 2 || gps_heading - heading < -2)
+      {
+        if(gps_heading - heading < -2)
+          {
+            motor(LEFT_MOTOR, -50);
+            motor(RIGHT_MOTOR, 50);
+            msleep(40L);
+            ao();
+        }
+        else if(gps_heading - heading > 2)
+          {
+            motor(LEFT_MOTOR, 50);
+            motor(RIGHT_MOTOR, -50);
+            msleep(40L);
+            ao();
+        }
+        
+        GPSGetAbsolute();   
+    }
+    
+    #ifdef TEST_LOG
+      {
+        LogEvent(690);
     }
     #endif
 }
