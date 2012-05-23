@@ -78,11 +78,11 @@
 |* Variable Constants                                                                              *|
 \*-------------------------------------------------------------------------------------------------*/
 
-#define LINE_FIND_SPEED 45
-#define LINE_FOLLOW_SPEED 45
+#define LINE_FIND_SPEED 30
+#define LINE_FOLLOW_SPEED 30
 #define LINE_FOLLOW_THRESHOLD 140
-#define TURN_SPEED 35
-#define SLOW_SPEED 35.
+#define TURN_SPEED 23
+#define SLOW_SPEED 30.
 
 /*-------------------------------------------------------------------------------------------------*\
 |* Redefined Variables                                                                             *|
@@ -167,13 +167,13 @@ struct Location{
     int y;
 }
 start = {0, 24},
-traffic = {0, 195},
-trafficLeft = {-15, 215},
-buttonStart = {-48, 185},
+traffic = {0, 185},
+trafficLeft = {-15, 218},
+buttonStart = {-48, 181},
 button = {-97, 161},
-topCenterRamp = {0,178},
+topCenterRamp = {0,180},
 bottomCenterRamp = {0, 80},
-crankLineStart = {50, 174},
+crankLineStart = {50, 173},
 crankLine = {70, 172},
 rightGarbageCan = {75, 10};
 

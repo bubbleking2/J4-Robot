@@ -54,7 +54,7 @@ void DriveTicks(int ticks, float power)
     rightEncoderCounts = 0;
     
     ticks += leftEncoderCounts;
-    slowPoint = ticks - 30;
+    slowPoint = ticks - 40;
     
     while(ticks > (leftEncoderCounts + rightEncoderCounts) / 2 && drivePower < power)
       {
@@ -144,7 +144,7 @@ void TurnTicks(int ticks)
         LogEvent(621);
     }
     #endif
-    
+	
     if (ticks > 0)
       {
         motor(RIGHT_MOTOR, -TURN_SPEED);

@@ -36,7 +36,7 @@ void FromStartToTraffic()
     }
     #endif
     
-    GetTo(traffic.x, traffic.y, 100.);
+    DriveDistance(.25 * sqrt((float)((traffic.y - gps_y) * (traffic.y - gps_y) + (traffic.x - gps_x) * (traffic.x - gps_x))), 100.);
     
     #ifdef TEST_LOG
       {
@@ -116,8 +116,8 @@ void FromCrankToStart()
     }
     #endif
     
-    GetTo(topCenterRamp.x, topCenterRamp.y, 100.);
-    GetTo(0, 24, 100.);
+    GetTo(topCenterRamp.x - 4, topCenterRamp.y, 100.);
+    GetTo(bottomCenterRamp.x, bottomCenterRamp.y, 50.);
     
     
     #ifdef TEST_LOG
