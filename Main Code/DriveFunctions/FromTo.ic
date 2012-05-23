@@ -117,8 +117,11 @@ void FromCrankToStart()
     #endif
     
     GetTo(topCenterRamp.x - 4, topCenterRamp.y, 100.);
-    GetTo(bottomCenterRamp.x, bottomCenterRamp.y, 50.);
-    
+    GetTo(bottomCenterRamp.x, bottomCenterRamp.y, 75.);
+    TurnDegrees(55);
+    facingLeft = 1;
+	TurnAgainst(0,0);
+	DriveDistance(24., -100.);
     
     #ifdef TEST_LOG
       {

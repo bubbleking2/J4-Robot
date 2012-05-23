@@ -44,12 +44,12 @@ void HangLight(int courseDirection)
     
     if(trafficIsRight)
       {
-        TurnDegrees(45);
+        TurnDegrees(50);
         facingLeft = 0;
     }
     else
       {
-        TurnDegrees(-45);
+        TurnDegrees(-50);
         facingLeft = 1;
     } 
     

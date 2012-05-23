@@ -44,19 +44,11 @@ void TurnCrank(int courseDirection)
     
     TurnAgainst(crankLine.x, crankLine.y);
     
-    RunWhileFor(DriveDistance(24., -LINE_FIND_SPEED), analog(CENTER_OPTOSENSOR) > LINE_FOLLOW_THRESHOLD && analog(LEFT_OPTOSENSOR) > LINE_FOLLOW_THRESHOLD && analog(RIGHT_OPTOSENSOR) > LINE_FOLLOW_THRESHOLD, 2000L);
+    RunFor(DriveDistance(24., -LINE_FIND_SPEED.), 2000L);
     
     #ifdef TEST_LOG
       {
         LogEvent(612);
-    }
-    #endif
-    
-    RunFor(FollowLineBackwards(), 2000L);
-    
-    #ifdef TEST_LOG
-      {
-        LogEvent(682);
     }
     #endif
     
@@ -66,7 +58,7 @@ void TurnCrank(int courseDirection)
     
     #ifdef TEST_LOG
       {
-        LogEvent(831);
+        LogEvent(830);
     }
     #endif
 }
