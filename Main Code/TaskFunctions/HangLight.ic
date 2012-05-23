@@ -53,7 +53,7 @@ void HangLight(int courseDirection)
         facingLeft = 1;
     } 
     
-    TurnTowards(trafficLeft.x, trafficLeft.y);                      
+    TurnTowards(trafficLeft.x, trafficLeft.y);
     
     RunWhileFor(DriveDistance(24., LINE_FIND_SPEED), analog(CENTER_OPTOSENSOR) > LINE_FOLLOW_THRESHOLD && analog(LEFT_OPTOSENSOR) > LINE_FOLLOW_THRESHOLD && analog(RIGHT_OPTOSENSOR) > LINE_FOLLOW_THRESHOLD, 2000L);
     
@@ -74,12 +74,12 @@ void HangLight(int courseDirection)
     DriveDistance(10., -100.);
     if(courseDirection == 1)
       {
-        TurnDegrees(-60);
+        TurnDegrees(-65);
         facingLeft = 1;
     }
     else
       {
-        TurnDegrees(60);
+        TurnDegrees(65);
         facingLeft = 0;
     }
     

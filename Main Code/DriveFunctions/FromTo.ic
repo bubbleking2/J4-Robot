@@ -61,7 +61,7 @@ void FromTrafficToButtonStart()
         LogEvent(711);
     }
     #endif
-    
+	
     GetTo(buttonStart.x, buttonStart.y, 100.);
     
     #ifdef TEST_LOG
@@ -117,7 +117,7 @@ void FromCrankToStart()
     #endif
     
     GetTo(topCenterRamp.x - 4, topCenterRamp.y, 100.);
-    GetTo(bottomCenterRamp.x, bottomCenterRamp.y, 75.);
+    GetTo(bottomCenterRamp.x, bottomCenterRamp.y, 50.);
     TurnDegrees(55);
     facingLeft = 1;
 	TurnAgainst(0,0);

@@ -25,7 +25,7 @@
 |*-------------------------------------------------------------------------------------------------*|
 |* Function #60                                                                                    *|
 |*-------------------------------------------------------------------------------------------------*|
-|* Purpose: Drives  at a set power until a specified number of encoder ticks are recorded.         *|
+|* Purpose: Drives at a set power until a specified number of encoder ticks are recorded.          *|
 |*-------------------------------------------------------------------------------------------------*|
 |* Arguments                                                                                       *|
 |*-------------------------------------------------------------------------------------------------*|
@@ -144,7 +144,7 @@ void TurnTicks(int ticks)
         LogEvent(621);
     }
     #endif
-	
+    
     if (ticks > 0)
       {
         motor(RIGHT_MOTOR, -TURN_SPEED);

@@ -242,11 +242,13 @@ void GPSGetAbsolute()
     }
     #endif
     
+    msleep(GPS_STALL_TIME);
     while(!GPSGetData());
     initialHeading = gps_heading;
     initialX = gps_x;
     initialY = gps_y;
     
+    msleep(GPS_STALL_TIME);
     while(!GPSGetData());
     finalHeading = gps_heading;
     finalX = gps_x;
@@ -257,6 +259,7 @@ void GPSGetAbsolute()
         initialHeading = finalHeading;
         initialX = finalX;
         initialY = finalY;
+        msleep(GPS_STALL_TIME);
         while(!GPSGetData());
         finalHeading = gps_heading;
         finalX = gps_x;

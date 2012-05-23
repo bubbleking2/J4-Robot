@@ -10,8 +10,8 @@
 |* Included Libraries                                                                              *|
 \*=================================================================================================*/
 
-//#use TestLog\TestLog.ic
-//#use TestLog\GPSLog.ic
+#use TestLog\TestLog.ic
+#use TestLog\GPSLog.ic
 #use Globals\GlobalVariables.ic
 #use MathFunctions\Arctan.ic
 #use CourseFunctions\CourseInitialize.ic
