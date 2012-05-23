@@ -1,7 +1,7 @@
 /*=================================================================================================*\
-|* File #9                                                                                         *|
-|*-------------------------------------------------------------------------------------------------*|
 |* main.ic                                                                                         *|
+|*-------------------------------------------------------------------------------------------------*|
+|* File #9                                                                                         *|
 |*-------------------------------------------------------------------------------------------------*|
 |* Purpose: Contains the main program entry point and opens all of the libraries it requires.      *|
 \*=================================================================================================*/
@@ -30,9 +30,9 @@
 \*=================================================================================================*/
 
 /*-------------------------------------------------------------------------------------------------*\
-|* Function #90                                                                                    *|
-|*-------------------------------------------------------------------------------------------------*|
 |* void main()                                                                                     *|
+|*-------------------------------------------------------------------------------------------------*|
+|* Function #90                                                                                    *|
 |*-------------------------------------------------------------------------------------------------*|
 |* Purpose: The main entry point for the program, makes calls to other functions to complete the   *|
 |* course.                                                                                         *|
@@ -95,7 +95,7 @@ void main()
     
     //Travel from start to traffic
     printf("\nFrom start to traffic");
-    FromStartToTraffic(courseDirection);
+    FromStartToTraffic();
     
     //Hang the traffic light
     printf("\nHang light");
@@ -103,7 +103,7 @@ void main()
     
     //Travel from traffic to button area
     printf("\nFrom traffic to button start");
-    FromTrafficToButtonStart(courseDirection);
+    FromTrafficToButtonStart();
     
     //Attempt to push button
     printf("\nPush button");
@@ -111,7 +111,7 @@ void main()
     
     //Travel from button to crank
     printf("\nFrom button to crank");
-    FromButtonToCrank(courseDirection);
+    FromButtonToCrank();
     
     //Turn crank
     printf("\nTurn crank");
@@ -119,7 +119,7 @@ void main()
     
     //Return to start
     printf("\nReturn to start");
-    FromCrankToStart(courseDirection);
+    FromCrankToStart();
     
     #ifdef TEST_LOG
       {
