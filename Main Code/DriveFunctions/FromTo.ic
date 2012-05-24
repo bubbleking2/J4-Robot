@@ -118,8 +118,8 @@ void FromCrankToStart()
     
     GetTo(topCenterRamp.x, topCenterRamp.y, 100.);
     GetTo(bottomCenterRamp.x, bottomCenterRamp.y, 50.);
+	DriveDistance(3., -100.);
     TurnDegrees(55);
-    DriveDistance(3., -100.);
     facingLeft = 1;
     TurnAgainst(0,0);
     DriveDistance(24., -100.);
